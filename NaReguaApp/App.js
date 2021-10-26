@@ -7,7 +7,7 @@
  */
 
 import React from 'react';
-import Route from './routes/route';
+import Route from './src/routes/route';
 import {
   SafeAreaView,
   StatusBar,
