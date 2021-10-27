@@ -8,6 +8,7 @@ import {
     TouchableOpacity
 } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
+import { RadioButton } from 'react-native-paper';
 
 
 const Cadastro = () => {
@@ -16,6 +17,7 @@ const Cadastro = () => {
     const [senha, setSenha] = useState('');
     const [confirmSenha, setConfirmSenha] = useState('');
 	const [celular, setCelular] = useState('');
+	const [tipoUsuario, setTipoUsuario] = React.useState('Cliente');
 	const [tipoServico, setTipoServico] = useState('Selecione uma opção');
 
 	return (
@@ -71,8 +73,27 @@ const Cadastro = () => {
 						onChangeText={(confirmSenha) => setConfirmSenha(confirmSenha)}
 					/>
 				</View>
-				
-				{/*checkbox cliente ou prestador */}
+			
+				<View onChange={event => this.setTipoUsuario(event)} style={styles.radioButton}>
+					<RadioButton
+						value="Cliente" color = "#004A5A"
+						status={ tipoUsuario === 'Cliente' ? 'checked' : 'unchecked' }
+						onPress={() => setTipoUsuario('Cliente')}
+					/>
+					<View style={styles.label}>
+						<Text style={styles.labelText}>Cliente</Text>
+					</View>	
+				</View>
+				<View onChange={event => this.setTipoUsuario(event)} style={styles.radioButton}>
+					<RadioButton
+						value="Prestador" color = "#004A5A"
+						status={ tipoUsuario === 'Prestador' ? 'checked' : 'unchecked' }
+						onPress={() => setTipoUsuario('Prestador')}
+					/>
+					<View style={styles.label}>
+						<Text style={styles.labelText}>Prestador</Text>
+					</View>
+				</View>
 
 				<View style={styles.label}>
 					<Text style={styles.labelText}>Nº de celular</Text>
@@ -87,10 +108,10 @@ const Cadastro = () => {
 					/>
 				</View>
 
-				<View style={styles.label}>
+				<View style={tipoUsuario === 'Prestador' ? styles.label : styles.hide}>
 					<Text style={styles.labelText}>Tipo de Serviço</Text>
 				</View>
-				<View style={styles.pickerContainer}>
+				<View style={tipoUsuario === 'Prestador' ? styles.pickerContainer : styles.hide}>
 					<Picker
 						style={styles.pickerInput}
 						dropdownIconColor="black"
@@ -187,6 +208,14 @@ const styles = StyleSheet.create({
 		flex: 1,
 		marginTop: 20,
 		alignItems: 'center'
+	},
+	radioButton: {
+		flexDirection: 'row',
+		alignItems: 'center',
+		marginBottom: 20
+	},
+	hide: {
+		display: 'none'
 	}
 });
 export default Cadastro;
