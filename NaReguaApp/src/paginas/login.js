@@ -42,7 +42,7 @@ const Login = ({ navigation }) => {
                     />
                 </View>
                 <View style={styles.containerBotao}>
-                    <TouchableOpacity style={styles.loginBtn}>
+                    <TouchableOpacity onPress={() => navigation.navigate('InicioCliente')} style={styles.loginBtn}>
                         <Text style={styles.loginText}>LOGIN</Text>
                     </TouchableOpacity>
                 </View>
