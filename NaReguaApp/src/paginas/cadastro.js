@@ -32,8 +32,10 @@ const Cadastro = ({ navigation }) => {
 				email: email,
 				phone: celular,
 				password: senha
-            });
-			let res = await api.post(`/users`, data);
+			});
+
+			let endpoint = tipoUsuario === 'Cliente' ? 'users' : 'providers';
+			let res = await api.post(`/${endpoint}`, data);
 
 			console.log(res.data);
 			navigation.navigate('Login');
