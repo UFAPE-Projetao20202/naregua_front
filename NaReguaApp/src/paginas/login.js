@@ -8,11 +8,49 @@ import {
     StyleSheet,
     TouchableOpacity
 } from 'react-native';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import api from '../services/api';
 
 const Login = ({ navigation }) => {
     const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
+	const [apiError, setApiError] = useState('');
+    
+    useEffect(() => {
+        tryConnect()
+    }, []);
+    
+    async function tryConnect() {
+        const res = await api.get(`/`);
+        console.log(res.data.status);
+    }
+
+	async function logar() {
+		try {
+            let data = JSON.stringify({
+				email: email,
+				password: senha
+            });
+
+			let res = await api.post(`/login`, data);
+
+			console.log(res.data);
+			navigation.navigate('InicioCliente');
+		} catch (error) {
+			console.log(error.response.data);
+			setApiError(error.response.data.message);
+		}
+	}
+
+	function validarDados() {
+		if (senha.length >= 6 && email.length >= 3) {
+			logar();
+			return;
+		}
+		setApiError('Preencha todos os campos corretamente');
+	}
+
+
     return (
         <ScrollView contentContainerStyle={styles.scrollViewcontainer}>
             <View style={styles.container}>
@@ -41,8 +79,11 @@ const Login = ({ navigation }) => {
                     onChangeText={(senha) => setSenha(senha)}
                     />
                 </View>
+
+				{apiError.length > 0 && <Text style={styles.error}>{apiError}</Text>}
+
                 <View style={styles.containerBotao}>
-                    <TouchableOpacity onPress={() => navigation.navigate('InicioCliente')} style={styles.loginBtn}>
+                    <TouchableOpacity onPress={() => validarDados()} style={styles.loginBtn}>
                         <Text style={styles.loginText}>LOGIN</Text>
                     </TouchableOpacity>
                 </View>
@@ -105,6 +146,9 @@ const styles = StyleSheet.create({
         color: 'black',
         textAlign: 'left'
     },
+	error: {
+		color: 'red'
+	},
     containerBotao: {
         width: '80%',
         flex: 1,
