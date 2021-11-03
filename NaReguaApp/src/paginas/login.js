@@ -21,8 +21,12 @@ const Login = ({ navigation }) => {
     }, []);
     
     async function tryConnect() {
-        const res = await api.get(`/`);
-        console.log(res.data.status);
+        try{
+            const res = await api.get(`/`);
+            console.log(res.data.status);
+        } catch (e) {
+            console.log('Não foi possível conectar com a api', e)
+        }
     }
 
 	async function logar() {
