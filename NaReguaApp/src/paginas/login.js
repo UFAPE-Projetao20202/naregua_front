@@ -9,6 +9,7 @@ import {
     TouchableOpacity
 } from 'react-native';
 import { useState, useEffect } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import api from '../services/api';
 
 const Login = ({ navigation }) => {
@@ -38,8 +39,18 @@ const Login = ({ navigation }) => {
 
 			let res = await api.post(`/login`, data);
 
-			console.log(res.data);
-			navigation.navigate('InicioCliente');
+            let { user } = res.data;
+            let { token } = res.data;
+
+            api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+            await AsyncStorage.setItem('token', token);
+            await AsyncStorage.setItem('user', JSON.stringify(user));
+
+            if(user.is_provider) {
+                navigation.navigate('InicioPrestador', { user });
+            } else {
+                navigation.navigate('InicioCliente', { user });
+            }
 		} catch (error) {
 			console.log(error.response.data);
 			setApiError(error.response.data.message);
