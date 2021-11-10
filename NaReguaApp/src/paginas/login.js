@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import {
     View,
     ScrollView,
@@ -8,14 +8,15 @@ import {
     StyleSheet,
     TouchableOpacity
 } from 'react-native';
-import { useState, useEffect } from 'react';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import api from '../services/api';
+import AuthContext from '../contexts/auth';
 
 const Login = ({ navigation }) => {
     const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
-	const [apiError, setApiError] = useState('');
+    const [apiError, setApiError] = useState('');
+    
+    const { login } = useContext(AuthContext);
     
     useEffect(() => {
         tryConnect()
@@ -23,7 +24,7 @@ const Login = ({ navigation }) => {
     
     async function tryConnect() {
         try{
-            const res = await api.get(`/`);
+            const res = await api.get('/');
             console.log(res.data.status);
         } catch (e) {
             console.log('Não foi possível conectar com a api', e)
@@ -31,30 +32,13 @@ const Login = ({ navigation }) => {
     }
 
 	async function logar() {
-		try {
-            let data = JSON.stringify({
-				email: email,
-				password: senha
-            });
+        let data = JSON.stringify({
+            email: email,
+            password: senha
+        });
 
-			let res = await api.post(`/login`, data);
-
-            let { user } = res.data;
-            let { token } = res.data;
-
-            api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-            await AsyncStorage.setItem('token', token);
-            await AsyncStorage.setItem('user', JSON.stringify(user));
-
-            if(user.is_provider) {
-                navigation.navigate('InicioPrestador', { user });
-            } else {
-                navigation.navigate('InicioCliente', { user });
-            }
-		} catch (error) {
-			console.log(error.response.data);
-			setApiError(error.response.data.message);
-		}
+        const res = await login(data);
+        setApiError(res);
 	}
 
 	function validarDados() {
