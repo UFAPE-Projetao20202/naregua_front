@@ -14,9 +14,8 @@ import AuthContext from '../contexts/auth';
 const Login = ({ navigation }) => {
     const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
-    const [apiError, setApiError] = useState('');
     
-    const { login } = useContext(AuthContext);
+    const { login, mensagemErro } = useContext(AuthContext);
     
     useEffect(() => {
         tryConnect()
@@ -37,8 +36,7 @@ const Login = ({ navigation }) => {
             password: senha
         });
 
-        const res = await login(data);
-        setApiError(res);
+        login(data);
 	}
 
 	function validarDados() {
@@ -79,7 +77,7 @@ const Login = ({ navigation }) => {
                     />
                 </View>
 
-				{apiError.length > 0 && <Text style={styles.error}>{apiError}</Text>}
+				{mensagemErro.length > 0 && <Text style={styles.error}>{mensagemErro}</Text>}
 
                 <View style={styles.containerBotao}>
                     <TouchableOpacity onPress={() => validarDados()} style={styles.loginBtn}>
