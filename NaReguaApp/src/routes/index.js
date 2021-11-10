@@ -22,7 +22,7 @@ function Routes() {
 		<>
 			{logado ?
 				<>
-					{isProvider ? <AppClienteRoute /> : <AppPrestadorRoute />}
+					{isProvider ? <AppPrestadorRoute /> : <AppClienteRoute />}
 				</>
 				: <AuthRoute />
 			}
