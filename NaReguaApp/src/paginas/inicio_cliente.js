@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import { Divider } from 'react-native-paper';
 import {
   View,
@@ -19,7 +19,6 @@ const InicioCliente = () => {
     try {
       let res1 = await api.get('/providers');
       setlistaPrestadores(res1.data);
-
     } catch (error) {
       console.log(error.response.data);
     }

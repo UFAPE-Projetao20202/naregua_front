@@ -18,7 +18,7 @@ export const AuthProvider = ({children}) => {
       if (storageUser && storageToken) {
         setUser(JSON.parse(storageUser));
         setIsProvider(storageUser.is_provider);
-        api.defaults.headers.common["Authorization"] = `Bearer ${storageToken}`;
+        api.defaults.headers.common['Authorization'] = `Bearer ${storageToken}`;
       }
       setLoading(false);
     }
@@ -34,7 +34,7 @@ export const AuthProvider = ({children}) => {
       let { token } = res.data;
       let responseUser = res.data.user;
 
-      api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+      api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
       await AsyncStorage.setItem('token', token);
       await AsyncStorage.setItem('user', JSON.stringify(responseUser));
 
