@@ -8,6 +8,7 @@ export const AuthProvider = ({ children }) => {
 	const [user, setUser] = useState(null);
 	const [isProvider, setIsProvider] = useState(false);
 	const [mensagemErro, setMensagemErro] = useState('');
+	const [loading, setLoading] = useState(true);
 
 	useEffect(() => {
 		async function carregarStorage() {
@@ -19,6 +20,7 @@ export const AuthProvider = ({ children }) => {
 				setIsProvider(storageUser.isProvider);
 				api.defaults.headers.common['Authorization'] = `Bearer ${storageToken}`;
 			}
+			setLoading(false);
 		}
 
 		carregarStorage();
@@ -26,6 +28,7 @@ export const AuthProvider = ({ children }) => {
 
 	async function login(data) {
 		try {
+			setLoading(true);
 			let res = await api.post('/login', data);
 
 			let { token } = res.data;
@@ -37,7 +40,9 @@ export const AuthProvider = ({ children }) => {
 			
 			setUser(responseUser);
 			setIsProvider(responseUser.isProvider);
+			setLoading(false);
 		} catch (error) {
+				setLoading(false);
 				console.log(error);
 				if(error.response) {
 					setMensagemErro(error.response.data.message);
@@ -46,7 +51,7 @@ export const AuthProvider = ({ children }) => {
 	}
 
 	return (
-		<AuthContext.Provider value={{ logado: !!user, isProvider, user, login, mensagemErro }}>
+		<AuthContext.Provider value={{ logado: !!user, isProvider, user, loading, login, mensagemErro }}>
 			{children}
 		</AuthContext.Provider>
 	)

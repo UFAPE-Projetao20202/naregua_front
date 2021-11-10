@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { View, ActivityIndicator } from 'react-native';
 
 import AuthContext from '../contexts/auth';
 
@@ -7,7 +8,15 @@ import AppPrestadorRoute from './app-prestator.routes';
 import AuthRoute from './auth.routes';
 
 function Routes() {
-	const { logado, isProvider } = useContext(AuthContext);
+	const { logado, isProvider, loading } = useContext(AuthContext);
+
+	if (loading) {
+		return (
+			<View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+				<ActivityIndicator size="large" color="#666" />
+			</View>
+		)
+	}
 
 	return (
 		<>
