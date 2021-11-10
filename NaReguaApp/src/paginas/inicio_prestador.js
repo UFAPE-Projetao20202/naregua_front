@@ -6,11 +6,16 @@ import {
     StyleSheet,
     TouchableOpacity
 } from 'react-native';
+import { useAuth } from '../contexts/auth';
 
 const InicioPrestador = ({ navigation }) => {
+	const { user } = useAuth();
+
     return (
         <ScrollView contentContainerStyle={styles.scrollViewcontainer}>
             <View style={styles.container}>
+				{user && <Text style={styles.title}>Bem vindo, {user.name}</Text>}
+
                 <View style={styles.containerBtn}>
 					<TouchableOpacity style={styles.signBtn} onPress={() => navigation.navigate('CadastroServico')}>
 						<Text style={styles.btnText}>Criar serviço</Text>
@@ -33,6 +38,11 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         height: '100%'
     },
+	title: {
+		color: 'black',
+		fontSize: 20,
+		fontWeight: '500'
+	},
 	containerBtn: {
 		width: '80%',
 		flex: 1,

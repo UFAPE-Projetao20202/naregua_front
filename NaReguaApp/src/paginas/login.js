@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
     View,
     ScrollView,
@@ -8,13 +8,14 @@ import {
     StyleSheet,
     TouchableOpacity
 } from 'react-native';
-import { useState, useEffect } from 'react';
 import api from '../services/api';
+import { useAuth } from '../contexts/auth';
 
 const Login = ({ navigation }) => {
     const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
-	const [apiError, setApiError] = useState('');
+    
+    const { login, mensagemErro } = useAuth();
     
     useEffect(() => {
         tryConnect()
@@ -22,7 +23,7 @@ const Login = ({ navigation }) => {
     
     async function tryConnect() {
         try{
-            const res = await api.get(`/`);
+            const res = await api.get('/');
             console.log(res.data.status);
         } catch (e) {
             console.log('Não foi possível conectar com a api', e)
@@ -30,20 +31,12 @@ const Login = ({ navigation }) => {
     }
 
 	async function logar() {
-		try {
-            let data = JSON.stringify({
-				email: email,
-				password: senha
-            });
+        let data = JSON.stringify({
+            email: email,
+            password: senha
+        });
 
-			let res = await api.post(`/login`, data);
-
-			console.log(res.data);
-			navigation.navigate('InicioCliente');
-		} catch (error) {
-			console.log(error.response.data);
-			setApiError(error.response.data.message);
-		}
+        login(data);
 	}
 
 	function validarDados() {
@@ -84,7 +77,7 @@ const Login = ({ navigation }) => {
                     />
                 </View>
 
-				{apiError.length > 0 && <Text style={styles.error}>{apiError}</Text>}
+				{mensagemErro.length > 0 && <Text style={styles.error}>{mensagemErro}</Text>}
 
                 <View style={styles.containerBotao}>
                     <TouchableOpacity onPress={() => validarDados()} style={styles.loginBtn}>

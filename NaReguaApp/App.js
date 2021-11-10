@@ -1,18 +1,12 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
-
 import React from 'react';
-import Route from './src/routes/route';
+import Routes from './src/routes/index';
+import { NavigationContainer } from '@react-navigation/native'
 import {
   SafeAreaView,
   StatusBar,
   useColorScheme
 } from 'react-native';
+import { AuthProvider } from './src/contexts/auth';
 
 const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
@@ -24,10 +18,14 @@ const App = () => {
   };
 
   return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-        <Route />
-    </SafeAreaView>
+    <NavigationContainer>
+      <SafeAreaView style={backgroundStyle}>
+        <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
+        <AuthProvider>
+          <Routes />
+        </AuthProvider>
+      </SafeAreaView>
+    </NavigationContainer>
   );
 };
 
