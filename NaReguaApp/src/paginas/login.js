@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
     View,
     ScrollView,
@@ -9,13 +9,13 @@ import {
     TouchableOpacity
 } from 'react-native';
 import api from '../services/api';
-import AuthContext from '../contexts/auth';
+import { useAuth } from '../contexts/auth';
 
 const Login = ({ navigation }) => {
     const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
     
-    const { login, mensagemErro } = useContext(AuthContext);
+    const { login, mensagemErro } = useAuth();
     
     useEffect(() => {
         tryConnect()

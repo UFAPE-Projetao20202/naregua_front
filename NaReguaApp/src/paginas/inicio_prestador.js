@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import {
     View,
     ScrollView,
@@ -6,10 +6,10 @@ import {
     StyleSheet,
     TouchableOpacity
 } from 'react-native';
-import AuthContext from '../contexts/auth';
+import { useAuth } from '../contexts/auth';
 
 const InicioPrestador = ({ navigation }) => {
-	const { user } = useContext(AuthContext);
+	const { user } = useAuth();
 
     return (
         <ScrollView contentContainerStyle={styles.scrollViewcontainer}>
