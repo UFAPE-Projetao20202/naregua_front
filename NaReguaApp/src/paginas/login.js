@@ -69,6 +69,7 @@ const Login = ({ navigation }) => {
                     placeholderTextColor="grey"
                     keyboardType="email-address"
                     onChangeText={(email) => setEmail(email)}
+                    accessible={true} accessibilityLabel="campo-email"
                     />
                 </View>
                 <View style={styles.label}>
@@ -81,6 +82,7 @@ const Login = ({ navigation }) => {
                     placeholderTextColor="grey"
                     secureTextEntry={true}
                     onChangeText={(senha) => setSenha(senha)}
+                    accessible={true} accessibilityLabel="campo-senha"
                     />
                 </View>
 
@@ -88,12 +90,12 @@ const Login = ({ navigation }) => {
 
                 <View style={styles.containerBotao}>
                     <TouchableOpacity onPress={() => validarDados()} style={styles.loginBtn}>
-                        <Text style={styles.loginText}>LOGIN</Text>
+                        <Text style={styles.loginText} accessible={true} accessibilityLabel="botao-login" >LOGIN</Text>
                     </TouchableOpacity>
                 </View>
 
                 <TouchableOpacity onPress={() => navigation.navigate('Cadastro')} style={styles.signupBtn}>
-                    <Text style={styles.signupText}>Não tem uma conta ainda? Faça seu cadastro clicando aqui</Text>
+                    <Text style={styles.signupText} accessible={true} accessibilityLabel="botao-cadastro">Não tem uma conta ainda? Faça seu cadastro clicando aqui</Text>
                 </TouchableOpacity>
             </View>
         </ScrollView>
