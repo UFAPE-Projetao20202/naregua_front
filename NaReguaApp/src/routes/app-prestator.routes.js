@@ -8,7 +8,7 @@ const PrestadorStack = createNativeStackNavigator();
 function AppPrestadorRoute() {
   return (
     <PrestadorStack.Navigator initialRouteName="InicioPrestador">
-      <PrestadorStack.Screen name="InicioPrestador" component={InicioPrestador} options={{ headerShown: false }}/>
+      <PrestadorStack.Screen name="InicioPrestador" component={InicioPrestador}/>
       <PrestadorStack.Screen name="CadastroServico" component={CadastroServico} options={{ title: 'Novo Serviço'}}/>
     </PrestadorStack.Navigator>
   );
