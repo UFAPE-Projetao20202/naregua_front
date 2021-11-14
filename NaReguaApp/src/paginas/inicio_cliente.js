@@ -42,7 +42,7 @@ const InicioCliente = ({ navigation }) => {
                             <View>
                                 <Text style={styles.itemTitulo}>{item.nome}</Text>
                                 <Text style={styles.itemDados}>{item.distancia}</Text>
-                                <Text style={styles.itemDados}>{item.descricao}</Text>
+                                <Text style={styles.itemDados} accessible={true} accessibilityLabel="descricao-prestador">{item.descricao}</Text>
                             </View>
                             <View style={styles.itemCol2}>
                                 <Text style={styles.itemNota}>{item.nota}</Text>
