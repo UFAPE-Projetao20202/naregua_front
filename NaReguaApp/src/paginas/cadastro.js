@@ -1,27 +1,64 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
 	View,
 	ScrollView,
-    Text,
-    TextInput,
-    StyleSheet,
-    TouchableOpacity
+	Text,
+	TextInput,
+	StyleSheet,
+	TouchableOpacity
 } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
 import { RadioButton } from 'react-native-paper';
+import api from '../services/api';
 
 
-const Cadastro = () => {
-    const [email, setEmail] = useState('');
-    const [nome, setNome] = useState('');
-    const [senha, setSenha] = useState('');
-    const [confirmSenha, setConfirmSenha] = useState('');
+const Cadastro = ({ navigation }) => {
+	const [email, setEmail] = useState('');
+	const [nome, setNome] = useState('');
+	const [senha, setSenha] = useState('');
+	const [confirmSenha, setConfirmSenha] = useState('');
 	const [celular, setCelular] = useState('');
 	const [tipoUsuario, setTipoUsuario] = React.useState('Cliente');
 	const [tipoServico, setTipoServico] = useState('Selecione uma opção');
+	const [apiError, setApiError] = useState('');
+
+	useEffect(() => {
+	}, []);
+
+	async function cadastrar() {
+		try {
+            let data = JSON.stringify({
+				name: nome,
+				email: email,
+				phone: celular,
+				password: senha
+			});
+
+			let endpoint = tipoUsuario === 'Cliente' ? 'users' : 'providers';
+			let res = await api.post(`/${endpoint}`, data);
+
+			console.log(res.data);
+			navigation.navigate('Login');
+		} catch (error) {
+			console.log(error.response.data);
+			setApiError(error.response.data.message);
+		}
+	}
+
+	function validarDados() {
+		if (senha === confirmSenha &&
+			senha.length >= 6 &&
+			nome.length >= 3 &&
+			email.length >= 3 &&
+			celular.length >= 8) {
+			cadastrar();
+			return;
+		}
+		setApiError('Preencha todos os campos corretamente');
+	}
 
 	return (
-        <ScrollView contentContainerStyle={styles.scrollViewcontainer}>
+		<ScrollView contentContainerStyle={styles.scrollViewcontainer}>
 			<View style={styles.container}>
 				<View style={styles.label}>
 					<Text style={styles.labelText}>Nome</Text>
@@ -32,6 +69,7 @@ const Cadastro = () => {
 						placeholder="João Silva"
 						placeholderTextColor="grey"
 						onChangeText={(nome) => setNome(nome)}
+						accessible={true} accessibilityLabel="campo-nome"
 					/>
 				</View>
 
@@ -45,6 +83,7 @@ const Cadastro = () => {
 						placeholderTextColor="grey"
 						keyboardType="email-address"
 						onChangeText={(email) => setEmail(email)}
+						accessible={true} accessibilityLabel="campo-email"
 					/>
 				</View>
 
@@ -58,6 +97,7 @@ const Cadastro = () => {
 						placeholderTextColor="grey"
 						secureTextEntry={true}
 						onChangeText={(senha) => setSenha(senha)}
+						accessible={true} accessibilityLabel="campo-senha"
 					/>
 				</View>
 
@@ -71,23 +111,24 @@ const Cadastro = () => {
 						placeholderTextColor="grey"
 						secureTextEntry={true}
 						onChangeText={(confirmSenha) => setConfirmSenha(confirmSenha)}
+						accessible={true} accessibilityLabel="campo-confirmarSenha"
 					/>
 				</View>
-			
+
 				<View onChange={event => this.setTipoUsuario(event)} style={styles.radioButton}>
 					<RadioButton
-						value="Cliente" color = "#004A5A"
-						status={ tipoUsuario === 'Cliente' ? 'checked' : 'unchecked' }
+						value="Cliente" color="#004A5A"
+						status={tipoUsuario === 'Cliente' ? 'checked' : 'unchecked'}
 						onPress={() => setTipoUsuario('Cliente')}
 					/>
 					<View style={styles.label}>
 						<Text style={styles.labelText}>Cliente</Text>
-					</View>	
+					</View>
 				</View>
 				<View onChange={event => this.setTipoUsuario(event)} style={styles.radioButton}>
 					<RadioButton
-						value="Prestador" color = "#004A5A"
-						status={ tipoUsuario === 'Prestador' ? 'checked' : 'unchecked' }
+						value="Prestador" color="#004A5A"
+						status={tipoUsuario === 'Prestador' ? 'checked' : 'unchecked'}
 						onPress={() => setTipoUsuario('Prestador')}
 					/>
 					<View style={styles.label}>
@@ -105,6 +146,7 @@ const Cadastro = () => {
 						placeholderTextColor="grey"
 						keyboardType="number-pad"
 						onChangeText={(celular) => setCelular(celular)}
+						accessible={true} accessibilityLabel="campo-celular"
 					/>
 				</View>
 
@@ -128,10 +170,12 @@ const Cadastro = () => {
 						<Picker.Item label="Massagista" value="Massagista" />
 					</Picker>
 				</View>
-				
+
+				{apiError.length > 0 && <Text style={styles.error}>{apiError}</Text>}
+
 				<View style={styles.containerBtn}>
-					<TouchableOpacity style={styles.signBtn}>
-						<Text style={styles.signText}>CADASTRAR</Text>
+					<TouchableOpacity style={styles.signBtn} onPress={() => validarDados()}>
+						<Text style={styles.signText} accessible={true} accessibilityLabel="botao-cadastrar">CADASTRAR</Text>
 					</TouchableOpacity>
 				</View>
 			</View>
@@ -202,6 +246,9 @@ const styles = StyleSheet.create({
 	labelText: {
 		color: 'black',
 		textAlign: 'left'
+	},
+	error: {
+		color: 'red'
 	},
 	containerBtn: {
 		width: '80%',

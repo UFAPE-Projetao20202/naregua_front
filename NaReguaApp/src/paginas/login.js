@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
     View,
     ScrollView,
@@ -8,11 +8,46 @@ import {
     StyleSheet,
     TouchableOpacity
 } from 'react-native';
-import { useState } from 'react';
+import api from '../services/api';
+import { useAuth } from '../contexts/auth';
 
 const Login = ({ navigation }) => {
     const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
+    
+    const { login, mensagemErro } = useAuth();
+    
+    useEffect(() => {
+        tryConnect()
+    }, []);
+    
+    async function tryConnect() {
+        try{
+            const res = await api.get('/');
+            console.log(res.data.status);
+        } catch (e) {
+            console.log('Não foi possível conectar com a api', e)
+        }
+    }
+
+	async function logar() {
+        let data = JSON.stringify({
+            email: email,
+            password: senha
+        });
+
+        login(data);
+	}
+
+	function validarDados() {
+		if (senha.length >= 6 && email.length >= 3) {
+			logar();
+			return;
+		}
+		setApiError('Preencha todos os campos corretamente');
+	}
+
+
     return (
         <ScrollView contentContainerStyle={styles.scrollViewcontainer}>
             <View style={styles.container}>
@@ -27,6 +62,7 @@ const Login = ({ navigation }) => {
                     placeholderTextColor="grey"
                     keyboardType="email-address"
                     onChangeText={(email) => setEmail(email)}
+                    accessible={true} accessibilityLabel="campo-email"
                     />
                 </View>
                 <View style={styles.label}>
@@ -39,16 +75,20 @@ const Login = ({ navigation }) => {
                     placeholderTextColor="grey"
                     secureTextEntry={true}
                     onChangeText={(senha) => setSenha(senha)}
+                    accessible={true} accessibilityLabel="campo-senha"
                     />
                 </View>
+
+				{mensagemErro.length > 0 && <Text style={styles.error}>{mensagemErro}</Text>}
+
                 <View style={styles.containerBotao}>
-                    <TouchableOpacity onPress={() => navigation.navigate('InicioCliente')} style={styles.loginBtn}>
-                        <Text style={styles.loginText}>LOGIN</Text>
+                    <TouchableOpacity onPress={() => validarDados()} style={styles.loginBtn}>
+                        <Text style={styles.loginText} accessible={true} accessibilityLabel="botao-login" >LOGIN</Text>
                     </TouchableOpacity>
                 </View>
 
                 <TouchableOpacity onPress={() => navigation.navigate('Cadastro')} style={styles.signupBtn}>
-                    <Text style={styles.signupText}>Não tem uma conta ainda? Faça seu cadastro clicando aqui</Text>
+                    <Text style={styles.signupText} accessible={true} accessibilityLabel="botao-cadastro">Não tem uma conta ainda? Faça seu cadastro clicando aqui</Text>
                 </TouchableOpacity>
             </View>
         </ScrollView>
@@ -105,6 +145,9 @@ const styles = StyleSheet.create({
         color: 'black',
         textAlign: 'left'
     },
+	error: {
+		color: 'red'
+	},
     containerBotao: {
         width: '80%',
         flex: 1,
