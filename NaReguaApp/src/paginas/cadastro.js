@@ -69,6 +69,7 @@ const Cadastro = ({ navigation }) => {
 						placeholder="João Silva"
 						placeholderTextColor="grey"
 						onChangeText={(nome) => setNome(nome)}
+						accessible={true} accessibilityLabel="campo-nome"
 					/>
 				</View>
 
@@ -82,6 +83,7 @@ const Cadastro = ({ navigation }) => {
 						placeholderTextColor="grey"
 						keyboardType="email-address"
 						onChangeText={(email) => setEmail(email)}
+						accessible={true} accessibilityLabel="campo-email"
 					/>
 				</View>
 
@@ -95,6 +97,7 @@ const Cadastro = ({ navigation }) => {
 						placeholderTextColor="grey"
 						secureTextEntry={true}
 						onChangeText={(senha) => setSenha(senha)}
+						accessible={true} accessibilityLabel="campo-senha"
 					/>
 				</View>
 
@@ -108,6 +111,7 @@ const Cadastro = ({ navigation }) => {
 						placeholderTextColor="grey"
 						secureTextEntry={true}
 						onChangeText={(confirmSenha) => setConfirmSenha(confirmSenha)}
+						accessible={true} accessibilityLabel="campo-confirmarSenha"
 					/>
 				</View>
 
@@ -142,6 +146,7 @@ const Cadastro = ({ navigation }) => {
 						placeholderTextColor="grey"
 						keyboardType="number-pad"
 						onChangeText={(celular) => setCelular(celular)}
+						accessible={true} accessibilityLabel="campo-celular"
 					/>
 				</View>
 
@@ -170,7 +175,7 @@ const Cadastro = ({ navigation }) => {
 
 				<View style={styles.containerBtn}>
 					<TouchableOpacity style={styles.signBtn} onPress={() => validarDados()}>
-						<Text style={styles.signText}>CADASTRAR</Text>
+						<Text style={styles.signText} accessible={true} accessibilityLabel="botao-cadastrar">CADASTRAR</Text>
 					</TouchableOpacity>
 				</View>
 			</View>
