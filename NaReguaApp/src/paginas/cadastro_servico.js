@@ -69,6 +69,7 @@ const CadastroServico = ({ navigation }) => {
 								placeholder="Corte de cabelo"
 								placeholderTextColor="grey"
 								onChangeText={(nome) => setNome(nome)}
+								accessible={true} accessibilityLabel="campo-nome"
 							/>
 						</View>
 					</View>
@@ -84,6 +85,7 @@ const CadastroServico = ({ navigation }) => {
 								placeholderTextColor="grey"
 								keyboardType="decimal-pad"
 								onChangeText={(valor) => setValor(valor)}
+								accessible={true} accessibilityLabel="campo-valor"
 							/>
 						</View>
 						
@@ -97,6 +99,7 @@ const CadastroServico = ({ navigation }) => {
 								placeholderTextColor="grey"
 								keyboardType="number-pad"
 								onChangeText={(duracao) => setDuracao(duracao)}
+								accessible={true} accessibilityLabel="campo-duracao"
 							/>
 						</View>
 					</View>
@@ -113,6 +116,7 @@ const CadastroServico = ({ navigation }) => {
 							maxLength={100}
 							numberOfLines={3}
 							onChangeText={(decricao) => setDescricao(decricao)}
+							accessible={true} accessibilityLabel="campo-descricao"
 						/>
 					</View>
 				</View>
@@ -121,7 +125,7 @@ const CadastroServico = ({ navigation }) => {
 
 				<View style={styles.containerBtn}>
 					<TouchableOpacity style={styles.signBtn} onPress={() => validarDados()}>
-						<Text style={styles.signText}>Concluir</Text>
+						<Text style={styles.signText} accessible={true} accessibilityLabel="botao-concluir">Concluir</Text>
 					</TouchableOpacity>
 				</View>
 			</View>

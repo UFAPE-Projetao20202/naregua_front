@@ -39,6 +39,7 @@ When('Eu clico na opção de cadastro', {timeout: 20000}, async() => {
 });
 
 When('Eu estou na tela de cadastro', {timeout: 30000}, async() => {
+  await driver.setImplicitWaitTimeout(15000);
   let ehTelaCadastro = await driver.hasElementByAccessibilityId("botao-cadastrar");
   assert.equal(ehTelaCadastro, true);
 });
@@ -150,4 +151,46 @@ Then('eu vejo uma mensagem de erro no login', {timeout: 20000}, async() => {
   await driver.setImplicitWaitTimeout(15000);
   let msgErro = await driver.hasElementByXPath("//*[@text='Email ou senha incorretos!']");
   assert.equal(msgErro, true);
+});
+
+When('eu vejo a tela inicial de prestador', {timeout: 20000}, async() => {
+  await driver.setImplicitWaitTimeout(15000);
+  let ehTelaInicial = await driver.hasElementByXPath("//*[@text='InicioPrestador']");
+  assert.equal(ehTelaInicial, true);
+});
+
+When('eu pressiono o botão "Criar Serviço"', async() => {
+  let botaoCriarServico = await driver.elementByAccessibilityId("botao-criarservico");
+  botaoCriarServico.click();
+});
+
+When('eu vejo a tela inicial de novo serviço', {timeout: 20000}, async() => {
+  await driver.setImplicitWaitTimeout(15000);
+  let ehTelaNovoServico = await driver.hasElementByXPath("//*[@text='Novo Serviço']");
+  assert.equal(ehTelaNovoServico, true);
+});
+
+When('eu preencho o campo "nome" com "Corte de cabelo"', async() => {
+  let preencherNome = await driver.elementByAccessibilityId('campo-nome');
+  preencherNome.sendKeys("Corte de cabelo");
+});
+
+When('eu preencho o campo "valor" com "50,00"', async() => {
+  let preencherValor = await driver.elementByAccessibilityId('campo-valor');
+  preencherValor.sendKeys("50");
+});
+
+When('eu preencho o campo "Duração Média" com "15,00"', async() => {
+  let preencherDuracao = await driver.elementByAccessibilityId('campo-duracao');
+  preencherDuracao.sendKeys("15");
+});
+
+When('eu preencho o campo "Descrição" com "Adicione uma descrição"', async() => {
+  let preencherDescricao = await driver.elementByAccessibilityId('campo-descricao');
+  preencherDescricao.sendKeys("Adicione uma descrição");
+});
+
+When('eu pressiono o botão "Concluir"', async() => {
+  let botaoConcluir = await driver.elementByAccessibilityId("botao-concluir");
+  botaoConcluir.click();
 });
