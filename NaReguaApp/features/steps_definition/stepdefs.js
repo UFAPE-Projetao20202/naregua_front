@@ -43,7 +43,7 @@ When('Eu estou na tela de cadastro', {timeout: 30000}, async() => {
   assert.equal(ehTelaCadastro, true);
 });
 
-When('eu preencho o campo "nome" com João Silva', async() => {
+When('eu preencho o campo "nome" com "João Silva"', async() => {
   let preencherNome = await driver.elementByAccessibilityId('campo-nome');
   preencherNome.sendKeys("João Silva");
 });
@@ -53,14 +53,21 @@ When('eu preencho o campo "email" com "exemplo2@email.com"', async() => {
   preencherEmail.sendKeys("exemplo2@email.com");
 });
 
-When('eu preencho o campo "senha" e o campo "confirmar senha" com 123456', async() => {
+When('eu preencho o campo "senha" e o campo "confirmar senha" com a senha invalida "a"', async() => {
+  let preencherSenha = await driver.elementByAccessibilityId('campo-senha');
+  preencherSenha.sendKeys("a");
+  let preencherConfirmarSenha = await driver.elementByAccessibilityId('campo-confirmarSenha');
+  preencherConfirmarSenha.sendKeys("a");
+});
+
+When('eu preencho o campo "senha" e o campo "confirmar senha" com "123456"', async() => {
   let preencherSenha = await driver.elementByAccessibilityId('campo-senha');
   preencherSenha.sendKeys("123456");
   let preencherConfirmarSenha = await driver.elementByAccessibilityId('campo-confirmarSenha');
   preencherConfirmarSenha.sendKeys("123456");
 });
 
-When('eu preencho o campo "Nª de celular" com 8822445566', async() => {
+When('eu preencho o campo "Nª de celular" com "8822445566"', async() => {
   let preencherCelular = await driver.elementByAccessibilityId('campo-celular');
   preencherCelular.sendKeys("8822445566");
 });
@@ -76,7 +83,17 @@ Then('eu vejo a tela de login', {timeout: 20000}, async() => {
   assert.equal(ehTelaLogin, true);
 });
 
-When('eu preencho o campo "senha" com 123456', async() => {
+Then('eu vejo uma mensagem de erro', {timeout: 20000}, async() => {
+  let msgErro = await driver.hasElementByXPath("//*[@text='Preencha todos os campos corretamente']");
+  assert.equal(msgErro, true);
+});
+
+Then('eu vejo uma mensagem de erro indicando email já cadastrado', {timeout: 20000}, async() => {
+  let msgErro = await driver.hasElementByXPath("//*[@text='Já existe um usuário com esse email.']");
+  assert.equal(msgErro, true);
+});
+
+When('eu preencho o campo "senha" com "123456"', async() => {
   let preencherSenha = await driver.elementByAccessibilityId('campo-senha');
   preencherSenha.sendKeys("123456");
 });
@@ -88,6 +105,22 @@ When('eu pressiono o botão "Login"', async() => {
 
 Then('eu vejo a tela inicial de cliente', {timeout: 20000}, async() => {
   await driver.setImplicitWaitTimeout(15000);
-  let ehTelaInicial = await driver.hasElementByAccessibilityId("descricao-prestador");
+  let ehTelaInicial = await driver.hasElementByAccessibilityId("lista-prestadores");
   assert.equal(ehTelaInicial, true);
+});
+
+When('eu preencho o campo "email" com o email incorreto "abc@email.com"', async() => {
+  let preencherEmail = await driver.elementByAccessibilityId('campo-email');
+  preencherEmail.sendKeys("abc@email.com");
+});
+
+When('eu preencho o campo "senha" com a senha incorreta "654321"', async() => {
+  let preencherSenha = await driver.elementByAccessibilityId('campo-senha');
+  preencherSenha.sendKeys("654321");
+});
+
+Then('eu vejo uma mensagem de erro no login', {timeout: 20000}, async() => {
+  await driver.setImplicitWaitTimeout(15000);
+  let msgErro = await driver.hasElementByXPath("//*[@text='Email ou senha incorretos!']");
+  assert.equal(msgErro, true);
 });
