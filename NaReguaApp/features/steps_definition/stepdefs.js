@@ -112,11 +112,13 @@ Then('eu vejo a tela de login', {timeout: 20000}, async() => {
 });
 
 Then('eu vejo uma mensagem de erro', {timeout: 20000}, async() => {
+  await driver.setImplicitWaitTimeout(15000);
   let msgErro = await driver.hasElementByXPath("//*[@text='Preencha todos os campos corretamente']");
   assert.equal(msgErro, true);
 });
 
 Then('eu vejo uma mensagem de erro indicando email já cadastrado', {timeout: 20000}, async() => {
+  await driver.setImplicitWaitTimeout(15000);
   let msgErro = await driver.hasElementByXPath("//*[@text='Já existe um usuário com esse email.']");
   assert.equal(msgErro, true);
 });
