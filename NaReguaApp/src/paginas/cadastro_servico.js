@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import {
 	View,
 	ScrollView,
@@ -9,8 +9,7 @@ import {
 } from 'react-native';
 import api from '../services/api';
 
-
-const CadastroServico = ({ navigation }) => {
+const CadastroServico = () => {
 	const [nome, setNome] = useState('');
 	const [valor, setValor] = useState(0);
 	const [duracao, setDuracao] = useState(0);
@@ -22,18 +21,30 @@ const CadastroServico = ({ navigation }) => {
 
 	async function cadastrar() {
 		try {
+			let categoriaId;
+			let resCategorias = await api.get(`/categories`);
+
+			if(resCategorias.data.length > 0) {
+				categoriaId = resCategorias.data[0].id;
+			} else {
+				let dataCategoria = JSON.stringify({description: 'Categoria 1'});
+				let resPost = await api.post(`/categories`, dataCategoria);
+				categoriaId = resPost.data.id;
+			}
+
             let data = JSON.stringify({
                 name: nome,
                 value: valor,
                 duration: duracao,
 				description: descricao,
+				discount: 0,
 				available: true,
-				category_id: 1, // corrigir após adicionar cadastro de categoria
-				provider_id: 1 // corrigir
+				category_id: categoriaId // corrigir após adicionar cadastro de categoria
 			});
 
-			let res = await api.post(`/services`, data);
+			await api.post(`/services`, data);
 
+			setApiError('');
             alert('Serviço cadastrado!');
 		} catch (error) {
 			console.log(error.response.data);
