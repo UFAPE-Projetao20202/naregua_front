@@ -53,6 +53,13 @@ When('eu preencho o campo "email" com "exemplo2@email.com"', async() => {
   preencherEmail.sendKeys("exemplo2@email.com");
 });
 
+///
+When('eu preencho o campo "email" com "exemplo@email.com"', async() => {
+  let preencherEmail = await driver.elementByAccessibilityId('campo-email');
+  preencherEmail.sendKeys("exemplo@email.com");
+});
+///
+
 When('eu preencho o campo "senha" e o campo "confirmar senha" com a senha invalida "a"', async() => {
   let preencherSenha = await driver.elementByAccessibilityId('campo-senha');
   preencherSenha.sendKeys("a");
@@ -70,6 +77,26 @@ When('eu preencho o campo "senha" e o campo "confirmar senha" com "123456"', asy
 When('eu preencho o campo "Nª de celular" com "8822445566"', async() => {
   let preencherCelular = await driver.elementByAccessibilityId('campo-celular');
   preencherCelular.sendKeys("8822445566");
+});
+
+///
+When('eu preencho o campo "Nª de celular" com "8833445566"', async() => {
+  let preencherCelular = await driver.elementByAccessibilityId('campo-celular');
+  preencherCelular.sendKeys("8833445566");
+});
+///
+
+When('eu seleciono a opção "Prestador"', async() => {
+  let campoPrestador = await driver.elementByAccessibilityId("campo-prestador");
+  campoPrestador.click();
+});
+
+When('eu seleciono a opção "Tipo de Serviço" e seleciono "Manicure"', async() => {
+  let campoServico = await driver.elementByAccessibilityId("campo-servico");
+  //campoServico.click();
+  let campoTipoServico = await driver.elementByAccessibilityId("campo-tiposervico")
+  campoTipoServico.click()
+  campoTipoServico.select("Manicure");
 });
 
 When('eu pressiono o botão "Cadastrar"', async() => {
@@ -105,7 +132,7 @@ When('eu pressiono o botão "Login"', async() => {
 
 Then('eu vejo a tela inicial de cliente', {timeout: 20000}, async() => {
   await driver.setImplicitWaitTimeout(15000);
-  let ehTelaInicial = await driver.hasElementByAccessibilityId("lista-prestadores");
+  let ehTelaInicial = await driver.hasElementByXPath("//*[@text='InicioCliente']");
   assert.equal(ehTelaInicial, true);
 });
 
