@@ -82,7 +82,7 @@ const Login = ({ navigation }) => {
 				{mensagemErro.length > 0 && <Text style={styles.error}>{mensagemErro}</Text>}
 
                 <View style={styles.containerBotao}>
-                    <TouchableOpacity onPress={() => validarDados()} style={styles.loginBtn}>
+                    <TouchableOpacity onPress={() => navigation.navigate('InicioCliente')} style={styles.loginBtn}>
                         <Text style={styles.loginText} accessible={true} accessibilityLabel="botao-login" >LOGIN</Text>
                     </TouchableOpacity>
                 </View>
@@ -97,17 +97,18 @@ const Login = ({ navigation }) => {
 
 const styles = StyleSheet.create({
 	scrollViewcontainer: {
-		backgroundColor: '#ECECEC',
-        paddingVertical: 20
+        backgroundColor: '#ECECEC',
+        paddingVertical: 20,
+        height: '100%',
+        paddingHorizontal: 15
 	},
     container: {
-        flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
         height: '100%'
     },
     image: {
-        marginBottom: 4,
+        marginVertical: 5,
         resizeMode: 'contain',
         width: '100%',
         height: 220
@@ -115,14 +116,13 @@ const styles = StyleSheet.create({
     inputView: {
         backgroundColor: 'white',
         borderRadius: 15,
-        width: "80%",
         height: 45,
-        marginBottom: 20
+        width: '90%',
+        marginVertical: 10
     },
     textInput: {
         height: 50,
         flex: 1,
-        padding: 10,
         marginLeft: 20,
         color: 'black'
     },
@@ -139,25 +139,27 @@ const styles = StyleSheet.create({
     },
     label: {
         marginBottom: 7,
-        width: '70%'
+        width: '90%'
     },
     labelText: {
         color: 'black',
-        textAlign: 'left'
+        textAlign: 'left',
+        marginTop: 10
     },
 	error: {
 		color: 'red'
 	},
     containerBotao: {
-        width: '80%',
+        width: '90%',
         flex: 1,
         marginTop: 20,
         alignItems: 'flex-end'
     },
     signupBtn: {
-        flex: 1,
-        marginVertical: 40,
-        marginHorizontal: 36
+        position: 'absolute',
+        left: 15,
+        bottom: 20,
+        right: 15
     },
     signupText: {
         flex: 1,
