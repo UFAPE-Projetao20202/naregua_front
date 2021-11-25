@@ -17,11 +17,17 @@ const InicioPrestador = ({ navigation }) => {
 				{user && <Text style={styles.title}>Bem vindo, {user.name}</Text>}
 
                 <View style={styles.containerBtn}>
-					<TouchableOpacity style={styles.signBtn} onPress={() => navigation.navigate('CadastroServico')}>
-						<Text style={styles.btnText} accessible={true} accessibilityLabel="botao-criarservico">Criar serviço</Text>
-					</TouchableOpacity>
-				</View>
-            </View>
+								<TouchableOpacity style={styles.signBtn} onPress={() => navigation.navigate('CadastroServico')}>
+								<Text style={styles.btnText} accessible={true} accessibilityLabel="botao-criarservico">Criar serviço</Text>
+								</TouchableOpacity>
+								</View>
+								<View style={styles.containerBtn}>
+								<TouchableOpacity style={styles.signBtn} onPress={() => navigation.navigate('PerfilPrestador')}>
+								<Text style={styles.btnText} accessible={true} accessibilityLabel="botao-perfilprestador">Perfil</Text>
+								</TouchableOpacity>
+								</View>
+								
+        		</View>
         </ScrollView>
     );
 };
