@@ -10,19 +10,19 @@ import {
 import api from '../services/api';
 import { useAuth } from '../contexts/auth';
 
-const InicioCliente = ({ navigation })  => {
+const Endereco = ({ navigation })  => {
   const { user } = useAuth();
   
-  const [listaPrestadores, setlistaPrestadores] = useState([]);
+  const [listaEnderecos, setlistaEnderecos] = useState([]);
 
   useEffect(() => {
-    listarPrestadores();
+    listarEnderecos();
   }, []);
 
-  async function listarPrestadores() {
+  async function listarEnderecos() {
     try {
-      let res1 = await api.get('/providers');
-      setlistaPrestadores(res1.data);
+      let res1 = await api.get('/providers/address');
+      setlistaEnderecos(res1.data);
     } catch (error) {
       console.log(error.response.data);
     }
@@ -32,26 +32,25 @@ const InicioCliente = ({ navigation })  => {
     <ScrollView contentContainerStyle={styles.scrollViewcontainer}>
       <View style={styles.container}>
         {user && <Text style={styles.title}>Bem vindo, {user.name}</Text>}
-        <View style={styles.containerBtn}>
-          <TouchableOpacity style={styles.signBtn} onPress={() => navigation.navigate('PerfilCliente')}>
-          <Text style={styles.btnText} accessible={true} accessibilityLabel="botao-perfilcliente">Perfil</Text>
-          </TouchableOpacity>
-			  </View>
-        {listaPrestadores.map((item) => (
+        {listaEnderecos.map((item) => (
           <View style={styles.itemLista} key={item.id}>
             <View style={styles.itemColunas}>
               <View>
-                <Text style={styles.itemTitulo}>{item.user.name}</Text>
-                <Text style={styles.itemDados}>1,7 km</Text>
-                <Text style={styles.itemDados}>Descrição do prestador</Text>
+                <Text style={styles.itemTitulo}>{item.name}</Text>
+                <Text style={styles.itemDados}>{item.street}</Text>
+                <Text style={styles.itemDados}>{item.state}</Text>
+                <Text style={styles.itemDados}>{item.complement}</Text>
               </View>
-              <View style={styles.itemCol2}>
-                <Text style={styles.itemNota}>4.5</Text>
-              </View>
-            </View>
             <Divider style={styles.divisor} />
           </View>
+          </View>
         ))}
+        <View style={styles.containerBtn}>
+								<TouchableOpacity style={styles.signBtn} onPress={() => navigation.navigate('CadastroEndereco')}>
+								<Text style={styles.btnText} accessible={true} accessibilityLabel="botao-criarendereco">Adicionar endereço</Text>
+								</TouchableOpacity>
+								
+            </View>
       </View>
     </ScrollView>
   );
@@ -110,7 +109,7 @@ const styles = StyleSheet.create({
 		fontWeight: '500'
 	},
 	signBtn: {
-		width: 140,
+		width: 240,
 		borderRadius: 15,
 		padding: 10,
 		height: 45,
@@ -120,4 +119,4 @@ const styles = StyleSheet.create({
 	}
 });
 
-export default InicioCliente;
+export default Endereco;
