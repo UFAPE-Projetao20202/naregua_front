@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import { Divider } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
+import Icon from "react-native-dynamic-vector-icons";
 import {
   View,
   Text,
@@ -120,7 +121,10 @@ const ListaServicos = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.pageTitle}>{prestador.name}</Text>
+      <View style={styles.row}>
+        <Icon style={styles.backButton} name="chevron-left" type="FontAwesome" size={18} color="black" onPress={() => {}} />
+        <Text style={styles.pageTitle}>{prestador.name}</Text>
+      </View>
       <Divider style={styles.divisor} />
       <SectionList
         sections={listaServ}
@@ -145,11 +149,12 @@ const styles = StyleSheet.create({
   },
   pageTitle: {
     textAlign: 'center',
-    marginVertical: 5,
+    marginVertical: 10,
     fontSize: 18,
     color: 'black',
     textTransform: 'uppercase',
-    fontWeight: '500'
+    fontWeight: '500',
+    width: '90%'
   },
   item: {
     marginVertical: 10
@@ -177,6 +182,14 @@ const styles = StyleSheet.create({
   },
   divisor: {
     marginVertical: 5
+  },
+  row: {
+    flexDirection: 'row'
+  },
+  backButton: {
+    textAlign: 'left',
+    marginVertical: 14,
+    width: "10%"
   }
 });
 
