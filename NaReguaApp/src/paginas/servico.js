@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import { Divider } from 'react-native-paper';
+import Icon from "react-native-dynamic-vector-icons";
 import {
   View,
   Text,
@@ -19,7 +20,10 @@ const Servico = ({ route, navigation }) => {
   return (
   <View style={styles.container}>
     <View style={styles.content}>
-      <Text style={styles.pageTitle}>{servico.name}</Text>
+      <View style={styles.row}>
+        <Icon style={styles.backButton} name="chevron-left" type="FontAwesome" size={18} color="black" onPress={() => {}} />
+        <Text style={styles.pageTitle}>{servico.name}</Text>
+      </View>
       <Text style={styles.itemDescription}>{servico.description}</Text>
       <View style={styles.row}>
         <Text style={styles.itemText}>R$ {servico.value}</Text>
@@ -66,11 +70,12 @@ const styles = StyleSheet.create({
   },
   pageTitle: {
     textAlign: 'center',
-    marginVertical: 5,
+    marginVertical: 10,
     fontSize: 18,
     color: 'black',
     textTransform: 'uppercase',
-    fontWeight: '500'
+    fontWeight: '500',
+    width: '90%'
   },
   itemText: {
     marginVertical: 5,
@@ -133,6 +138,14 @@ const styles = StyleSheet.create({
     left: 15,
     bottom: 20,
     right: 15
+  },
+  row: {
+    flexDirection: 'row'
+  },
+  backButton: {
+    textAlign: 'left',
+    marginVertical: 14,
+    width: "10%"
   }
 });
 
