@@ -12,6 +12,7 @@ export const AuthProvider = ({children}) => {
 
   useEffect(() => {
     async function carregarStorage() {
+      //await AsyncStorage.clear();
       const storageUser = await AsyncStorage.getItem('user');
       const storageToken = await AsyncStorage.getItem('token');
 

@@ -130,6 +130,7 @@ const Cadastro = ({ navigation }) => {
 						value="Prestador" color="#004A5A"
 						status={tipoUsuario === 'Prestador' ? 'checked' : 'unchecked'}
 						onPress={() => setTipoUsuario('Prestador')}
+						accessible={true} accessibilityLabel="campo-prestador"
 					/>
 					<View style={styles.label}>
 						<Text style={styles.labelText}>Prestador</Text>
@@ -151,7 +152,7 @@ const Cadastro = ({ navigation }) => {
 				</View>
 
 				<View style={tipoUsuario === 'Prestador' ? styles.label : styles.hide}>
-					<Text style={styles.labelText}>Tipo de Serviço</Text>
+					<Text style={styles.labelText} accessible={true} accessibilityLabel="campo-servico">Tipo de Serviço</Text>
 				</View>
 				<View style={tipoUsuario === 'Prestador' ? styles.pickerContainer : styles.hide}>
 					<Picker
@@ -159,6 +160,7 @@ const Cadastro = ({ navigation }) => {
 						dropdownIconColor="black"
 						selectedValue={tipoServico}
 						mode="dropdown"
+						accessible={true} accessibilityLabel="campo-tiposervico"
 						onValueChange={(itemValue, itemIndex) =>
 							setTipoServico(itemValue)
 						}>

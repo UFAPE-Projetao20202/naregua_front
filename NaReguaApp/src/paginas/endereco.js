@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from 'react';
 import { Divider } from 'react-native-paper';
-import Icon from "react-native-dynamic-vector-icons";
 import {
   View,
   ScrollView,
@@ -11,19 +10,19 @@ import {
 import api from '../services/api';
 import { useAuth } from '../contexts/auth';
 
-const InicioCliente = ({ navigation })  => {
+const Endereco = ({ navigation })  => {
   const { user } = useAuth();
   
-  const [listaPrestadores, setlistaPrestadores] = useState([]);
+  const [listaEnderecos, setlistaEnderecos] = useState([]);
 
   useEffect(() => {
-    listarPrestadores();
+    listarEnderecos();
   }, []);
 
-  async function listarPrestadores() {
+  async function listarEnderecos() {
     try {
-      let res1 = await api.get('/providers');
-      setlistaPrestadores(res1.data);
+      let res1 = await api.get('/providers/address');
+      setlistaEnderecos(res1.data);
     } catch (error) {
       console.log(error.response.data);
     }
@@ -33,30 +32,25 @@ const InicioCliente = ({ navigation })  => {
     <ScrollView contentContainerStyle={styles.scrollViewcontainer}>
       <View style={styles.container}>
         {user && <Text style={styles.title}>Bem vindo, {user.name}</Text>}
-        <View style={styles.containerBtn}>
-          <TouchableOpacity style={styles.signBtn} onPress={() => navigation.navigate('PerfilCliente')}>
-          <Text style={styles.btnText} accessible={true} accessibilityLabel="botao-perfilcliente">Perfil</Text>
-          </TouchableOpacity>
-			  </View>
-        {listaPrestadores.map((item) => (
+        {listaEnderecos.map((item) => (
           <View style={styles.itemLista} key={item.id}>
             <View style={styles.itemColunas}>
               <View>
-                <Text style={styles.itemTitulo}>{item.user.name}</Text>
-                <Text style={styles.itemDados}>1,7 km</Text>
-                <Text style={styles.itemDados}>Descrição do prestador</Text>
+                <Text style={styles.itemTitulo}>{item.name}</Text>
+                <Text style={styles.itemDados}>{item.street}</Text>
+                <Text style={styles.itemDados}>{item.state}</Text>
+                <Text style={styles.itemDados}>{item.complement}</Text>
               </View>
-              <View style={styles.itemCol2}>
-                <View style={styles.itemLinha}>
-                  <Icon name="star" type="FontAwesome" size={15} color="#DE7800" onPress={() => {}} />
-                  <Text style={styles.itemNota}>4.5</Text>
-                </View>
-                <Icon name="heart" type="FontAwesome" size={24} color="black" onPress={() => {}} />
-              </View>
-            </View>
             <Divider style={styles.divisor} />
           </View>
+          </View>
         ))}
+        <View style={styles.containerBtn}>
+								<TouchableOpacity style={styles.signBtn} onPress={() => navigation.navigate('CadastroEndereco')}>
+								<Text style={styles.btnText} accessible={true} accessibilityLabel="botao-criarendereco">Adicionar endereço</Text>
+								</TouchableOpacity>
+								
+            </View>
       </View>
     </ScrollView>
   );
@@ -65,40 +59,35 @@ const InicioCliente = ({ navigation })  => {
 const styles = StyleSheet.create({
   scrollViewcontainer: {
     backgroundColor: '#ECECEC',
-    paddingVertical: 20,
-    height: '100%',
-    paddingHorizontal: 15
+    paddingVertical: 20
   },
   container: {
+    flex: 1,
     alignItems: 'center',
+    justifyContent: 'center',
     height: '100%'
   },
   itemLista: {
-    width: "100%"
+    width: "85%",
+    marginBottom: 20
   },
   itemTitulo: {
     color: 'black',
     textAlign: 'left',
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: '500'
   },
   itemDados: {
-    color: 'grey',
-    fontSize: 16
+    color: '#5A5A5A',
+    textAlign: 'left'
   },
   divisor: {
-    marginVertical: 10
+    marginTop: 10
   },
   itemColunas: {
     width: '100%',
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginVertical: 10
-  },
-  itemLinha: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginVertical: 10
+    justifyContent: 'space-between'
   },
   itemNota: {
     color: '#DE7800',
@@ -120,7 +109,7 @@ const styles = StyleSheet.create({
 		fontWeight: '500'
 	},
 	signBtn: {
-		width: 140,
+		width: 240,
 		borderRadius: 15,
 		padding: 10,
 		height: 45,
@@ -130,4 +119,4 @@ const styles = StyleSheet.create({
 	}
 });
 
-export default InicioCliente;
+export default Endereco;
