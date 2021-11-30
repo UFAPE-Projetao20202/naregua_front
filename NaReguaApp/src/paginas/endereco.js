@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import { Divider } from 'react-native-paper';
+import Icon from "react-native-dynamic-vector-icons";
 import {
   View,
-  ScrollView,
   Text,
   StyleSheet,
   TouchableOpacity
@@ -12,7 +12,7 @@ import { useAuth } from '../contexts/auth';
 
 const Endereco = ({ navigation })  => {
   const { user } = useAuth();
-  
+
   const [listaEnderecos, setlistaEnderecos] = useState([]);
 
   useEffect(() => {
@@ -29,94 +29,114 @@ const Endereco = ({ navigation })  => {
   }
 
   return (
-    <ScrollView contentContainerStyle={styles.scrollViewcontainer}>
-      <View style={styles.container}>
-        {user && <Text style={styles.title}>Bem vindo, {user.name}</Text>}
-        {listaEnderecos.map((item) => (
-          <View style={styles.itemLista} key={item.id}>
-            <View style={styles.itemColunas}>
-              <View>
-                <Text style={styles.itemTitulo}>{item.name}</Text>
-                <Text style={styles.itemDados}>{item.street}</Text>
-                <Text style={styles.itemDados}>{item.state}</Text>
-                <Text style={styles.itemDados}>{item.complement}</Text>
-              </View>
-            <Divider style={styles.divisor} />
-          </View>
-          </View>
-        ))}
-        <View style={styles.containerBtn}>
-								<TouchableOpacity style={styles.signBtn} onPress={() => navigation.navigate('CadastroEndereco')}>
-								<Text style={styles.btnText} accessible={true} accessibilityLabel="botao-criarendereco">Adicionar endereço</Text>
-								</TouchableOpacity>
-								
-            </View>
+
+  <View style={styles.container}>
+    <View style={styles.content}>
+      <View style={styles.row}>
+        <Icon style={styles.backButton} name="chevron-left" type="FontAwesome" size={18} color="black" onPress={() => {}} />
+        <Text style={styles.pageTitle}>{user.name}</Text>
       </View>
-    </ScrollView>
+      <Divider style={styles.dividerHeader}></Divider>
+      {listaEnderecos.map((item) => (
+        <View style={styles.rowAddress} key={item.id}>
+          <Icon name="home" type="FontAwesome" size={24} color="black" onPress={() => {}} />
+          <View style={styles.column}>
+            <Text style={styles.itemText}>{item.name}</Text>
+            <Text style={styles.itemDescription}>{item.street}</Text>
+            <Text style={styles.itemDescription}>{item.state}</Text>
+            <Text style={styles.itemDescription}>{item.complement}</Text>
+          </View>
+        </View>
+      ))}
+      <Divider style={styles.divider}></Divider>
+      <TouchableOpacity style={styles.rowAdd} onPress={() => navigation.navigate('CadastroEndereco')}>
+        <Icon name="plus" type="FontAwesome" size={22} color="black" onPress={() => {}} />
+        <Text style={styles.addText}>Adicionar Endereço</Text>
+      </TouchableOpacity>
+    </View>
+  </View>
+
   );
 };
 
 const styles = StyleSheet.create({
-  scrollViewcontainer: {
-    backgroundColor: '#ECECEC',
-    paddingVertical: 20
-  },
   container: {
+    backgroundColor: '#ECECEC',
+    paddingVertical: 20,
     flex: 1,
-    alignItems: 'center',
     justifyContent: 'center',
+    height: '100%',
+    paddingHorizontal: 15
+  },
+  content: {
+    width: '100%',
     height: '100%'
   },
-  itemLista: {
-    width: "85%",
-    marginBottom: 20
-  },
-  itemTitulo: {
+  pageTitle: {
+    textAlign: 'center',
+    marginVertical: 10,
+    fontSize: 18,
     color: 'black',
-    textAlign: 'left',
-    fontSize: 16,
-    fontWeight: '500'
+    textTransform: 'uppercase',
+    fontWeight: '500',
+    width: '90%'
   },
-  itemDados: {
-    color: '#5A5A5A',
-    textAlign: 'left'
-  },
-  divisor: {
-    marginTop: 10
-  },
-  itemColunas: {
-    width: '100%',
+  row: {
+    flex: 0,
+    marginHorizontal: 5,
     flexDirection: 'row',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    width: '100%'
   },
-  itemNota: {
-    color: '#DE7800',
-    fontWeight: '500'
+  rowAddress: {
+    flex: 0,
+    marginHorizontal: 5,
+    marginVertical: 10,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'flex-start',
+    width: '100%'
   },
-  title: {
-		color: 'black',
-		fontSize: 20,
-		fontWeight: '500'
-	},
-  containerBtn: {
-		width: '80%',
-		flex: 1,
-		marginTop: 20,
-		alignItems: 'center'
-	},btnText: {
-		color: 'white',
-		fontSize: 16,
-		fontWeight: '500'
-	},
-	signBtn: {
-		width: 240,
-		borderRadius: 15,
-		padding: 10,
-		height: 45,
-		alignItems: 'center',
-		justifyContent: 'center',
-		backgroundColor: '#004A5A'
-	}
+  rowAdd: {
+    flex: 0,
+    marginHorizontal: 5,
+    marginVertical: 10,
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    width: '100%'
+  },
+  dividerHeader: {
+    marginVertical: 10
+  },
+  divider: {
+    marginVertical: 10
+  },
+  column: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    marginHorizontal: 5
+  },
+  itemText: {
+    marginVertical: 3,
+    marginHorizontal: 10,
+    fontSize: 17,
+    color: 'black',
+  },
+  itemDescription: {
+    marginVertical: 2,
+    marginHorizontal: 10,
+    fontSize: 15,
+    color: 'grey',
+  },
+  addText: {
+    marginVertical: 3,
+    marginHorizontal: 10,
+    fontSize: 18,
+    color: 'black',
+  },
 });
 
 export default Endereco;

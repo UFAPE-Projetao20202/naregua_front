@@ -21,7 +21,7 @@ const PerfilCliente = ({ navigation }) => {
       </View>
       <Divider style={styles.dividerHeader}></Divider>
       <TouchableOpacity style={styles.row}>
-        <Icon style={styles.backButton} name="comment" type="FontAwesome" size={20} color="black" onPress={() => {}} />
+        <Icon name="comment" type="FontAwesome" size={20} color="black" onPress={() => {}} />
         <View style={styles.column}>
           <Text style={styles.itemText}>Chats</Text>
           <Text style={styles.itemDescription}>Minhas conversas</Text>
@@ -29,7 +29,7 @@ const PerfilCliente = ({ navigation }) => {
       </TouchableOpacity>
       <Divider style={styles.divider}></Divider>
       <TouchableOpacity style={styles.row}>
-        <Icon style={styles.backButton} name="bell" type="FontAwesome" size={20} color="black" onPress={() => {}} />
+        <Icon name="bell" type="FontAwesome" size={20} color="black" onPress={() => {}} />
         <View style={styles.column}>
           <Text style={styles.itemText}>Notificações</Text>
           <Text style={styles.itemDescription}>Minha central de notificações</Text>
@@ -37,7 +37,7 @@ const PerfilCliente = ({ navigation }) => {
       </TouchableOpacity>
       <Divider style={styles.divider}></Divider>
       <TouchableOpacity style={styles.row}>
-        <Icon style={styles.backButton} name="heart" type="FontAwesome" size={20} color="black" onPress={() => {}} />
+        <Icon name="heart" type="FontAwesome" size={20} color="black" onPress={() => {}} />
         <View style={styles.column}>
           <Text style={styles.itemText}>Favoritos</Text>
           <Text style={styles.itemDescription}>Meus locais favoritos</Text>
@@ -45,7 +45,7 @@ const PerfilCliente = ({ navigation }) => {
       </TouchableOpacity>
       <Divider style={styles.divider}></Divider>
       <TouchableOpacity style={styles.row} onPress={() => navigation.navigate('Endereco')}>
-        <Icon style={styles.backButton} name="map-marker" type="FontAwesome" size={24} color="black" onPress={() => {}} />
+        <Icon name="map-marker" type="FontAwesome" size={24} color="black" onPress={() => {}} />
         <View style={styles.column}>
           <Text style={styles.itemText}>Endereços</Text>
           <Text style={styles.itemDescription}>Meus endereços</Text>
@@ -53,7 +53,7 @@ const PerfilCliente = ({ navigation }) => {
       </TouchableOpacity>
       <Divider style={styles.divider}></Divider>
       <TouchableOpacity style={styles.row}>
-        <Icon style={styles.backButton} name="id-card" type="FontAwesome" size={20} color="black" onPress={() => {}} />
+        <Icon name="id-card" type="FontAwesome" size={20} color="black" onPress={() => {}} />
         <View style={styles.column}>
           <Text style={styles.itemText}>Meus Dados</Text>
           <Text style={styles.itemDescription}>Informações da minha conta</Text>
@@ -61,7 +61,7 @@ const PerfilCliente = ({ navigation }) => {
       </TouchableOpacity>
       <Divider style={styles.divider}></Divider>
       <TouchableOpacity style={styles.row}>
-        <Icon style={styles.backButton} name="sign-out" type="FontAwesome" size={24} color="black" onPress={() => {}} />
+        <Icon name="sign-out" type="FontAwesome" size={24} color="black" onPress={() => {}} />
         <View style={styles.column}>
           <Text style={styles.itemText}>Sair</Text>
         </View>
