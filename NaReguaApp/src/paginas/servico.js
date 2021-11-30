@@ -13,10 +13,6 @@ const Servico = ({ route, navigation }) => {
   const [observacoes, setObservacoes] = useState('');
   const servico = route.params.servico;
 
-  function adicionarServico() {
-    console.log('add');
-  }
-
   return (
   <View style={styles.container}>
     <View style={styles.content}>
@@ -45,7 +41,7 @@ const Servico = ({ route, navigation }) => {
       <Divider style={styles.divider}></Divider>
       <View style={styles.row}>
         <View style={styles.containerBotao}>
-          <TouchableOpacity onPress={() => adicionarServico()} style={styles.addButton}>
+          <TouchableOpacity onPress={() => navigation.navigate('Agendamento', {servico: servico})} style={styles.addButton}>
             <Text style={styles.buttonText} accessible={true} accessibilityLabel="botao-adicionar">ADICIONAR (R$ {servico.value})</Text>
           </TouchableOpacity>
         </View>
