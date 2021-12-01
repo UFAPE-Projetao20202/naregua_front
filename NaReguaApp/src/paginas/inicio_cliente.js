@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { Divider } from 'react-native-paper';
+import Icon from "react-native-dynamic-vector-icons";
 import {
   View,
   ScrollView,
@@ -46,7 +47,11 @@ const InicioCliente = ({ navigation })  => {
                 <Text style={styles.itemDados}>Descrição do prestador</Text>
               </View>
               <View style={styles.itemCol2}>
-                <Text style={styles.itemNota}>4.5</Text>
+                <View style={styles.itemLinha}>
+                  <Icon name="star" type="FontAwesome" size={15} color="#DE7800" onPress={() => {}} />
+                  <Text style={styles.itemNota}>4.5</Text>
+                </View>
+                <Icon name="heart" type="FontAwesome" size={24} color="black" onPress={() => {}} />
               </View>
             </View>
             <Divider style={styles.divisor} />
@@ -60,35 +65,40 @@ const InicioCliente = ({ navigation })  => {
 const styles = StyleSheet.create({
   scrollViewcontainer: {
     backgroundColor: '#ECECEC',
-    paddingVertical: 20
+    paddingVertical: 20,
+    height: '100%',
+    paddingHorizontal: 15
   },
   container: {
-    flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
     height: '100%'
   },
   itemLista: {
-    width: "85%",
-    marginBottom: 20
+    width: "100%"
   },
   itemTitulo: {
     color: 'black',
     textAlign: 'left',
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: '500'
   },
   itemDados: {
-    color: '#5A5A5A',
-    textAlign: 'left'
+    color: 'grey',
+    fontSize: 16
   },
   divisor: {
-    marginTop: 10
+    marginVertical: 10
   },
   itemColunas: {
     width: '100%',
     flexDirection: 'row',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    marginVertical: 10
+  },
+  itemLinha: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginVertical: 10
   },
   itemNota: {
     color: '#DE7800',
