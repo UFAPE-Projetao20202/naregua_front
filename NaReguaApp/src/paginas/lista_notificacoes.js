@@ -17,16 +17,19 @@ const ListaNotificacoes = ({ navigation })  => {
           {
               id: 1,
               titulo: "Titulo notificação 1",
+              texto: "fjskmldfk fnddfmk fdmkdfkfdjkf jfdkdfjd jfdmdf kjdmdfkjdf kjfdmdmfk",
               lida: true
           },
           {
               id: 2,
               titulo: "Titulo notificação 2",
+              texto: "fjskmldfk fnddfmk fdmkdfkfdjkf jfdkdfjd jfdmdf kjdmdfkjdf kjfdmdmfk",
               lida: false
           },
           {
               id: 3,
               titulo: "Titulo notificação 3",
+              texto: "fjskmldfk fnddfmk fdmkdfkfdjkf jfdkdfjd jfdmdf kjdmdfkjdf kjfdmdmfk",
               lida: true
           }
       ]
@@ -43,7 +46,7 @@ const ListaNotificacoes = ({ navigation })  => {
       <Divider style={styles.dividerHeader}></Divider>
       {listaNotificacoes.map((item) => (
           <View key={item.id}>
-            <TouchableOpacity style={styles.item} onPress={() => {}}>
+            <TouchableOpacity style={styles.item} onPress={() => navigation.navigate('Notificacao', {notificacao: item})}>
                 <Text style={styles.itemText}>{item.titulo}</Text>
                 {item.lida === false &&
                     <Icon name="circle" type="FontAwesome" size={18} color="firebrick"/> 
