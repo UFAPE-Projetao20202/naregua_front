@@ -20,24 +20,24 @@ const PerfilCliente = ({ navigation }) => {
         <Text style={styles.pageTitle}>{cliente.name}</Text>
       </View>
       <Divider style={styles.dividerHeader}></Divider>
-      <TouchableOpacity style={styles.row}>
-        <Icon name="comment" type="FontAwesome" size={20} color="black" onPress={() => {}} />
+      <TouchableOpacity style={styles.row} onPress={() => navigation.navigate('Chats')}>
+        <Icon name="comment" type="FontAwesome" size={20} color="black"/>
         <View style={styles.column}>
           <Text style={styles.itemText}>Chats</Text>
           <Text style={styles.itemDescription}>Minhas conversas</Text>
         </View>
       </TouchableOpacity>
       <Divider style={styles.divider}></Divider>
-      <TouchableOpacity style={styles.row}>
-        <Icon name="bell" type="FontAwesome" size={20} color="black" onPress={() => {}} />
+      <TouchableOpacity style={styles.row} onPress={() => {}}>
+        <Icon name="bell" type="FontAwesome" size={20} color="black"/>
         <View style={styles.column}>
           <Text style={styles.itemText}>Notificações</Text>
           <Text style={styles.itemDescription}>Minha central de notificações</Text>
         </View>
       </TouchableOpacity>
       <Divider style={styles.divider}></Divider>
-      <TouchableOpacity style={styles.row}>
-        <Icon name="heart" type="FontAwesome" size={20} color="black" onPress={() => {}} />
+      <TouchableOpacity style={styles.row} onPress={() => {}}>
+        <Icon name="heart" type="FontAwesome" size={20} color="black"/>
         <View style={styles.column}>
           <Text style={styles.itemText}>Favoritos</Text>
           <Text style={styles.itemDescription}>Meus locais favoritos</Text>
@@ -52,16 +52,16 @@ const PerfilCliente = ({ navigation }) => {
         </View>
       </TouchableOpacity>
       <Divider style={styles.divider}></Divider>
-      <TouchableOpacity style={styles.row}>
-        <Icon name="id-card" type="FontAwesome" size={20} color="black" onPress={() => {}} />
+      <TouchableOpacity style={styles.row} onPress={() => {}}>
+        <Icon name="id-card" type="FontAwesome" size={20} color="black"/>
         <View style={styles.column}>
           <Text style={styles.itemText}>Meus Dados</Text>
           <Text style={styles.itemDescription}>Informações da minha conta</Text>
         </View>
       </TouchableOpacity>
       <Divider style={styles.divider}></Divider>
-      <TouchableOpacity style={styles.row}>
-        <Icon name="sign-out" type="FontAwesome" size={24} color="black" onPress={() => {}} />
+      <TouchableOpacity style={styles.row} onPress={() => {}}>
+        <Icon name="sign-out" type="FontAwesome" size={24} color="black"/>
         <View style={styles.column}>
           <Text style={styles.itemText}>Sair</Text>
         </View>
