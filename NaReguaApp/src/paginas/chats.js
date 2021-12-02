@@ -7,52 +7,53 @@ import {
   StyleSheet,
   TouchableOpacity
 } from 'react-native';
-import api from '../services/api';
-import { useAuth } from '../contexts/auth';
 
-const Endereco = ({ navigation })  => {
-  const { user } = useAuth();
+const Chats = ({ navigation })  => {
+    let dados = [
+        {
+            nome: 'Nome do prestador',
+            id_pedido: '4787584',
+            data_pedido: '12/01/21',
+            telefone: '(81) 99999-9999',
+            whatsapp: true
+        },
+        {
+            nome: 'Nome do prestador 2',
+            id_pedido: '44585494',
+            data_pedido: '15/01/21',
+            telefone: '(87) 99888-9999',
+            whatsapp: false
+        }
+    ];
 
-  const [listaEnderecos, setlistaEnderecos] = useState([]);
-
-  /*useEffect(() => {
-    listarEnderecos();
-  }, []);*/
-
-  /*async function listarEnderecos() {
-    try {
-      let res1 = await api.get('/users/address');
-      setlistaEnderecos(res1.data);
-    } catch (error) {
-      console.log(error.response.data);
-    }
-  }*/
+  useEffect(() => {
+  }, []);
 
   return (
-
   <View style={styles.container}>
     <View style={styles.content}>
       <View style={styles.row}>
-        <Icon style={styles.backButton} name="chevron-left" type="FontAwesome" size={18} color="black" onPress={() => {}} />
-        <Text style={styles.pageTitle}>{user.name}</Text>
+        <Icon name="chevron-left" type="FontAwesome" size={18} color="black" onPress={() => {}} />
+        <Text style={styles.pageTitle}>CHATS</Text>
       </View>
       <Divider style={styles.dividerHeader}></Divider>
-      {listaEnderecos.map((item) => (
-        <View style={styles.rowAddress} key={item.id}>
-          <Icon name="home" type="FontAwesome" size={24} color="black" onPress={() => {}} />
-          <View style={styles.column}>
-            <Text style={styles.itemText}>{item.name}</Text>
-            <Text style={styles.itemDescription}>{item.street}</Text>
-            <Text style={styles.itemDescription}>{item.state}</Text>
-            <Text style={styles.itemDescription}>{item.complement}</Text>
-          </View>
+      {dados.map((item) => (
+        <View>
+            <TouchableOpacity key={item.id_pedido}>
+                <Text style={styles.itemText}>{item.nome}</Text>
+                <Text style={styles.itemData}>Pedido {item.id_pedido} • {item.data_pedido}</Text>
+                {
+                item.whatsapp === true && 
+                <Text style={styles.itemDescription}>CLIQUE PARA SER REDIRECIONADO AO WHATSAPP DESSE ESTABELECIMENTO</Text>
+                }
+                {
+                item.whatsapp === false && 
+                <Text style={styles.itemDescription}>ESSE ESTABELECIMENTO NÃO CONECTOU UM NÚMERO DE WHATSAPP, ENTRE EM CONTATO POR LIGAÇÃO: {item.telefone}</Text>
+                }
+            </TouchableOpacity>
+            <Divider style={styles.divider}></Divider>
         </View>
       ))}
-      <Divider style={styles.divider}></Divider>
-      <TouchableOpacity style={styles.rowAdd} onPress={() => navigation.navigate('CadastroEndereco')}>
-        <Icon name="plus" type="FontAwesome" size={22} color="black" onPress={() => {}} />
-        <Text style={styles.addText}>Adicionar Endereço</Text>
-      </TouchableOpacity>
     </View>
   </View>
 
@@ -89,7 +90,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width: '100%'
   },
-  rowAddress: {
+  rowChat: {
     flex: 0,
     marginHorizontal: 5,
     marginVertical: 10,
@@ -122,14 +123,22 @@ const styles = StyleSheet.create({
   itemText: {
     marginVertical: 3,
     marginHorizontal: 10,
-    fontSize: 17,
+    fontSize: 18,
     color: 'black',
+  },
+  itemData: {
+    marginVertical: 2,
+    marginHorizontal: 10,
+    fontSize: 14,
+    color: 'grey',
   },
   itemDescription: {
     marginVertical: 2,
     marginHorizontal: 10,
-    fontSize: 15,
-    color: 'grey',
+    fontSize: 16,
+    fontWeight: 'bold',
+    textAlign: 'justify',
+    color: '#004A5A',
   },
   addText: {
     marginVertical: 3,
@@ -139,4 +148,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Endereco;
+export default Chats;

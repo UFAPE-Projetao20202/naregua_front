@@ -176,7 +176,7 @@ const Cadastro = ({ navigation }) => {
 				{apiError.length > 0 && <Text style={styles.error}>{apiError}</Text>}
 
 				<View style={styles.containerBtn}>
-					<TouchableOpacity style={styles.signBtn} onPress={() => validarDados()}>
+					<TouchableOpacity style={styles.signBtn} onPress={() => navigation.navigate('Login')}>
 						<Text style={styles.signText} accessible={true} accessibilityLabel="botao-cadastrar">CADASTRAR</Text>
 					</TouchableOpacity>
 				</View>
@@ -187,44 +187,45 @@ const Cadastro = ({ navigation }) => {
 
 const styles = StyleSheet.create({
 	scrollViewcontainer: {
-		backgroundColor: '#ECECEC',
-		paddingVertical: 26
+        backgroundColor: '#ECECEC',
+        paddingVertical: 20,
+        height: '100%',
+        paddingHorizontal: 15
 	},
 	container: {
-		flex: 1,
 		alignItems: 'center',
 		justifyContent: 'center',
 		height: '100%'
 	},
 	inputView: {
-		backgroundColor: 'white',
-		borderRadius: 15,
-		width: "80%",
-		height: 45,
-		marginBottom: 20
+        backgroundColor: 'white',
+        borderRadius: 15,
+        height: 45,
+        width: '90%',
+        marginVertical: 10
 	},
 	textInput: {
-		height: 50,
-		flex: 1,
-		padding: 10,
-		marginLeft: 20,
-		color: 'black'
+        height: 50,
+        flex: 1,
+        marginLeft: 20,
+        color: 'black'
 	},
 	pickerContainer: {
 		backgroundColor: 'white',
 		borderRadius: 15,
-		width: "80%",
+		width: "90%",
 		height: 45,
 		alignItems: 'center',
 		justifyContent: 'center',
 		overflow: 'hidden',
-		marginBottom: 20
+		marginVertical: 10
 	},
 	pickerInput: {
 		color: 'black',
 		backgroundColor: 'white',
 		borderRadius: 50,
-		width: 280,
+		width: "100%",
+		marginLeft: 20,
 		height: 45
 	},
 	signBtn: {
@@ -242,8 +243,8 @@ const styles = StyleSheet.create({
 		fontWeight: '500'
 	},
 	label: {
-		marginBottom: 7,
-		width: '70%'
+        marginTop: 5,
+        width: '90%'
 	},
 	labelText: {
 		color: 'black',
@@ -261,7 +262,7 @@ const styles = StyleSheet.create({
 	radioButton: {
 		flexDirection: 'row',
 		alignItems: 'center',
-		marginBottom: 20
+		marginVertical: 10
 	},
 	hide: {
 		display: 'none'
