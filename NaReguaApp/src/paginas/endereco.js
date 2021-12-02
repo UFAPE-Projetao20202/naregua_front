@@ -15,18 +15,18 @@ const Endereco = ({ navigation })  => {
   
   const [listaEnderecos, setlistaEnderecos] = useState([]);
 
-  useEffect(() => {
+  /*useEffect(() => {
     listarEnderecos();
-  }, []);
+  }, []);*/
 
-  async function listarEnderecos() {
+  /*async function listarEnderecos() {
     try {
-      let res1 = await api.get('/providers/address');
+      let res1 = await api.get('/users/address');
       setlistaEnderecos(res1.data);
     } catch (error) {
       console.log(error.response.data);
     }
-  }
+  }*/
 
   return (
     <ScrollView contentContainerStyle={styles.scrollViewcontainer}>

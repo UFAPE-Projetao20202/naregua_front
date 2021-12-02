@@ -5,6 +5,7 @@ import {
   ScrollView,
   Text,
   StyleSheet,
+  TouchableOpacity,
 } from 'react-native';
 import api from '../services/api';
 
@@ -13,19 +14,15 @@ const PerfilPrestador = ({ navigation }) => {
   return (
     <ScrollView contentContainerStyle={styles.scrollViewcontainer}>
       <View style={styles.container}>
-        {listaPrestadores.map((item) => (
-          <View style={styles.itemLista} key={item.id}>
             <View style={styles.itemColunas}>
-            <View style={styles.containerBtn}>
+              <View style={styles.containerBtn}>
 								<TouchableOpacity style={styles.signBtn} onPress={() => navigation.navigate('Endereco')}>
 								<Text style={styles.btnText} accessible={true} accessibilityLabel="botao-endereco">Endereços</Text>
 								</TouchableOpacity>
-								</View>
+							</View>
             </View>
             <Divider style={styles.divisor} />
           </View>
-        ))}
-      </View>
     </ScrollView>
   );
 };
@@ -41,19 +38,29 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     height: '100%'
   },
-
   divisor: {
     marginTop: 10
   },
-  itemColunas: {
-    width: '100%',
-    flexDirection: 'row',
-    justifyContent: 'space-between'
-  },
-  itemNota: {
-    color: '#DE7800',
-    fontWeight: '500'
-  }
+  containerBtn: {
+		width: '80%',
+		flex: 1,
+		marginTop: 20,
+		alignItems: 'center'
+	},
+	btnText: {
+		color: 'white',
+		fontSize: 16,
+		fontWeight: '500'
+	},
+	signBtn: {
+		width: 140,
+		borderRadius: 15,
+		padding: 10,
+		height: 45,
+		alignItems: 'center',
+		justifyContent: 'center',
+		backgroundColor: '#004A5A'
+	}
 });
 
 export default PerfilPrestador;
