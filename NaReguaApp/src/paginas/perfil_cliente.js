@@ -28,7 +28,7 @@ const PerfilCliente = ({ navigation }) => {
         </View>
       </TouchableOpacity>
       <Divider style={styles.divider}></Divider>
-      <TouchableOpacity style={styles.row} onPress={() => {}}>
+      <TouchableOpacity style={styles.row} onPress={() => navigation.navigate('ListaNotificacoes')}>
         <Icon name="bell" type="FontAwesome" size={20} color="black"/>
         <View style={styles.column}>
           <Text style={styles.itemText}>Notificações</Text>
@@ -36,7 +36,7 @@ const PerfilCliente = ({ navigation }) => {
         </View>
       </TouchableOpacity>
       <Divider style={styles.divider}></Divider>
-      <TouchableOpacity style={styles.row} onPress={() => {}}>
+      <TouchableOpacity style={styles.row} onPress={() => navigation.navigate('Favoritos')}>
         <Icon name="heart" type="FontAwesome" size={20} color="black"/>
         <View style={styles.column}>
           <Text style={styles.itemText}>Favoritos</Text>
@@ -52,7 +52,7 @@ const PerfilCliente = ({ navigation }) => {
         </View>
       </TouchableOpacity>
       <Divider style={styles.divider}></Divider>
-      <TouchableOpacity style={styles.row} onPress={() => {}}>
+      <TouchableOpacity style={styles.row} onPress={() => navigation.navigate('DadosCliente')}>
         <Icon name="id-card" type="FontAwesome" size={20} color="black"/>
         <View style={styles.column}>
           <Text style={styles.itemText}>Meus Dados</Text>
