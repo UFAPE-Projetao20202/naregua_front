@@ -1,58 +1,154 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import { Divider } from 'react-native-paper';
+import Icon from "react-native-dynamic-vector-icons";
 import {
   View,
-  ScrollView,
   Text,
   StyleSheet,
+  TouchableOpacity
 } from 'react-native';
-import api from '../services/api';
 
 const PerfilPrestador = ({ navigation }) => {
+  let prestador = {name: 'Nome do prestador'};
 
   return (
-    <ScrollView contentContainerStyle={styles.scrollViewcontainer}>
-      <View style={styles.container}>
-        {listaPrestadores.map((item) => (
-          <View style={styles.itemLista} key={item.id}>
-            <View style={styles.itemColunas}>
-            <View style={styles.containerBtn}>
-								<TouchableOpacity style={styles.signBtn} onPress={() => navigation.navigate('Endereco')}>
-								<Text style={styles.btnText} accessible={true} accessibilityLabel="botao-endereco">Endereços</Text>
-								</TouchableOpacity>
-								</View>
-            </View>
-            <Divider style={styles.divisor} />
-          </View>
-        ))}
+  <View style={styles.container}>
+    <View style={styles.content}>
+      <View style={styles.row}>
+        <Text style={styles.pageTitle}>{prestador.name}</Text>
       </View>
-    </ScrollView>
+      <Divider style={styles.dividerHeader}></Divider>
+      <TouchableOpacity style={styles.row} onPress={() => navigation.navigate('Chats')}>
+        <Icon style={styles.icon} name="comment" type="FontAwesome" size={20} color="black"/>
+        <View style={styles.column}>
+          <Text style={styles.itemText}>Chats</Text>
+          <Text style={styles.itemDescription}>Minhas conversas</Text>
+        </View>
+      </TouchableOpacity>
+      <Divider style={styles.divider}></Divider>
+      <TouchableOpacity style={styles.row} onPress={() => navigation.navigate('ListaNotificacoes')}>
+        <Icon style={styles.icon} name="bell" type="FontAwesome" size={20} color="black"/>
+        <View style={styles.column}>
+          <Text style={styles.itemText}>Notificações</Text>
+          <Text style={styles.itemDescription}>Minha central de notificações</Text>
+        </View>
+      </TouchableOpacity>
+      <Divider style={styles.divider}></Divider>
+      <TouchableOpacity style={styles.row} onPress={() => {}}>
+        <Icon style={styles.icon} name="schedule" type="MaterialIcons" size={21} color="black"/>
+        <View style={styles.column}>
+          <Text style={styles.itemText}>Horários</Text>
+          <Text style={styles.itemDescription}>Meus horários</Text>
+        </View>
+      </TouchableOpacity>
+      <Divider style={styles.divider}></Divider>
+      <TouchableOpacity style={styles.row} onPress={() => {}}>
+        <Icon style={styles.icon} name="store" type="MaterialIcons" size={23} color="black" onPress={() => {}} />
+        <View style={styles.column}>
+          <Text style={styles.itemText}>Minha Loja</Text>
+          <Text style={styles.itemDescription}>Visualizar o perfil da minha loja</Text>
+        </View>
+      </TouchableOpacity>
+      <Divider style={styles.divider}></Divider>
+      <TouchableOpacity style={styles.row} onPress={() => {}}>
+        <Icon style={styles.icon} name="id-card" type="FontAwesome" size={20} color="black"/>
+        <View style={styles.column}>
+          <Text style={styles.itemText}>Meus Dados</Text>
+          <Text style={styles.itemDescription}>Informações da minha conta</Text>
+        </View>
+      </TouchableOpacity>
+      <Divider style={styles.divider}></Divider>
+      <TouchableOpacity style={styles.row} onPress={() => {}}>
+        <Icon style={styles.icon} name="star" type="FontAwesome" size={24} color="black"/>
+        <View style={styles.column}>
+          <Text style={styles.itemText}>Avaliações</Text>
+          <Text style={styles.itemDescription}>Avaliações da minha loja</Text>
+        </View>
+      </TouchableOpacity>
+      <Divider style={styles.divider}></Divider>
+      <TouchableOpacity style={styles.row} onPress={() => {}}>
+        <Icon style={styles.icon} name="dollar" type="FontAwesome" size={22} color="black"/>
+        <View style={styles.column}>
+          <Text style={styles.itemText}>Pedidos</Text>
+          <Text style={styles.itemDescription}>Pedidos recebidos pela minha loja</Text>
+        </View>
+      </TouchableOpacity>
+      <Divider style={styles.divider}></Divider>
+      <TouchableOpacity style={styles.row} onPress={() => {}}>
+        <Icon style={styles.icon} name="poll" type="MaterialIcons" size={24} color="black"/>
+        <View style={styles.column}>
+          <Text style={styles.itemText}>Estatísticas</Text>
+          <Text style={styles.itemDescription}>Estatísticas da minha loja</Text>
+        </View>
+      </TouchableOpacity>
+      <Divider style={styles.divider}></Divider>
+      <TouchableOpacity style={styles.row} onPress={() => {}}>
+        <Icon style={styles.icon} name="sign-out" type="FontAwesome" size={24} color="black"/>
+        <View style={styles.column}>
+          <Text style={styles.itemText}>Sair</Text>
+        </View>
+      </TouchableOpacity>
+    </View>
+  </View>
   );
 };
 
 const styles = StyleSheet.create({
-  scrollViewcontainer: {
-    backgroundColor: '#ECECEC',
-    paddingVertical: 20
-  },
   container: {
+    backgroundColor: '#ECECEC',
+    paddingVertical: 20,
     flex: 1,
-    alignItems: 'center',
     justifyContent: 'center',
+    height: '100%',
+    paddingHorizontal: 15
+  },
+  content: {
+    width: '100%',
     height: '100%'
   },
-
-  divisor: {
-    marginTop: 10
+  pageTitle: {
+    textAlign: 'center',
+    marginVertical: 10,
+    fontSize: 18,
+    color: 'black',
+    textTransform: 'uppercase',
+    fontWeight: '500',
+    width: '100%'
   },
-  itemColunas: {
-    width: '100%',
+  row: {
+    flex: 0,
+    marginHorizontal: 5,
     flexDirection: 'row',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    width: '100%'
   },
-  itemNota: {
-    color: '#DE7800',
-    fontWeight: '500'
+  column: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    marginHorizontal: 5
+  },
+  divider: {
+    marginVertical: 10
+  },
+  dividerHeader: {
+    marginVertical: 10
+  },
+  itemText: {
+    marginVertical: 3,
+    marginHorizontal: 10,
+    fontSize: 17,
+    color: 'black',
+  },
+  itemDescription: {
+    marginVertical: 2,
+    marginHorizontal: 10,
+    fontSize: 15,
+    color: 'grey',
+  },
+  icon: {
+    width: '7%'
   }
 });
 

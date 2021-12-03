@@ -9,16 +9,17 @@ import {
 } from 'react-native';
 
 const Chats = ({ navigation })  => {
+    let prestador = true;
     let dados = [
         {
-            nome: 'Nome do prestador',
+            nome: 'Nome',
             id_pedido: '4787584',
             data_pedido: '12/01/21',
             telefone: '(81) 99999-9999',
             whatsapp: true
         },
         {
-            nome: 'Nome do prestador 2',
+            nome: 'Nome 2',
             id_pedido: '44585494',
             data_pedido: '15/01/21',
             telefone: '(87) 99888-9999',
@@ -44,11 +45,11 @@ const Chats = ({ navigation })  => {
                 <Text style={styles.itemData}>Pedido {item.id_pedido} • {item.data_pedido}</Text>
                 {
                 item.whatsapp === true && 
-                <Text style={styles.itemDescription}>CLIQUE PARA SER REDIRECIONADO AO WHATSAPP DESSE ESTABELECIMENTO</Text>
+                <Text style={styles.itemDescription}>TOQUE PARA SER REDIRECIONADO AO WHATSAPP DESSE {prestador ? 'CLIENTE' : 'ESTABELECIMENTO'}</Text>
                 }
                 {
                 item.whatsapp === false && 
-                <Text style={styles.itemDescription}>ESSE ESTABELECIMENTO NÃO CONECTOU UM NÚMERO DE WHATSAPP, ENTRE EM CONTATO POR LIGAÇÃO: {item.telefone}</Text>
+                <Text style={styles.itemDescription}>ESSE {prestador ? 'CLIENTE' : 'ESTABELECIMENTO'} NÃO CONECTOU UM NÚMERO DE WHATSAPP, ENTRE EM CONTATO POR LIGAÇÃO: {item.telefone}</Text>
                 }
             </TouchableOpacity>
             <Divider style={styles.divider}></Divider>
