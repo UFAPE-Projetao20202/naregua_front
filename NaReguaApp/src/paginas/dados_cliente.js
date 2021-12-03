@@ -6,13 +6,11 @@ import {
   Text,
   StyleSheet
 } from 'react-native';
+import { useAuth } from '../contexts/auth';
+
 
 const DadosCliente = ({ navigation })  => {
-    let user = {
-        name: 'Nome do usuario',
-        email: 'email@email.com',
-        password: 'senha'
-    };
+  const { user } = useAuth();
 
   return (
   <View style={styles.container}>
