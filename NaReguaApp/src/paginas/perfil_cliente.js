@@ -5,11 +5,16 @@ import {
   View,
   Text,
   StyleSheet,
-  TouchableOpacity
+  TouchableOpacity,
+  Modal
 } from 'react-native';
 import api from '../services/api';
 
 const PerfilCliente = ({ navigation }) => {
+  const [visible, setVisible] = React.useState(false);
+
+  const showDialog = () => setVisible(true);
+  const hideDialog = () => setVisible(false);
 
   const cliente = {name: 'Nome do Cliente'};
 
@@ -60,13 +65,28 @@ const PerfilCliente = ({ navigation }) => {
         </View>
       </TouchableOpacity>
       <Divider style={styles.divider}></Divider>
-      <TouchableOpacity style={styles.row} onPress={() => {}}>
+      <TouchableOpacity style={styles.row} onPress={showDialog}>
         <Icon style={styles.icon} name="sign-out" type="FontAwesome" size={24} color="black"/>
         <View style={styles.column}>
           <Text style={styles.itemText}>Sair</Text>
         </View>
       </TouchableOpacity>
     </View>
+    <Modal transparent={true} visible={visible} onRequestClose={hideDialog}>
+      <View style={styles.centeredView}>
+        <View style={styles.modalView}>
+          <Text style={styles.itemText}>Fazer logout?</Text>
+          <View style={styles.row}>
+            <TouchableOpacity onPress={hideDialog} style={styles.dialogBtn}>
+              <Text style={styles.buttonText}>NÃO</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => ''} style={styles.dialogBtn}>
+              <Text style={styles.buttonText}>SIM</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </View>
+    </Modal>
   </View>
   );
 };
@@ -127,6 +147,31 @@ const styles = StyleSheet.create({
   },
   icon: {
     width: '7%'
+  },
+  centeredView: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  modalView: {
+    backgroundColor: "white",
+    borderRadius: 15,
+    padding: 20,
+    alignItems: "center",
+    elevation: 5,
+    width: '70%'
+  },
+  dialogBtn: {
+    width: 110,
+    borderRadius: 15,
+    height: 40,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#004A5A',
+    marginTop: 15
+  },
+  buttonText: {
+    color: 'white'
   }
 });
 
