@@ -35,9 +35,16 @@ const InicioCliente = ({ navigation })  => {
         {user && <Text style={styles.title}>Bem vindo, {user.name}</Text>}
         <View style={styles.containerBtn}>
           <TouchableOpacity style={styles.signBtn} onPress={() => navigation.navigate('PerfilCliente')}>
-          <Text style={styles.btnText} accessible={true} accessibilityLabel="botao-perfilcliente">Perfil</Text>
+            <Text style={styles.btnText} accessible={true} accessibilityLabel="botao-perfilcliente">Perfil</Text>
           </TouchableOpacity>
-			  </View>
+		</View>
+
+        <View style={styles.containerBtn}>
+		<TouchableOpacity style={styles.signBtn} onPress={() => navigation.navigate('BuscarPrestador')}>
+            <Text style={styles.btnText} >Buscar Prestador</Text>
+          </TouchableOpacity>
+        </View>
+
         {listaPrestadores.map((item) => (
           <View style={styles.itemLista} key={item.id}>
             <View style={styles.itemColunas}>
@@ -114,20 +121,22 @@ const styles = StyleSheet.create({
 		flex: 1,
 		marginTop: 20,
 		alignItems: 'center'
-	},btnText: {
-		color: 'white',
-		fontSize: 16,
-		fontWeight: '500'
-	},
-	signBtn: {
-		width: 140,
-		borderRadius: 15,
-		padding: 10,
-		height: 45,
-		alignItems: 'center',
-		justifyContent: 'center',
-		backgroundColor: '#004A5A'
-	}
+    },
+    btnText: {
+        color: 'white',
+        fontSize: 16,
+        fontWeight: '500'
+    },
+    signBtn: {
+        width: 170,
+        borderRadius: 15,
+        padding: 10,
+        height: 45,
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#004A5A'
+    },
+
 });
 
 export default InicioCliente;
