@@ -5,11 +5,18 @@ import {
   View,
   Text,
   StyleSheet,
-  TouchableOpacity
+  TouchableOpacity,
+  Modal,
+  TextInput
 } from 'react-native';
 
 const PedidosCliente = ({ navigation })  => {
   const [listaPedidos, setListaPedidos] = useState([]);
+  const [visible, setVisible] = React.useState(false);
+  const [motivoAvaliacao, setMotivoAval] = React.useState('');
+
+  const showDialog = () => setVisible(true);
+  const hideDialog = () => setVisible(false);
 
   useEffect(() => {
     listarPedidos();
@@ -80,7 +87,7 @@ const PedidosCliente = ({ navigation })  => {
               <Text style={styles.itemText}>{item.nome_prestador}</Text>
               <Text style={styles.itemDescription}>{item.passou ? 'Ocorreu' : 'Ocorrerá'} em {item.data}</Text>
               <Text style={styles.itemDescription}>Valor: R$ {item.valor}</Text>
-              {item.avaliado === false && <Text style={styles.itemRate} onPress={() => {}}>AVALIAR</Text>}
+              {item.avaliado === false && <Text style={styles.itemRate} onPress={showDialog}>AVALIAR</Text>}
               {item.avaliado === true && 
                 <View style={styles.rowRated}>
                   <Icon name="star" type="FontAwesome" size={16} color={item.avaliacao >= 1 ? "#DE7800" : "grey"}/>
@@ -100,6 +107,41 @@ const PedidosCliente = ({ navigation })  => {
               </TouchableOpacity>
             </View>
           </View>
+          <Modal transparent={true} visible={visible} onRequestClose={hideDialog}>
+              <View style={styles.centeredView}>
+                <View style={styles.modalView}>
+                  <View>
+                    <Text style={styles.itemText}>{item.nome_prestador}</Text>
+                    <Text style={styles.itemDescription}>Ocorreu em {item.data}</Text>
+                    <Divider style={styles.divider}></Divider>
+                    <View style={styles.rowRated}>
+                      <Icon name="star" type="FontAwesome" size={16} color="grey"/>
+                      <Icon name="star" type="FontAwesome" size={16} color="grey"/>
+                      <Icon name="star" type="FontAwesome" size={16} color="grey"/>
+                      <Icon name="star" type="FontAwesome" size={16} color="grey"/>
+                      <Icon name="star" type="FontAwesome" size={16} color="grey"/>
+                    </View>
+                    <View style={styles.inputView}>
+                      <TextInput
+                        style={styles.textInput}
+                        placeholder="Digite o motivo da avaliação aqui..."
+                        placeholderTextColor="grey"
+                        onChangeText={(motivoAvaliacao) => setMotivoAval(motivoAvaliacao)}
+                        multiline={true}
+                      />
+                    </View>
+                  </View>
+                  <View style={styles.row}>
+                    <TouchableOpacity onPress={hideDialog} style={styles.dialogBtn}>
+                      <Text style={styles.buttonText} accessible={true} accessibilityLabel="botao-fechar">FECHAR</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={() => ''} style={styles.dialogBtn}>
+                      <Text style={styles.buttonText}>AVALIAR</Text>
+                    </TouchableOpacity>
+                  </View>
+                </View>
+              </View>
+          </Modal>
           <Divider style={styles.divider}></Divider>
         </View>
         ))}
@@ -231,6 +273,44 @@ const PedidosCliente = ({ navigation })  => {
     btnTextConfirmado: {
       color: 'darkgreen',
       fontWeight: 'bold'
+    },
+    centeredView: {
+      flex: 1,
+      justifyContent: "center",
+      alignItems: "center",
+    },
+    modalView: {
+      backgroundColor: "white",
+      borderRadius: 15,
+      padding: 20,
+      alignItems: "center",
+      elevation: 5,
+      width: '70%'
+    },
+    dialogBtn: {
+      width: 110,
+      borderRadius: 15,
+      height: 40,
+      alignItems: 'center',
+      justifyContent: 'center',
+      backgroundColor: '#004A5A',
+      marginTop: 15
+    },
+    inputView: {
+      backgroundColor: 'white',
+      borderWidth: 1,
+      borderColor: 'grey',
+      borderRadius: 15,
+      height: 90,
+      marginVertical: 10
+    },
+    textInput: {
+        height: 90,
+        marginHorizontal: 10,
+        color: 'black'
+    },
+    buttonText: {
+      color: 'white'
     }
   });
 
