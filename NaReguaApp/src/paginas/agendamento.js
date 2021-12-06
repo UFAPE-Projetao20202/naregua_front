@@ -221,7 +221,7 @@ const Agendamento = ({ route, navigation }) => {
       <Divider style={styles.divider}></Divider>
       <View style={styles.row}>
         <View style={styles.containerBotao}>
-          <TouchableOpacity onPress={() => Agendar()} style={styles.continuarBtn}>
+          <TouchableOpacity onPress={() => {Agendar(); navigation.navigate('AgendamentoConcluido')}} style={styles.continuarBtn}>
             <Text style={styles.buttonText} accessible={true} accessibilityLabel="botao-continuar">CONTINUAR</Text>
           </TouchableOpacity>
         </View>
