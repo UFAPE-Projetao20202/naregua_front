@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 import api from '../services/api';
 
-const BuscarPrestador = () => {
+const BuscarPrestador = ({ navigation }) => {
     const [nome, setNome] = useState('');
     const [listaPrestadores, setListaPrestadores] = useState([]);
 
@@ -51,17 +51,15 @@ const BuscarPrestador = () => {
                   <View style={styles.itemLista} key={item.id}>
                     <View style={styles.itemColunas}>
                       <View>
-                        <Text style={styles.itemTitulo}>{item.user.name}</Text>
-                        <Text style={styles.itemDados}>1,7 km</Text>
-                        <Text style={styles.itemDados}>Descrição do prestador</Text>
+                        <Text style={styles.itemTitulo}>
+                            {item.user.name}
+                        </Text>
+                        <Text style={styles.itemDados}>Descrição do prestador .... </Text>
                       </View>
-                      <View style={styles.itemCol2}>
-                        <View style={styles.itemLinha}>
-                          <Icon name="star" type="FontAwesome" size={15} color="#DE7800" onPress={() => {}} />
-                          <Text style={styles.itemNota}>4.5</Text>
-                        </View>
-                        <Icon name="heart" type="FontAwesome" size={24} color="black" onPress={() => {}} />
-                      </View>
+
+                      <TouchableOpacity onPress={() => navigation.navigate('ListarServicosPrestador', {prestador: item})} style={styles.buscarBtn}>
+                          <Text style={styles.btnText} >Listar Serviços</Text>
+                      </TouchableOpacity>
                     </View>
                     <Divider style={styles.divisor} />
                   </View>
