@@ -6,6 +6,7 @@ import {
   Text,
   StyleSheet,
   TouchableOpacity,
+  ScrollView
 } from 'react-native';
 
 const PerfilPrestador = ({ navigation }) => {
@@ -13,7 +14,7 @@ const PerfilPrestador = ({ navigation }) => {
 
   return (
   <View style={styles.container}>
-    <View style={styles.content}>
+    <ScrollView style={styles.content}>
       <View style={styles.row}>
         <Text style={styles.pageTitle}>{prestador.name}</Text>
       </View>
@@ -50,7 +51,7 @@ const PerfilPrestador = ({ navigation }) => {
         </View>
       </TouchableOpacity>
       <Divider style={styles.divider}></Divider>
-      <TouchableOpacity style={styles.row} onPress={() => {}}>
+      <TouchableOpacity style={styles.row} onPress={() => navigation.navigate('DadosPrestador')}>
         <Icon style={styles.icon} name="id-card" type="FontAwesome" size={20} color="black"/>
         <View style={styles.column}>
           <Text style={styles.itemText}>Meus Dados</Text>
@@ -66,7 +67,7 @@ const PerfilPrestador = ({ navigation }) => {
         </View>
       </TouchableOpacity>
       <Divider style={styles.divider}></Divider>
-      <TouchableOpacity style={styles.row} onPress={() => {}}>
+      <TouchableOpacity style={styles.row} onPress={() => navigation.navigate('PedidosPrestador')}>
         <Icon style={styles.icon} name="dollar" type="FontAwesome" size={22} color="black"/>
         <View style={styles.column}>
           <Text style={styles.itemText}>Pedidos</Text>
@@ -88,6 +89,27 @@ const PerfilPrestador = ({ navigation }) => {
           <Text style={styles.itemText}>Sair</Text>
         </View>
       </TouchableOpacity>
+    </ScrollView>
+    <View style={styles.appFooter}>
+      <Divider style={styles.divider}></Divider>
+      <View style={styles.appFooterRow}>
+        <TouchableOpacity style={styles.appFooterIcon} onPress={() => navigation.navigate('InicioPrestador')}>
+          <Icon name="home" type="FontAwesome" size={27} color="grey"/>
+          <Text style={styles.appFooterText}>Início</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.appFooterIcon} onPress={() => ''}>
+          <Icon name="store" type="MaterialIcons" size={27} color="grey"/>
+          <Text style={styles.appFooterText}>Minha Loja</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.appFooterIcon} onPress={() => navigation.navigate('PedidosPrestador')}>
+          <Icon name="dollar" type="FontAwesome" size={23} color="grey"/>
+          <Text style={styles.appFooterText}>Histórico</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.appFooterIcon} onPress={() => ''}>
+          <Icon name="user" type="FontAwesome" size={24} color="black"/>
+          <Text style={styles.appFooterTextActive}>Perfil</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   </View>
   );
@@ -149,6 +171,31 @@ const styles = StyleSheet.create({
   },
   icon: {
     width: '7%'
+  },
+  appFooter: {
+    height: 50
+  },
+  appFooterRow: {
+    flex: 0,
+    marginHorizontal: 5,
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    width: '100%'
+  },
+  appFooterIcon: {
+    width: 40,
+    flex: 1,
+    flexDirection: 'column',
+    alignItems: 'center'
+  },
+  appFooterText: {
+    color: 'grey',
+    fontSize: 12
+  },
+  appFooterTextActive: {
+    color: 'black',
+    fontSize: 12
   }
 });
 
