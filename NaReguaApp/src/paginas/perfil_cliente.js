@@ -26,7 +26,7 @@ const PerfilCliente = ({ navigation }) => {
         <Text style={styles.pageTitle}>{cliente.name}</Text>
       </View>
       <Divider style={styles.dividerHeader}></Divider>
-      <TouchableOpacity style={styles.row} onPress={() => navigation.navigate('Chats')}>
+      <TouchableOpacity style={styles.row} onPress={() => navigation.navigate('Chats', {prestador: false})}>
         <Icon style={styles.icon} name="comment" type="FontAwesome" size={20} color="black"/>
         <View style={styles.column}>
           <Text style={styles.itemText}>Chats</Text>

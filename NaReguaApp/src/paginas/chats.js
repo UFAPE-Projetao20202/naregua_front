@@ -9,8 +9,8 @@ import {
   TouchableOpacity
 } from 'react-native';
 
-const Chats = ({ navigation })  => {
-    let prestador = true;
+const Chats = ({ route, navigation })  => {
+    let prestador = route.params.prestador;
     let dados = [
         {
             nome: 'Nome',

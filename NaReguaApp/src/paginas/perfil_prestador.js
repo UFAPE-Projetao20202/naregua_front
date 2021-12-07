@@ -19,7 +19,7 @@ const PerfilPrestador = ({ navigation }) => {
         <Text style={styles.pageTitle}>{prestador.name}</Text>
       </View>
       <Divider style={styles.dividerHeader}></Divider>
-      <TouchableOpacity style={styles.row} onPress={() => navigation.navigate('Chats')}>
+      <TouchableOpacity style={styles.row} onPress={() => navigation.navigate('Chats', {prestador: true})}>
         <Icon style={styles.icon} name="comment" type="FontAwesome" size={20} color="black"/>
         <View style={styles.column}>
           <Text style={styles.itemText}>Chats</Text>
