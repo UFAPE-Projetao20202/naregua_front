@@ -7,7 +7,8 @@ import {
   Text,
   StyleSheet,
   SectionList,
-  TouchableOpacity
+  TouchableOpacity,
+  ScrollView
 } from 'react-native';
 
 const ListaServicos = () => {
@@ -121,19 +122,42 @@ const ListaServicos = () => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.row}>
-        <Icon style={styles.backButton} name="chevron-left" type="FontAwesome" size={18} color="black" onPress={() => {}} />
-        <Text style={styles.pageTitle}>{prestador.name}</Text>
+      <ScrollView style={styles.content}>
+        <View style={styles.row}>
+          <Icon style={styles.backButton} name="chevron-left" type="FontAwesome" size={18} color="black" onPress={() => {}} />
+          <Text style={styles.pageTitle}>{prestador.name}</Text>
+        </View>
+        <Divider style={styles.divisor} />
+        <SectionList
+          sections={listaServ}
+          keyExtractor={(item) => item.id}
+          renderItem={({ item }) => <Item item={item} />}
+          renderSectionHeader={({ section: { title } }) => (
+            <Title title={title}/>
+          )}
+        />
+      </ScrollView>
+      <View style={styles.appFooter}>
+        <Divider style={styles.divider}></Divider>
+        <View style={styles.appFooterRow}>
+          <TouchableOpacity style={styles.appFooterIcon} onPress={() => navigation.navigate('InicioCliente')}>
+            <Icon name="home" type="FontAwesome" size={27} color="grey"/>
+            <Text style={styles.appFooterText}>Início</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.appFooterIcon} onPress={() => ''}>
+            <Icon name="search" type="FontAwesome" size={22} color="grey"/>
+            <Text style={styles.appFooterText}>Busca</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.appFooterIcon} onPress={() => navigation.navigate('PedidosCliente')}>
+            <Icon name="dollar" type="FontAwesome" size={23} color="grey"/>
+            <Text style={styles.appFooterText}>Histórico</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.appFooterIcon} onPress={() => navigation.navigate('PerfilCliente')}>
+            <Icon name="user" type="FontAwesome" size={24} color="grey"/>
+            <Text style={styles.appFooterText}>Perfil</Text>
+          </TouchableOpacity>
+        </View>
       </View>
-      <Divider style={styles.divisor} />
-      <SectionList
-        sections={listaServ}
-        keyExtractor={(item) => item.id}
-        renderItem={({ item }) => <Item item={item} />}
-        renderSectionHeader={({ section: { title } }) => (
-          <Title title={title}/>
-        )}
-      />
     </View>
   );
 };
@@ -146,6 +170,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     height: '100%',
     paddingHorizontal: 15
+  },
+  content: {
+    width: '100%',
+    height: '100%'
   },
   pageTitle: {
     textAlign: 'center',
@@ -190,6 +218,34 @@ const styles = StyleSheet.create({
     textAlign: 'left',
     marginVertical: 14,
     width: "10%"
+  },
+    appFooter: {
+    height: 50
+  },
+  appFooterRow: {
+    flex: 0,
+    marginHorizontal: 5,
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    width: '100%'
+  },
+  appFooterIcon: {
+    width: 40,
+    flex: 1,
+    flexDirection: 'column',
+    alignItems: 'center'
+  },
+  appFooterText: {
+    color: 'grey',
+    fontSize: 12
+  },
+  appFooterTextActive: {
+    color: 'black',
+    fontSize: 12
+  },
+  divider: {
+    marginVertical: 10
   }
 });
 

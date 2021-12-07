@@ -5,19 +5,37 @@ import {
   View,
   Text,
   StyleSheet,
-  TouchableOpacity
+  TouchableOpacity,
+  Modal,
+  TextInput
 } from 'react-native';
-import { Dialog, RadioButton } from 'react-native-paper'
+import { RadioButton } from 'react-native-paper';
 import DateTimePicker from '@react-native-community/datetimepicker';
+import { grey100 } from 'react-native-paper/lib/typescript/styles/colors';
 
 const Agendamento = ({ route, navigation }) => {
   const [data, setDate] = useState(new Date());
   const [show, setShow] = useState(false);
+  const [quantSemanas, setSemanas] = useState('');
+  const [quantQuinzenas, setQuinzenas] = useState('');
+  const [quantMeses, setMeses] = useState('');
+
   const [visible, setVisible] = React.useState(false);
+  const [visibleSemana, setVisibleSemana] = React.useState(false);
+  const [visibleQuinzena, setVisibleQuinzena] = React.useState(false);
+  const [visibleMes, setVisibleMes] = React.useState(false);
 
   const showDialog = () => setVisible(true);
-
   const hideDialog = () => setVisible(false);
+
+  const showDialogSemana = () => {setVisible(false); setVisibleSemana(true)};
+  const hideDialogSemana = () => setVisibleSemana(false);
+
+  const showDialogQuinzena = () =>  {setVisible(false); setVisibleQuinzena(true)};
+  const hideDialogQuinzena = () => setVisibleQuinzena(false);
+
+  const showDialogMes = () =>  {setVisible(false); setVisibleMes(true)};
+  const hideDialogMes = () => setVisibleMes(false);
 
   const servico = route.params.servico;
   let horario = {inicio: '', fim: ''};
@@ -101,23 +119,109 @@ const Agendamento = ({ route, navigation }) => {
       <TouchableOpacity onPress={() => showDialog()} style={styles.periodicoBtn}>
         <Text style={styles.buttonText} accessible={true} accessibilityLabel="botao-agendar-periodicamente" >AGENDAR PERIODICAMENTE</Text>
       </TouchableOpacity>
-      <Dialog visible={visible} onDismiss={hideDialog}>
-        <Dialog.Title>Escolha a Frequência</Dialog.Title>
-        <Dialog.Content>
-          <Text style={styles.itemText}>shcdjksamksksdm</Text>
-        </Dialog.Content>
-        <Dialog.Actions>
-          <TouchableOpacity onPress={hideDialog} style={styles.dialogBtn}>
-            <Text style={styles.buttonText} accessible={true} accessibilityLabel="botao-fechar">FECHAR</Text>
-          </TouchableOpacity>
-        </Dialog.Actions>
-      </Dialog>
+      <Modal animationType="slide" transparent={true} visible={visible} onRequestClose={hideDialog}>
+        <View style={styles.centeredView}>
+          <View style={styles.modalView}>
+            <View>
+              <TouchableOpacity onPress={() => showDialogSemana()} style={styles.dialogOption}>
+                <Text style={styles.itemText}>Semanalmente</Text>
+              </TouchableOpacity>
+              <Divider style={styles.divider}></Divider>
+              <TouchableOpacity onPress={() => showDialogQuinzena()} style={styles.dialogOption}>
+                <Text style={styles.itemText}>Quinzenalmente</Text>
+              </TouchableOpacity>
+              <Divider style={styles.divider}></Divider>
+              <TouchableOpacity onPress={() => showDialogMes()} style={styles.dialogOption}>
+                <Text style={styles.itemText}>Mensalmente</Text>
+              </TouchableOpacity>
+            </View>
+            <TouchableOpacity onPress={hideDialog} style={styles.dialogBtn}>
+              <Text style={styles.buttonText} accessible={true} accessibilityLabel="botao-fechar">FECHAR</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
+      <Modal animationType="slide" transparent={true} visible={visibleSemana} onRequestClose={hideDialogSemana}>
+        <View style={styles.centeredView}>
+          <View style={styles.modalView}>
+            <View>
+              <Text style={styles.itemText}>Por quantas semanas?</Text>
+              <View style={styles.inputView}>
+                <TextInput
+                  style={styles.textInput}
+                  placeholder="Digite um número"
+                  placeholderTextColor="grey"
+                  onChangeText={(quantSemanas) => setSemanas(quantSemanas)}
+                />
+              </View>
+            </View>
+            <View style={styles.row}>
+            <TouchableOpacity onPress={hideDialogSemana} style={styles.dialogBtn}>
+              <Text style={styles.buttonText} accessible={true} accessibilityLabel="botao-fechar">FECHAR</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => ''} style={styles.dialogBtn}>
+              <Text style={styles.buttonText}>OK</Text>
+            </TouchableOpacity>
+            </View>
+          </View>
+        </View>
+      </Modal>
+      <Modal animationType="slide" transparent={true} visible={visibleQuinzena} onRequestClose={hideDialogQuinzena}>
+        <View style={styles.centeredView}>
+          <View style={styles.modalView}>
+            <View>
+              <Text style={styles.itemText}>Por quantas quinzenas?</Text>
+              <View style={styles.inputView}>
+                <TextInput
+                  style={styles.textInput}
+                  placeholder="Digite um número"
+                  placeholderTextColor="grey"
+                  onChangeText={(quantQuinzenas) => setQuinzenas(quantQuinzenas)}
+                />
+              </View>
+            </View>
+            <View style={styles.row}>
+            <TouchableOpacity onPress={hideDialogQuinzena} style={styles.dialogBtn}>
+              <Text style={styles.buttonText} accessible={true} accessibilityLabel="botao-fechar">FECHAR</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => ''} style={styles.dialogBtn}>
+              <Text style={styles.buttonText}>OK</Text>
+            </TouchableOpacity>
+            </View>
+          </View>
+        </View>
+      </Modal>
+      <Modal animationType="slide" transparent={true} visible={visibleMes} onRequestClose={hideDialogMes}>
+        <View style={styles.centeredView}>
+          <View style={styles.modalView}>
+            <View>
+              <Text style={styles.itemText}>Por quantos meses?</Text>
+              <View style={styles.inputView}>
+                <TextInput
+                  style={styles.textInput}
+                  placeholder="Digite um número"
+                  placeholderTextColor="grey"
+                  onChangeText={(quantMeses) => setMeses(quantMeses)}
+                />
+              </View>
+            </View>
+            <View style={styles.row}>
+            <TouchableOpacity onPress={hideDialogMes} style={styles.dialogBtn}>
+              <Text style={styles.buttonText} accessible={true} accessibilityLabel="botao-fechar">FECHAR</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => ''} style={styles.dialogBtn}>
+              <Text style={styles.buttonText}>OK</Text>
+            </TouchableOpacity>
+            </View>
+          </View>
+        </View>
+      </Modal>
     </View>
     <View style={styles.footer}> 
       <Divider style={styles.divider}></Divider>
       <View style={styles.row}>
         <View style={styles.containerBotao}>
-          <TouchableOpacity onPress={() => Agendar()} style={styles.continuarBtn}>
+          <TouchableOpacity onPress={() => {Agendar(); navigation.navigate('AgendamentoConcluido')}} style={styles.continuarBtn}>
             <Text style={styles.buttonText} accessible={true} accessibilityLabel="botao-continuar">CONTINUAR</Text>
           </TouchableOpacity>
         </View>
@@ -243,13 +347,44 @@ const styles = StyleSheet.create({
     backgroundColor: 'black'
   },
   dialogBtn: {
-    width: '40%',
+    width: 110,
     borderRadius: 15,
     height: 40,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#004A5A'
+    backgroundColor: '#004A5A',
+    marginTop: 15
   },
+  centeredView: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  modalView: {
+    backgroundColor: "white",
+    borderRadius: 15,
+    padding: 20,
+    alignItems: "center",
+    elevation: 5,
+    width: '70%'
+  },
+  dialogOption: {
+    marginVertical: 7
+  },
+  inputView: {
+    backgroundColor: 'white',
+    borderWidth: 1,
+    borderColor: 'grey',
+    borderRadius: 15,
+    height: 45,
+    marginVertical: 10
+  },
+  textInput: {
+      height: 50,
+      flex: 1,
+      marginLeft: 20,
+      color: 'black'
+  }
 });
 
 export default Agendamento;
