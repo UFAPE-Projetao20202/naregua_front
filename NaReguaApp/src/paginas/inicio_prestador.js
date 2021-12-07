@@ -1,4 +1,6 @@
 import React from 'react';
+import { Divider } from 'react-native-paper';
+import Icon from "react-native-dynamic-vector-icons";
 import {
     View,
     ScrollView,
@@ -12,63 +14,81 @@ const InicioPrestador = ({ navigation }) => {
 	const { user } = useAuth();
 
     return (
-        <ScrollView contentContainerStyle={styles.scrollViewcontainer}>
-            <View style={styles.container}>
-				{user && <Text style={styles.title}>Bem vindo, {user.name}</Text>}
-
-                <View style={styles.containerBtn}>
-								<TouchableOpacity style={styles.signBtn} onPress={() => navigation.navigate('CadastroServico')}>
-								<Text style={styles.btnText} accessible={true} accessibilityLabel="botao-criarservico">Criar serviço</Text>
-								</TouchableOpacity>
-								</View>
-								<View style={styles.containerBtn}>
-								<TouchableOpacity style={styles.signBtn} onPress={() => navigation.navigate('PerfilPrestador')}>
-								<Text style={styles.btnText} accessible={true} accessibilityLabel="botao-perfilprestador">Perfil</Text>
-								</TouchableOpacity>
-								</View>
-								
-        		</View>
-        </ScrollView>
+	<View style={styles.container}>
+		<ScrollView style={styles.content}>
+			<Text style={styles.text}>Bem Vindo!</Text>
+		</ScrollView>
+		<View style={styles.appFooter}>
+		<Divider style={styles.divider}></Divider>
+		<View style={styles.appFooterRow}>
+		  <TouchableOpacity style={styles.appFooterIcon} onPress={() => ''}>
+			<Icon name="home" type="FontAwesome" size={27} color="black"/>
+			<Text style={styles.appFooterTextActive}>Início</Text>
+		  </TouchableOpacity>
+		  <TouchableOpacity style={styles.appFooterIcon} onPress={() => ''}>
+			<Icon name="store" type="MaterialIcons" size={27} color="grey"/>
+			<Text style={styles.appFooterText}>Minha Loja</Text>
+		  </TouchableOpacity>
+		  <TouchableOpacity style={styles.appFooterIcon} onPress={() => ''}>
+			<Icon name="dollar" type="FontAwesome" size={23} color="grey"/>
+			<Text style={styles.appFooterText}>Histórico</Text>
+		  </TouchableOpacity>
+		  <TouchableOpacity style={styles.appFooterIcon} onPress={() => navigation.navigate('PerfilPrestador')}>
+			<Icon name="user" type="FontAwesome" size={24} color="grey"/>
+			<Text style={styles.appFooterText}>Perfil</Text>
+		  </TouchableOpacity>
+		</View>
+	  </View>
+	</View>
     );
 };
 
 const styles = StyleSheet.create({
-	scrollViewcontainer: {
-        flex: 1,
+	container: {
 		backgroundColor: '#ECECEC',
-        paddingVertical: 20
-	},
-    container: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-        height: '100%'
-    },
-	title: {
-		color: 'black',
-		fontSize: 20,
-		fontWeight: '500'
-	},
-	containerBtn: {
-		width: '80%',
+		paddingVertical: 20,
 		flex: 1,
-		marginTop: 20,
-		alignItems: 'center'
-	},
-	btnText: {
-		color: 'white',
-		fontSize: 16,
-		fontWeight: '500'
-	},
-	signBtn: {
-		width: 140,
-		borderRadius: 15,
-		padding: 10,
-		height: 45,
-		alignItems: 'center',
 		justifyContent: 'center',
-		backgroundColor: '#004A5A'
-	}
-  });
+		height: '100%',
+		paddingHorizontal: 15
+	},
+	content: {
+		width: '100%',
+		height: '100%'
+	},
+	appFooter: {
+		height: 50
+	  },
+	  appFooterRow: {
+		flex: 0,
+		marginHorizontal: 5,
+		flexDirection: 'row',
+		justifyContent: 'space-around',
+		alignItems: 'center',
+		width: '100%'
+	  },
+	  appFooterIcon: {
+		width: 40,
+		flex: 1,
+		flexDirection: 'column',
+		alignItems: 'center'
+	  },
+	  appFooterText: {
+		color: 'grey',
+		fontSize: 12
+	  },
+	  appFooterTextActive: {
+		color: 'black',
+		fontSize: 12
+	  },
+	  divider: {
+		marginVertical: 10
+	  },
+	  text: {
+		  color: 'black',
+		  fontSize: 20,
+		  fontWeight: 'bold'
+	  }
+});
 
 export default InicioPrestador;
