@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 
 const ListaNotificacoes = ({ navigation })  => {
-  let prestador = false;
+  let prestador = true;
   const [listaNotificacoes, setlistaNotificacoes] = useState([]);
 
   useEffect(() => {
@@ -93,7 +93,7 @@ const ListaNotificacoes = ({ navigation })  => {
           <Icon name="store" type="MaterialIcons" size={27} color="grey"/>
           <Text style={styles.appFooterText}>Minha Loja</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.appFooterIcon} onPress={() => ''}>
+          <TouchableOpacity style={styles.appFooterIcon} onPress={() => navigation.navigate('PedidosPrestador')}>
           <Icon name="dollar" type="FontAwesome" size={23} color="grey"/>
           <Text style={styles.appFooterText}>Histórico</Text>
           </TouchableOpacity>

@@ -11,7 +11,7 @@ import {
 
 const Notificacao = ({ route, navigation })  => {
     const notificacao = route.params.notificacao;
-    let prestador = false;
+    let prestador = true;
 
   useEffect(() => {
   }, []);
@@ -64,7 +64,7 @@ const Notificacao = ({ route, navigation })  => {
           <Icon name="store" type="MaterialIcons" size={27} color="grey"/>
           <Text style={styles.appFooterText}>Minha Loja</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.appFooterIcon} onPress={() => ''}>
+          <TouchableOpacity style={styles.appFooterIcon} onPress={() => navigation.navigate('PedidosPrestador')}>
           <Icon name="dollar" type="FontAwesome" size={23} color="grey"/>
           <Text style={styles.appFooterText}>Histórico</Text>
           </TouchableOpacity>
