@@ -5,7 +5,8 @@ import {
   View,
   Text,
   StyleSheet,
-  TouchableOpacity
+  TouchableOpacity,
+  ScrollView
 } from 'react-native';
 
 const AgendamentoConcluido = ({ navigation })  => {
@@ -23,7 +24,7 @@ const AgendamentoConcluido = ({ navigation })  => {
 
   return (
   <View style={styles.container}>
-    <View style={styles.content}>
+    <ScrollView style={styles.content}>
       <View style={styles.row}>
         <Icon name="chevron-left" type="FontAwesome" size={18} color="black" onPress={() => {}} />
         <Text style={styles.pageTitle}>AGENDAMENTO CONCLUÍDO</Text>
@@ -54,6 +55,27 @@ const AgendamentoConcluido = ({ navigation })  => {
                 </TouchableOpacity>
                 </View>
             </View>
+        </View>
+    </ScrollView>
+    <View style={styles.appFooter}>
+        <Divider style={styles.divider}></Divider>
+        <View style={styles.appFooterRow}>
+          <TouchableOpacity style={styles.appFooterIcon} onPress={() => navigation.navigate('InicioCliente')}>
+            <Icon name="home" type="FontAwesome" size={27} color="grey"/>
+            <Text style={styles.appFooterText}>Início</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.appFooterIcon} onPress={() => ''}>
+            <Icon name="search" type="FontAwesome" size={22} color="grey"/>
+            <Text style={styles.appFooterText}>Busca</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.appFooterIcon} onPress={() => navigation.navigate('PedidosCliente')}>
+            <Icon name="dollar" type="FontAwesome" size={23} color="grey"/>
+            <Text style={styles.appFooterText}>Histórico</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.appFooterIcon} onPress={() => navigation.navigate('PerfilCliente')}>
+            <Icon name="user" type="FontAwesome" size={24} color="grey"/>
+            <Text style={styles.appFooterText}>Perfil</Text>
+          </TouchableOpacity>
         </View>
     </View>
   </View>
@@ -166,6 +188,31 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: 'white'
+  },
+  appFooter: {
+    height: 50
+  },
+  appFooterRow: {
+    flex: 0,
+    marginHorizontal: 5,
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    width: '100%'
+  },
+  appFooterIcon: {
+    width: 40,
+    flex: 1,
+    flexDirection: 'column',
+    alignItems: 'center'
+  },
+  appFooterText: {
+    color: 'grey',
+    fontSize: 12
+  },
+  appFooterTextActive: {
+    color: 'black',
+    fontSize: 12
   }
 });
 
