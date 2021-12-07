@@ -4,7 +4,9 @@ import Icon from "react-native-dynamic-vector-icons";
 import {
   View,
   Text,
-  StyleSheet
+  StyleSheet,
+  ScrollView,
+  TouchableOpacity
 } from 'react-native';
 
 const DadosCliente = ({ navigation })  => {
@@ -16,7 +18,7 @@ const DadosCliente = ({ navigation })  => {
 
   return (
   <View style={styles.container}>
-    <View style={styles.content}>
+    <ScrollView style={styles.content}>
       <View style={styles.row}>
         <Icon name="chevron-left" type="FontAwesome" size={18} color="black" onPress={() => {}} />
         <Text style={styles.pageTitle}>MEUS DADOS</Text>
@@ -45,9 +47,29 @@ const DadosCliente = ({ navigation })  => {
               <Icon style={styles.icon} name="pencil" type="FontAwesome" size={18} color="black" onPress={() => {}} />
             </View>
       </View>
+    </ScrollView>
+    <View style={styles.appFooter}>
+        <Divider style={styles.divider}></Divider>
+        <View style={styles.appFooterRow}>
+          <TouchableOpacity style={styles.appFooterIcon} onPress={() => navigation.navigate('InicioCliente')}>
+            <Icon name="home" type="FontAwesome" size={27} color="grey"/>
+            <Text style={styles.appFooterText}>Início</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.appFooterIcon} onPress={() => ''}>
+            <Icon name="search" type="FontAwesome" size={22} color="grey"/>
+            <Text style={styles.appFooterText}>Busca</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.appFooterIcon} onPress={() => navigation.navigate('PedidosCliente')}>
+            <Icon name="dollar" type="FontAwesome" size={23} color="grey"/>
+            <Text style={styles.appFooterText}>Histórico</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.appFooterIcon} onPress={() => navigation.navigate('PerfilCliente')}>
+            <Icon name="user" type="FontAwesome" size={24} color="grey"/>
+            <Text style={styles.appFooterText}>Perfil</Text>
+          </TouchableOpacity>
+        </View>
     </View>
   </View>
-
   );
 };
 
@@ -91,6 +113,9 @@ const styles = StyleSheet.create({
   dividerHeader: {
     marginVertical: 10
   },
+  divider: {
+    marginVertical: 10
+  },
   itemText: {
     marginVertical: 3,
     marginHorizontal: 10,
@@ -105,6 +130,31 @@ const styles = StyleSheet.create({
   icon: {
     marginHorizontal: 10
   },
+  appFooter: {
+    height: 50
+  },
+  appFooterRow: {
+    flex: 0,
+    marginHorizontal: 5,
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    width: '100%'
+  },
+  appFooterIcon: {
+    width: 40,
+    flex: 1,
+    flexDirection: 'column',
+    alignItems: 'center'
+  },
+  appFooterText: {
+    color: 'grey',
+    fontSize: 12
+  },
+  appFooterTextActive: {
+    color: 'black',
+    fontSize: 12
+  }
 });
 
 export default DadosCliente;
