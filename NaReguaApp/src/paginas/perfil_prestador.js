@@ -67,7 +67,7 @@ const PerfilPrestador = ({ navigation }) => {
         </View>
       </TouchableOpacity>
       <Divider style={styles.divider}></Divider>
-      <TouchableOpacity style={styles.row} onPress={() => {}}>
+      <TouchableOpacity style={styles.row} onPress={() => navigation.navigate('PedidosPrestador')}>
         <Icon style={styles.icon} name="dollar" type="FontAwesome" size={22} color="black"/>
         <View style={styles.column}>
           <Text style={styles.itemText}>Pedidos</Text>
@@ -101,7 +101,7 @@ const PerfilPrestador = ({ navigation }) => {
           <Icon name="store" type="MaterialIcons" size={27} color="grey"/>
           <Text style={styles.appFooterText}>Minha Loja</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.appFooterIcon} onPress={() => ''}>
+        <TouchableOpacity style={styles.appFooterIcon} onPress={() => navigation.navigate('PedidosPrestador')}>
           <Icon name="dollar" type="FontAwesome" size={23} color="grey"/>
           <Text style={styles.appFooterText}>Histórico</Text>
         </TouchableOpacity>
