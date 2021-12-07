@@ -96,7 +96,7 @@ const PerfilCliente = ({ navigation }) => {
           <Icon name="home" type="FontAwesome" size={27} color="grey"/>
           <Text style={styles.appFooterText}>Início</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.appFooterIcon} onPress={() => ''}>
+        <TouchableOpacity style={styles.appFooterIcon} onPress={() => navigation.navigate('BuscarPrestador')}>
           <Icon name="search" type="FontAwesome" size={22} color="grey"/>
           <Text style={styles.appFooterText}>Busca</Text>
         </TouchableOpacity>
