@@ -26,18 +26,20 @@ const BuscarPrestador = ({ navigation }) => {
     }
 
     return (
-        <ScrollView contentContainerStyle={styles.scrollViewcontainer}>
+        <ScrollView contentContainerStyle={styles.scrollViewcontainer} accessible={true} accessibilityLabel="buscar-prestador-tela">
             <View style={styles.container}>
                 <View style={styles.inputView}>
                     <TextInput
                         style={styles.textInput}
                         placeholder="Buscar prestador"
+                        accessible={true}
+                        accessibilityLabel="nome-prestador"
                         inlineImageLeft='search_icon'
                         onChangeText={(nome) => setNome(nome)}
                     />
 
                     <TouchableOpacity onPress={() => buscar()} style={styles.buscarBtn}>
-                        <Text style={styles.btnText} >BUSCAR</Text>
+                        <Text style={styles.btnText} accessible={true} accessibilityLabel="buscar-prestador-btn" >BUSCAR</Text>
                     </TouchableOpacity>
                 </View>
 
@@ -51,7 +53,10 @@ const BuscarPrestador = ({ navigation }) => {
                         <Text style={styles.itemDados}>Descrição do prestador .... </Text>
                       </View>
 
-                      <TouchableOpacity onPress={() => navigation.navigate('ListarServicosPrestador', {prestador: item})} style={styles.buscarBtn}>
+                      <TouchableOpacity onPress={() => navigation.navigate('ListarServicosPrestador', {prestador: item})}
+                            style={styles.buscarBtn}
+                            accessible={true}
+                            accessibilityLabel={item.user.name}>
                           <Text style={styles.btnText} >Listar Serviços</Text>
                       </TouchableOpacity>
                     </View>

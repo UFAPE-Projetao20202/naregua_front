@@ -6,8 +6,8 @@ const Port = 4723;
 
 const config = {
   platformName: 'Android',
-  deviceName: 'Alistos', //nome do celular
-  udid: 'cf0368b3', //adb devices no terminal
+  deviceName: 'Pixel_5_API_29', //nome do celular
+  udid: 'emulator-5554', //adb devices no terminal
   platformVersion: '10', //versão do android
   appPackage: 'com.nareguaapp',
   appActivity: 'com.nareguaapp.MainActivity',
@@ -195,4 +195,111 @@ When('eu preencho o campo "Descrição" com "Adicione uma descrição"', async()
 When('eu pressiono o botão "Concluir"', async() => {
   let botaoConcluir = await driver.elementByAccessibilityId("botao-concluir");
   botaoConcluir.click();
+});
+
+Given('O usuario de email {string} e senha {string} existe', {timeout: 30000}, async (email, senha) => {
+
+    // tela de login
+    let ehTelaLogin = await driver.hasElementByAccessibilityId("botao-login");
+    assert.equal(ehTelaLogin, true);
+
+    // cadastro
+    let irCadastrar = await driver.elementByAccessibilityId('botao-cadastro');
+    irCadastrar.click();
+
+    await driver.setImplicitWaitTimeout(5000);
+
+    // nome
+    let preencherNome = await driver.elementByAccessibilityId('campo-nome');
+    preencherNome.sendKeys("Evandro");
+    // email
+    let preencherEmail = await driver.elementByAccessibilityId('campo-email');
+    preencherEmail.sendKeys(email);
+    // senha
+    let preencherSenha = await driver.elementByAccessibilityId('campo-senha');
+    preencherSenha.sendKeys(senha);
+    // confirmarSenha
+    let preencherConfirmarSenha = await driver.elementByAccessibilityId('campo-confirmarSenha');
+    preencherConfirmarSenha.sendKeys(senha);
+    // celular
+    let preencherCelular = await driver.elementByAccessibilityId('campo-celular');
+    preencherCelular.sendKeys('88922445566');
+
+    // cadastrar
+    let cadastrarBtn = await driver.elementByAccessibilityId('botao-cadastrar');
+    cadastrarBtn.click();
+
+    await driver.setImplicitWaitTimeout(5000);
+
+    let alert = await driver.elementByXPath("//*[@text='OK']");
+    alert.click();
+});
+
+Given('Eu estou logado com email {string} e senha {string}',{timeout: 30000} , async (email, senha
+) => {
+   let preencherEmail = await driver.elementByAccessibilityId('campo-email');
+   preencherEmail.sendKeys(email);
+   // senha
+   let preencherSenha = await driver.elementByAccessibilityId('campo-senha');
+   preencherSenha.sendKeys(senha);
+
+   loginBtn = await driver.elementByAccessibilityId('botao-login');
+   loginBtn.click();
+});
+
+Given('Eu estou na tela inicial de cliente', {timeout: 30000}, async() => {
+    await driver.setImplicitWaitTimeout(5000);
+    let ehTelaInicio = await driver.hasElementByAccessibilityId("inicio-cliente");
+    assert.equal(ehTelaInicio, true);
+});
+
+Given('Eu clico em buscar prestadores', {timeout: 30000}, async() => {
+    await driver.setImplicitWaitTimeout(15000);
+    let buscarBtn = await driver.elementByAccessibilityId("buscar-prestador-btn");
+    buscarBtn.click();
+
+    let telaBusca = await driver.hasElementByAccessibilityId("buscar-prestador-tela");
+    assert.equal(telaBusca, true);
+});
+
+Given('Preencho campo do nome com {string}', {timeout: 30000}, async(nome) => {
+    await driver.setImplicitWaitTimeout(15000);
+    let campoNome = await driver.elementByAccessibilityId('nome-prestador');
+    campoNome.sendKeys(nome);
+});
+
+When('Clico em buscar este prestador', {timeout: 30000}, async() => {
+    await driver.setImplicitWaitTimeout(15000);
+    let buscarBtn = await driver.elementByAccessibilityId('buscar-prestador-btn');
+    buscarBtn.click();
+});
+
+Then('Vejo o prestador {string}', {timeout: 30000}, async(nome) => {
+    await driver.setImplicitWaitTimeout(15000);
+    let hasNome = await driver.hasElementByXPath("//*[@text='"+nome+"']");
+    assert.equal(hasNome, true);
+});
+
+When('Clico em listar os serviços do prestador {string}', {timeout: 30000}, async(nome) => {
+    await driver.setImplicitWaitTimeout(15000);
+    let buscarBtnNome = await driver.elementByAccessibilityId(nome);
+    buscarBtnNome.click();
+});
+
+Then('Vejo a lista de serviços', {timeout: 30000}, async() => {
+    await driver.setImplicitWaitTimeout(15000);
+    let listaTela = await driver.hasElementByAccessibilityId('lista-servicos-tela');
+    assert.equal(listaTela, true);
+});
+
+When('Seleciono o serviço de nome {string}', {timeout: 30000}, async(nomeServico) => {
+    await driver.setImplicitWaitTimeout(15000);
+    let servico = await driver.elementByAccessibilityId(nomeServico);
+    servico.click();
+});
+
+Then('Vejo as informações do serviço', {timeout: 30000}, async() => {
+    await driver.setImplicitWaitTimeout(15000);
+    let servico = await driver.hasElementByAccessibilityId('servico-tela');
+    assert.equal(servico, true)
 });

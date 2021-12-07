@@ -32,7 +32,7 @@ const InicioCliente = ({ navigation })  => {
   return (
     <ScrollView contentContainerStyle={styles.scrollViewcontainer}>
       <View style={styles.container}>
-        {user && <Text style={styles.title}>Bem vindo, {user.name}</Text>}
+        {user && <Text style={styles.title} accessible={true} accessibilityLabel="inicio-cliente">Bem vindo, {user.name}</Text>}
         <View style={styles.containerBtn}>
           <TouchableOpacity style={styles.signBtn} onPress={() => navigation.navigate('PerfilCliente')}>
             <Text style={styles.btnText} accessible={true} accessibilityLabel="botao-perfilcliente">Perfil</Text>
@@ -40,7 +40,7 @@ const InicioCliente = ({ navigation })  => {
 		</View>
 
         <View style={styles.containerBtn}>
-		<TouchableOpacity style={styles.signBtn} onPress={() => navigation.navigate('BuscarPrestador')}>
+		<TouchableOpacity style={styles.signBtn} accessible={true} accessibilityLabel="buscar-prestador-btn" onPress={() => navigation.navigate('BuscarPrestador')}>
             <Text style={styles.btnText} >Buscar Prestador</Text>
           </TouchableOpacity>
         </View>
