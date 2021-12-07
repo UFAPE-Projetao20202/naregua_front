@@ -11,6 +11,7 @@ import {
 
 const Notificacao = ({ route, navigation })  => {
     const notificacao = route.params.notificacao;
+    let prestador = false;
 
   useEffect(() => {
   }, []);
@@ -28,6 +29,7 @@ const Notificacao = ({ route, navigation })  => {
             <Text style={styles.itemText}>{notificacao.texto}</Text>
         </View>
     </ScrollView>
+    {prestador == false &&
     <View style={styles.appFooter}>
         <Divider style={styles.divider}></Divider>
         <View style={styles.appFooterRow}>
@@ -49,6 +51,30 @@ const Notificacao = ({ route, navigation })  => {
           </TouchableOpacity>
         </View>
     </View>
+    }
+    {prestador == true &&
+    		<View style={styles.appFooter}>
+        <Divider style={styles.divider}></Divider>
+        <View style={styles.appFooterRow}>
+          <TouchableOpacity style={styles.appFooterIcon} onPress={() => navigation.navigate('InicioPrestador')}>
+          <Icon name="home" type="FontAwesome" size={27} color="grey"/>
+          <Text style={styles.appFooterText}>Início</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.appFooterIcon} onPress={() => ''}>
+          <Icon name="store" type="MaterialIcons" size={27} color="grey"/>
+          <Text style={styles.appFooterText}>Minha Loja</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.appFooterIcon} onPress={() => ''}>
+          <Icon name="dollar" type="FontAwesome" size={23} color="grey"/>
+          <Text style={styles.appFooterText}>Histórico</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.appFooterIcon} onPress={() => navigation.navigate('PerfilPrestador')}>
+          <Icon name="user" type="FontAwesome" size={24} color="grey"/>
+          <Text style={styles.appFooterText}>Perfil</Text>
+          </TouchableOpacity>
+        </View>
+        </View>
+    }
   </View>
   );
 };
