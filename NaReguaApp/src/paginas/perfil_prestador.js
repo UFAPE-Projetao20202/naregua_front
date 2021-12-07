@@ -43,7 +43,7 @@ const PerfilPrestador = ({ navigation }) => {
         </View>
       </TouchableOpacity>
       <Divider style={styles.divider}></Divider>
-      <TouchableOpacity style={styles.row} onPress={() => navigation.navigate('Loja')}>
+      <TouchableOpacity style={styles.row} onPress={() => navigation.navigate('Loja', {prestador: user})}>
         <Icon style={styles.icon} name="store" type="MaterialIcons" size={23} color="black" onPress={() => {}} />
         <View style={styles.column}>
           <Text style={styles.itemText}>Minha Loja</Text>
