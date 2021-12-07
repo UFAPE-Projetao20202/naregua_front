@@ -8,52 +8,50 @@ import {
   ScrollView,
   TouchableOpacity
 } from 'react-native';
+import { useAuth } from '../contexts/auth';
 
-const Notificacao = ({ route, navigation })  => {
-    const notificacao = route.params.notificacao;
-    let prestador = true;
 
-  useEffect(() => {
-  }, []);
+const DadosPrestador = ({ navigation })  => {
+  const user = {name: 'jnfdjndj', email: 'jndkfjfd@dfjdf.com', password: 'nfcdkjd'}
 
   return (
   <View style={styles.container}>
     <ScrollView style={styles.content}>
       <View style={styles.row}>
         <Icon name="chevron-left" type="FontAwesome" size={18} color="black" onPress={() => {}} />
-        <Text style={styles.pageTitle}>Notificação</Text>
+        <Text style={styles.pageTitle}>MEUS DADOS</Text>
       </View>
       <Divider style={styles.dividerHeader}></Divider>
-        <View style={styles.item}>
-            <Text style={styles.itemTitle}>{notificacao.titulo}</Text>
-            <Text style={styles.itemText}>{notificacao.texto}</Text>
-        </View>
+      <View>
+          <View style={styles.row}>
+              <View style={styles.rowData}>
+                <Text style={styles.label}>Nome:</Text>
+                <Text style={styles.itemText}>{user.name}</Text>
+              </View>
+              <Icon style={styles.icon} name="pencil" type="FontAwesome" size={18} color="black" onPress={() => {}} />
+          </View>
+          <View style={styles.row}>
+            <View style={styles.rowData}>
+                <Text style={styles.label}>E-mail:</Text>
+                <Text style={styles.itemText}>{user.email}</Text>
+            </View>
+            <Icon style={styles.icon} name="pencil" type="FontAwesome" size={18} color="black" onPress={() => {}} />
+          </View>
+          <View style={styles.row}>
+              <View style={styles.rowData}>
+                <Text style={styles.label}>Senha:</Text>
+                <Text style={styles.itemText}>******</Text>
+              </View>
+              <Icon style={styles.icon} name="pencil" type="FontAwesome" size={18} color="black" onPress={() => {}} />
+            </View>
+      </View>
+      <View style={styles.btnCont}>
+        <TouchableOpacity onPress={() => ''} style={styles.btn}>
+            <Text style={styles.btnText}>DADOS DE PAGAMENTO</Text>
+        </TouchableOpacity>
+      </View>
     </ScrollView>
-    {prestador == false &&
     <View style={styles.appFooter}>
-        <Divider style={styles.divider}></Divider>
-        <View style={styles.appFooterRow}>
-          <TouchableOpacity style={styles.appFooterIcon} onPress={() => navigation.navigate('InicioCliente')}>
-            <Icon name="home" type="FontAwesome" size={27} color="grey"/>
-            <Text style={styles.appFooterText}>Início</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.appFooterIcon} onPress={() => ''}>
-            <Icon name="search" type="FontAwesome" size={22} color="grey"/>
-            <Text style={styles.appFooterText}>Busca</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.appFooterIcon} onPress={() => navigation.navigate('PedidosCliente')}>
-            <Icon name="dollar" type="FontAwesome" size={23} color="grey"/>
-            <Text style={styles.appFooterText}>Histórico</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.appFooterIcon} onPress={() => navigation.navigate('PerfilCliente')}>
-            <Icon name="user" type="FontAwesome" size={24} color="grey"/>
-            <Text style={styles.appFooterText}>Perfil</Text>
-          </TouchableOpacity>
-        </View>
-    </View>
-    }
-    {prestador == true &&
-    		<View style={styles.appFooter}>
         <Divider style={styles.divider}></Divider>
         <View style={styles.appFooterRow}>
           <TouchableOpacity style={styles.appFooterIcon} onPress={() => navigation.navigate('InicioPrestador')}>
@@ -74,7 +72,6 @@ const Notificacao = ({ route, navigation })  => {
           </TouchableOpacity>
         </View>
         </View>
-    }
   </View>
   );
 };
@@ -109,28 +106,32 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width: '100%'
   },
+  rowData: {
+    flex: 0,
+    marginHorizontal: 5,
+    marginVertical: 10,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
   dividerHeader: {
     marginVertical: 10
   },
   divider: {
     marginVertical: 10
   },
-  itemTitle: {
-    color: 'black',
-    textAlign: 'left',
-    fontSize: 18,
-    fontWeight: '500',
-    marginVertical: 10
-  },
   itemText: {
-    color: 'black',
+    marginVertical: 3,
+    marginHorizontal: 10,
     fontSize: 16,
-    textAlign: 'justify',
-    marginVertical: 10
+    color: 'black',
   },
-  item: {
-    flexDirection: 'column',
-    marginHorizontal: 5,
+  label: {
+    fontWeight: 'bold',
+    fontSize: 16,
+    color: 'black',
+  },
+  icon: {
+    marginHorizontal: 10
   },
   appFooter: {
     height: 50
@@ -156,7 +157,23 @@ const styles = StyleSheet.create({
   appFooterTextActive: {
     color: 'black',
     fontSize: 12
+  },
+  btn: {
+    width: '60%',
+    borderRadius: 15,
+    height: 40,
+    marginVertical: 10,
+    marginHorizontal: 5,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'black'
+  },
+  btnText: {
+      color: 'white'
+  },
+  btnCont: {
+    alignItems: 'center'
   }
 });
 
-export default Notificacao;
+export default DadosPrestador;
