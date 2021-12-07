@@ -25,10 +25,6 @@ const BuscarPrestador = ({ navigation }) => {
         }
     }
 
-    function buscarPrestador() {
-        buscar();
-    }
-
     return (
         <ScrollView contentContainerStyle={styles.scrollViewcontainer}>
             <View style={styles.container}>
@@ -39,10 +35,8 @@ const BuscarPrestador = ({ navigation }) => {
                         inlineImageLeft='search_icon'
                         onChangeText={(nome) => setNome(nome)}
                     />
-                </View>
 
-                <View style={styles.containerBtn}>
-                    <TouchableOpacity onPress={() => buscarPrestador()} style={styles.buscarBtn}>
+                    <TouchableOpacity onPress={() => buscar()} style={styles.buscarBtn}>
                         <Text style={styles.btnText} >BUSCAR</Text>
                     </TouchableOpacity>
                 </View>
@@ -84,7 +78,6 @@ const styles = StyleSheet.create({
       },
     containerBtn: {
         width: '100%',
-        flex: 1,
         marginTop: 20,
         alignItems: 'center'
       },
@@ -92,20 +85,21 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         borderRadius: 15,
         width: "90%",
+        flexDirection: 'row',
+        marginBottom: 30,
         height: 45,
         alignItems: 'flex-start',
-        marginBottom: 20
     },
     textInput: {
         height: 50,
-        width: '40%',
+        width: '80%',
         //alignItems: 'flex-start',
         color: 'black'
     },
     buscarBtn: {
         width: '25%',
         borderRadius: 15,
-        height: 40,
+        height: 50,
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: '#004A5A'

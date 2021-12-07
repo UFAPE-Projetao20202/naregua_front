@@ -17,9 +17,9 @@ function AppClienteRoute() {
         <ClienteStack.Screen name="PerfilCliente" component={PerfilCliente} options={{title: 'Meu Perfil'}}/>
         <ClienteStack.Screen name="Endereco" component={Endereco} options={{title: "Meus Endereços"}}/>
         <ClienteStack.Screen name="CadastroEndereco" component={CadastroEndereco} options={{title: "Novo Endereço"}}/>
-        <ClienteStack.Screen name="BuscarPrestador" component={BuscarPrestador}/>
-        <ClienteStack.Screen name="ListarServicosPrestador" component={ListarServicosPrestador}/>
-        <ClienteStack.Screen name="Servico" component={Servico}/>
+        <ClienteStack.Screen name="BuscarPrestador" component={BuscarPrestador} options={{title: "Buscar Prestador"}}/>
+        <ClienteStack.Screen name="ListarServicosPrestador" component={ListarServicosPrestador} options={{title: "Listagem de serviços"}}/>
+        <ClienteStack.Screen name="Servico" component={Servico} options={{title: "Serviço"}}/>
     </ClienteStack.Navigator>
   );
 }

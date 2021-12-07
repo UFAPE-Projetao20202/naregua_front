@@ -28,11 +28,10 @@ const ListaServicos = ({navigation, route}) => {
         console.log(error.response.data);
     }
   }
-  console.log(listaServ[0])
+
   return (
     <View style={styles.container}>
       <View style={styles.row}>
-        <Icon style={styles.backButton} name="chevron-left" type="FontAwesome" size={18} color="black" onPress={() => {}} />
         <Text style={styles.pageTitle}>{prestador.user.name}</Text>
       </View>
       <Divider style={styles.divisor} />

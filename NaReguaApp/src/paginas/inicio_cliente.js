@@ -118,7 +118,6 @@ const styles = StyleSheet.create({
 	},
   containerBtn: {
 		width: '80%',
-		flex: 1,
 		marginTop: 20,
 		alignItems: 'center'
     },
