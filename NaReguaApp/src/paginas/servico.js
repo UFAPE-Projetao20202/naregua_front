@@ -14,7 +14,9 @@ const Servico = ({ route, navigation }) => {
   const servico = route.params.servico;
 
   return (
-  <View style={styles.container}>
+  <View style={styles.container}
+    accessible={true}
+    accessibilityLabel="servico-tela">
     <View style={styles.content}>
       <View style={styles.row}>
         <Icon style={styles.backButton} name="chevron-left" type="FontAwesome" size={18} color="black" onPress={() => {}} />

@@ -30,7 +30,7 @@ const ListaServicos = ({navigation, route}) => {
   }
 
   return (
-    <View style={styles.container}>
+    <View style={styles.container} accessible={true} accessibilityLabel="lista-servicos-tela">
       <View style={styles.row}>
         <Text style={styles.pageTitle}>{prestador.user.name}</Text>
       </View>
@@ -42,7 +42,11 @@ const ListaServicos = ({navigation, route}) => {
               <View style={styles.itemColunas}>
                 <Divider style={styles.divisor} />
                 <View>
-                  <TouchableOpacity onPress={() => navigation.navigate('Servico', {servico: item})} style={styles.item}>
+                  <TouchableOpacity
+                    onPress={() => navigation.navigate('Servico', {servico: item})}
+                    style={styles.item}
+                    accessible={true}
+                    accessibilityLabel={item.name}>
                       <Text style={styles.header}>{item.name}</Text>
                       <Text style={styles.itemDescription}>Tipo: {item.category.description}</Text>
                       <Text style={styles.itemDescription}>{item.description}</Text>

@@ -40,7 +40,11 @@ const InicioCliente = ({ navigation })  => {
 		</View>
 
         <View style={styles.containerBtn}>
-		<TouchableOpacity style={styles.signBtn} onPress={() => navigation.navigate('BuscarPrestador')}>
+		<TouchableOpacity style={
+		    styles.signBtn}
+		    accessible={true}
+		    accessibilityLabel="buscar-prestador-btn"
+		    onPress={() => navigation.navigate('BuscarPrestador')}>
             <Text style={styles.btnText} >Buscar Prestador</Text>
           </TouchableOpacity>
         </View>
