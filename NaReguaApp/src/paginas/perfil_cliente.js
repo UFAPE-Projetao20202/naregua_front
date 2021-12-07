@@ -27,7 +27,7 @@ const PerfilCliente = ({ navigation }) => {
         <Text style={styles.pageTitle}>{user.name}</Text>
       </View>
       <Divider style={styles.dividerHeader}></Divider>
-      <TouchableOpacity style={styles.row} onPress={() => navigation.navigate('Chats')}>
+      <TouchableOpacity style={styles.row} onPress={() => navigation.navigate('Chats', {prestador: false})}>
         <Icon style={styles.icon} name="comment" type="FontAwesome" size={20} color="black"/>
         <View style={styles.column}>
           <Text style={styles.itemText}>Chats</Text>
@@ -35,7 +35,7 @@ const PerfilCliente = ({ navigation }) => {
         </View>
       </TouchableOpacity>
       <Divider style={styles.divider}></Divider>
-      <TouchableOpacity style={styles.row} onPress={() => navigation.navigate('ListaNotificacoes')}>
+      <TouchableOpacity style={styles.row} onPress={() => navigation.navigate('ListaNotificacoes', {prestador: false})}>
         <Icon style={styles.icon} name="bell" type="FontAwesome" size={20} color="black"/>
         <View style={styles.column}>
           <Text style={styles.itemText}>Notificações</Text>
