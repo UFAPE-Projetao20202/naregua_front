@@ -105,6 +105,12 @@ When('eu pressiono o botão "Cadastrar"', async() => {
   botaoCadastrar.click();
 });
 
+Then('eu vejo uma mensagem de confirmação de cadastro', async() => {
+  await driver.setImplicitWaitTimeout(15000);
+  let msgErro = await driver.hasElementByXPath("//*[@text='Conta cadastrada!']");
+  assert.equal(msgErro, true);
+})
+
 Then('eu vejo a tela de login', {timeout: 20000}, async() => {
   await driver.setImplicitWaitTimeout(15000);
   let ehTelaLogin = await driver.hasElementByAccessibilityId("botao-login");
@@ -135,7 +141,7 @@ When('eu pressiono o botão "Login"', async() => {
 
 Then('eu vejo a tela inicial de cliente', {timeout: 20000}, async() => {
   await driver.setImplicitWaitTimeout(15000);
-  let ehTelaInicial = await driver.hasElementByXPath("//*[@text='InicioCliente']");
+  let ehTelaInicial = await driver.hasElementByAccessibilityId("bemvindo");
   assert.equal(ehTelaInicial, true);
 });
 
@@ -149,15 +155,21 @@ When('eu preencho o campo "senha" com a senha incorreta "654321"', async() => {
   preencherSenha.sendKeys("654321");
 });
 
-Then('eu vejo uma mensagem de erro no login', {timeout: 20000}, async() => {
+Then('eu vejo uma mensagem de erro no login indicando email incorreto', {timeout: 20000}, async() => {
   await driver.setImplicitWaitTimeout(15000);
-  let msgErro = await driver.hasElementByXPath("//*[@text='Email ou senha incorretos!']");
+  let msgErro = await driver.hasElementByXPath("//*[@text='Email não existe!']");
+  assert.equal(msgErro, true);
+});
+
+Then('eu vejo uma mensagem de erro no login indicando senha incorreta', {timeout: 20000}, async() => {
+  await driver.setImplicitWaitTimeout(15000);
+  let msgErro = await driver.hasElementByXPath("//*[@text='Senha incorreta!']");
   assert.equal(msgErro, true);
 });
 
 When('eu vejo a tela inicial de prestador', {timeout: 20000}, async() => {
   await driver.setImplicitWaitTimeout(15000);
-  let ehTelaInicial = await driver.hasElementByXPath("//*[@text='InicioPrestador']");
+  let ehTelaInicial = await driver.hasElementByAccessibilityId("bemvindo");
   assert.equal(ehTelaInicial, true);
 });
 
@@ -195,4 +207,10 @@ When('eu preencho o campo "Descrição" com "Adicione uma descrição"', async()
 When('eu pressiono o botão "Concluir"', async() => {
   let botaoConcluir = await driver.elementByAccessibilityId("botao-concluir");
   botaoConcluir.click();
+});
+
+Then('eu vejo uma mensagem de confirmação de cadastro do serviço', async() => {
+  await driver.setImplicitWaitTimeout(15000);
+  let msgErro = await driver.hasElementByXPath("//*[@text='Serviço cadastrado!']");
+  assert.equal(msgErro, true);
 });

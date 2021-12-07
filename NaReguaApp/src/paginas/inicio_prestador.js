@@ -14,7 +14,7 @@ const InicioPrestador = ({ navigation }) => {
     return (
         <ScrollView contentContainerStyle={styles.scrollViewcontainer}>
             <View style={styles.container}>
-				{user && <Text style={styles.title}>Bem vindo, {user.name}</Text>}
+				{user && <Text style={styles.title} accessible={true} accessibilityLabel="bemvindo">Bem vindo, {user.name}</Text>}
 
                 <View style={styles.containerBtn}>
 								<TouchableOpacity style={styles.signBtn} onPress={() => navigation.navigate('CadastroServico')}>
