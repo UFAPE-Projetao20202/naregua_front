@@ -16,7 +16,13 @@ const InicioPrestador = ({ navigation }) => {
     return (
 	<View style={styles.container}>
 		<ScrollView style={styles.content}>
-			<Text style={styles.text}>Bem Vindo!</Text>
+			{user && <Text style={styles.title} accessible={true} accessibilityLabel="bemvindo">Bem vindo, {user.name}</Text>}
+
+      <View style={styles.containerBtn}>
+			  <TouchableOpacity style={styles.signBtn} onPress={() => navigation.navigate('CadastroServico')}>
+				<Text style={styles.btnText} accessible={true} accessibilityLabel="botao-criarservico">Criar serviço</Text>
+				</TouchableOpacity>
+				</View>
 		</ScrollView>
 		<View style={styles.appFooter}>
 		<Divider style={styles.divider}></Divider>
@@ -35,11 +41,12 @@ const InicioPrestador = ({ navigation }) => {
 		  </TouchableOpacity>
 		  <TouchableOpacity style={styles.appFooterIcon} onPress={() => navigation.navigate('PerfilPrestador')}>
 			<Icon name="user" type="FontAwesome" size={24} color="grey"/>
-			<Text style={styles.appFooterText}>Perfil</Text>
+			<Text style={styles.appFooterText} accessible={true} accessibilityLabel="botao-perfilprestador">Perfil</Text>
 		  </TouchableOpacity>
 		</View>
 	  </View>
 	</View>
+
     );
 };
 

@@ -8,15 +8,16 @@ import {
   TouchableOpacity,
   ScrollView
 } from 'react-native';
+import { useAuth } from '../contexts/auth';
 
 const PerfilPrestador = ({ navigation }) => {
-  let prestador = {name: 'Nome do prestador'};
+  const { user } = useAuth();
 
   return (
   <View style={styles.container}>
     <ScrollView style={styles.content}>
       <View style={styles.row}>
-        <Text style={styles.pageTitle}>{prestador.name}</Text>
+        <Text style={styles.pageTitle}>{user.name}</Text>
       </View>
       <Divider style={styles.dividerHeader}></Divider>
       <TouchableOpacity style={styles.row} onPress={() => navigation.navigate('Chats')}>
@@ -43,7 +44,7 @@ const PerfilPrestador = ({ navigation }) => {
         </View>
       </TouchableOpacity>
       <Divider style={styles.divider}></Divider>
-      <TouchableOpacity style={styles.row} onPress={() => {}}>
+      <TouchableOpacity style={styles.row} onPress={() => navigation.navigate('Loja', {prestador: user})}>
         <Icon style={styles.icon} name="store" type="MaterialIcons" size={23} color="black" onPress={() => {}} />
         <View style={styles.column}>
           <Text style={styles.itemText}>Minha Loja</Text>
@@ -52,6 +53,7 @@ const PerfilPrestador = ({ navigation }) => {
       </TouchableOpacity>
       <Divider style={styles.divider}></Divider>
       <TouchableOpacity style={styles.row} onPress={() => navigation.navigate('DadosPrestador')}>
+
         <Icon style={styles.icon} name="id-card" type="FontAwesome" size={20} color="black"/>
         <View style={styles.column}>
           <Text style={styles.itemText}>Meus Dados</Text>

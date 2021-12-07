@@ -12,8 +12,8 @@ import api from '../services/api';
 import { useAuth } from '../contexts/auth';
 
 const Endereco = ({ navigation })  => {
-  //const { user } = useAuth();
-  let user = {name: 'Nome do usuario'};
+  const { user } = useAuth();
+  //let user = {name: 'Nome do usuario'};
 
   const [listaEnderecos, setlistaEnderecos] = useState([]);
 
