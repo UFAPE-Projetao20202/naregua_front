@@ -82,7 +82,7 @@ const Login = ({ navigation }) => {
 				{mensagemErro.length > 0 && <Text style={styles.error}>{mensagemErro}</Text>}
 
                 <View style={styles.containerBotao}>
-                    <TouchableOpacity onPress={() => navigation.navigate('InicioCliente')} style={styles.loginBtn}>
+                    <TouchableOpacity onPress={() => validarDados()} style={styles.loginBtn}>
                         <Text style={styles.loginText} accessible={true} accessibilityLabel="botao-login" >LOGIN</Text>
                     </TouchableOpacity>
                 </View>

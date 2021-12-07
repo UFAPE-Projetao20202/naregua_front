@@ -17,9 +17,9 @@ const Endereco = ({ navigation })  => {
 
   const [listaEnderecos, setlistaEnderecos] = useState([]);
 
-  useEffect(() => {
+  /*useEffect(() => {
     listarEnderecos();
-  }, []);
+  }, []);*/
 
   async function listarEnderecos() {
     // try {

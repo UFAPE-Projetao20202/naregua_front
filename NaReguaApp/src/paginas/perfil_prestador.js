@@ -5,7 +5,7 @@ import {
   View,
   Text,
   StyleSheet,
-  TouchableOpacity
+  TouchableOpacity,
 } from 'react-native';
 
 const PerfilPrestador = ({ navigation }) => {
