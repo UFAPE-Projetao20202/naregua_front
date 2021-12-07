@@ -30,14 +30,8 @@ const InicioCliente = ({ navigation })  => {
   }
 
   return (
-    <ScrollView contentContainerStyle={styles.scrollViewcontainer}>
-      <View style={styles.container}>
-        {user && <Text style={styles.title}>Bem vindo, {user.name}</Text>}
-        <View style={styles.containerBtn}>
-          <TouchableOpacity style={styles.signBtn} onPress={() => navigation.navigate('PerfilCliente')}>
-          <Text style={styles.btnText} accessible={true} accessibilityLabel="botao-perfilcliente">Perfil</Text>
-          </TouchableOpacity>
-			  </View>
+    <View style={styles.container}>
+      <ScrollView style={styles.content}>
         {listaPrestadores.map((item) => (
           <View style={styles.itemLista} key={item.id}>
             <View style={styles.itemColunas}>
@@ -57,20 +51,43 @@ const InicioCliente = ({ navigation })  => {
             <Divider style={styles.divisor} />
           </View>
         ))}
-      </View>
-    </ScrollView>
+      </ScrollView>
+      <View style={styles.appFooter}>
+        <Divider style={styles.divider}></Divider>
+        <View style={styles.appFooterRow}>
+          <TouchableOpacity style={styles.appFooterIcon} onPress={() => ''}>
+            <Icon name="home" type="FontAwesome" size={27} color="black"/>
+            <Text style={styles.appFooterTextActive}>Início</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.appFooterIcon} onPress={() => ''}>
+            <Icon name="search" type="FontAwesome" size={22} color="grey"/>
+            <Text style={styles.appFooterText}>Busca</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.appFooterIcon} onPress={() => navigation.navigate('PedidosCliente')}>
+            <Icon name="dollar" type="FontAwesome" size={23} color="grey"/>
+            <Text style={styles.appFooterText}>Histórico</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.appFooterIcon} onPress={() => navigation.navigate('PerfilCliente')}>
+            <Icon name="user" type="FontAwesome" size={24} color="grey"/>
+            <Text style={styles.appFooterText}>Perfil</Text>
+          </TouchableOpacity>
+        </View>
+    </View>
+  </View>
   );
 };
 
 const styles = StyleSheet.create({
-  scrollViewcontainer: {
+  container: {
     backgroundColor: '#ECECEC',
     paddingVertical: 20,
+    flex: 1,
+    justifyContent: 'center',
     height: '100%',
     paddingHorizontal: 15
   },
-  container: {
-    alignItems: 'center',
+  content: {
+    width: '100%',
     height: '100%'
   },
   itemLista: {
@@ -127,7 +144,35 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 		justifyContent: 'center',
 		backgroundColor: '#004A5A'
-	}
+	},
+  appFooter: {
+    height: 50
+  },
+  appFooterRow: {
+    flex: 0,
+    marginHorizontal: 5,
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    width: '100%'
+  },
+  appFooterIcon: {
+    width: 40,
+    flex: 1,
+    flexDirection: 'column',
+    alignItems: 'center'
+  },
+  appFooterText: {
+    color: 'grey',
+    fontSize: 12
+  },
+  appFooterTextActive: {
+    color: 'black',
+    fontSize: 12
+  },
+  divider: {
+    marginVertical: 10
+  }
 });
 
 export default InicioCliente;

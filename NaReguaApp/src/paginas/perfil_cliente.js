@@ -5,18 +5,24 @@ import {
   View,
   Text,
   StyleSheet,
-  TouchableOpacity
+  TouchableOpacity,
+  Modal,
+  ScrollView
 } from 'react-native';
 import api from '../services/api';
 import { useAuth } from '../contexts/auth';
 
 const PerfilCliente = ({ navigation }) => {
+  const [visible, setVisible] = React.useState(false);
+
+  const showDialog = () => setVisible(true);
+  const hideDialog = () => setVisible(false);
 
   const { user } = useAuth();
 
   return (
-    <View style={styles.container}>
-    <View style={styles.content}>
+  <View style={styles.container}>
+    <ScrollView style={styles.content}>
       <View style={styles.row}>
         <Text style={styles.pageTitle}>{user.name}</Text>
       </View>
@@ -61,12 +67,48 @@ const PerfilCliente = ({ navigation }) => {
         </View>
       </TouchableOpacity>
       <Divider style={styles.divider}></Divider>
-      <TouchableOpacity style={styles.row} onPress={() => {}}>
+      <TouchableOpacity style={styles.row} onPress={showDialog}>
         <Icon style={styles.icon} name="sign-out" type="FontAwesome" size={24} color="black"/>
         <View style={styles.column}>
           <Text style={styles.itemText}>Sair</Text>
         </View>
       </TouchableOpacity>
+    </ScrollView>
+    <Modal transparent={true} visible={visible} onRequestClose={hideDialog}>
+      <View style={styles.centeredView}>
+        <View style={styles.modalView}>
+          <Text style={styles.itemText}>Fazer logout?</Text>
+          <View style={styles.row}>
+            <TouchableOpacity onPress={hideDialog} style={styles.dialogBtn}>
+              <Text style={styles.buttonText}>NÃO</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => ''} style={styles.dialogBtn}>
+              <Text style={styles.buttonText}>SIM</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </View>
+    </Modal>
+    <View style={styles.appFooter}>
+      <Divider style={styles.divider}></Divider>
+      <View style={styles.appFooterRow}>
+        <TouchableOpacity style={styles.appFooterIcon} onPress={() => navigation.navigate('InicioCliente')}>
+          <Icon name="home" type="FontAwesome" size={27} color="grey"/>
+          <Text style={styles.appFooterText}>Início</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.appFooterIcon} onPress={() => ''}>
+          <Icon name="search" type="FontAwesome" size={22} color="grey"/>
+          <Text style={styles.appFooterText}>Busca</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.appFooterIcon} onPress={() => navigation.navigate('PedidosCliente')}>
+          <Icon name="dollar" type="FontAwesome" size={23} color="grey"/>
+          <Text style={styles.appFooterText}>Histórico</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.appFooterIcon} onPress={() => ''}>
+          <Icon name="user" type="FontAwesome" size={24} color="black"/>
+          <Text style={styles.appFooterTextActive}>Perfil</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   </View>
   );
@@ -128,6 +170,56 @@ const styles = StyleSheet.create({
   },
   icon: {
     width: '7%'
+  },
+  centeredView: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  modalView: {
+    backgroundColor: "white",
+    borderRadius: 15,
+    padding: 20,
+    alignItems: "center",
+    elevation: 5,
+    width: '70%'
+  },
+  dialogBtn: {
+    width: 110,
+    borderRadius: 15,
+    height: 40,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#004A5A',
+    marginTop: 15
+  },
+  buttonText: {
+    color: 'white'
+  },
+  appFooter: {
+    height: 50
+  },
+  appFooterRow: {
+    flex: 0,
+    marginHorizontal: 5,
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    width: '100%'
+  },
+  appFooterIcon: {
+    width: 40,
+    flex: 1,
+    flexDirection: 'column',
+    alignItems: 'center'
+  },
+  appFooterText: {
+    color: 'grey',
+    fontSize: 12
+  },
+  appFooterTextActive: {
+    color: 'black',
+    fontSize: 12
   }
 });
 

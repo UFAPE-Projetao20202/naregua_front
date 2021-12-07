@@ -5,11 +5,19 @@ import {
   View,
   Text,
   StyleSheet,
-  TouchableOpacity
+  TouchableOpacity,
+  Modal,
+  TextInput,
+  ScrollView
 } from 'react-native';
 
 const PedidosCliente = ({ navigation })  => {
   const [listaPedidos, setListaPedidos] = useState([]);
+  const [visible, setVisible] = React.useState(false);
+  const [motivoAvaliacao, setMotivoAval] = React.useState('');
+
+  const showDialog = () => setVisible(true);
+  const hideDialog = () => setVisible(false);
 
   useEffect(() => {
     listarPedidos();
@@ -68,7 +76,7 @@ const PedidosCliente = ({ navigation })  => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.content}>
+      <ScrollView style={styles.content}>
         <View style={styles.row}>
           <Text style={styles.pageTitle}>HISTÓRICO</Text>
         </View>
@@ -80,7 +88,7 @@ const PedidosCliente = ({ navigation })  => {
               <Text style={styles.itemText}>{item.nome_prestador}</Text>
               <Text style={styles.itemDescription}>{item.passou ? 'Ocorreu' : 'Ocorrerá'} em {item.data}</Text>
               <Text style={styles.itemDescription}>Valor: R$ {item.valor}</Text>
-              {item.avaliado === false && <Text style={styles.itemRate} onPress={() => {}}>AVALIAR</Text>}
+              {item.avaliado === false && <Text style={styles.itemRate} onPress={showDialog}>AVALIAR</Text>}
               {item.avaliado === true && 
                 <View style={styles.rowRated}>
                   <Icon name="star" type="FontAwesome" size={16} color={item.avaliacao >= 1 ? "#DE7800" : "grey"}/>
@@ -100,10 +108,66 @@ const PedidosCliente = ({ navigation })  => {
               </TouchableOpacity>
             </View>
           </View>
+          <Modal transparent={true} visible={visible} onRequestClose={hideDialog}>
+              <View style={styles.centeredView}>
+                <View style={styles.modalView}>
+                  <View>
+                    <Text style={styles.itemText}>{item.nome_prestador}</Text>
+                    <Text style={styles.itemDescription}>Ocorreu em {item.data}</Text>
+                    <Divider style={styles.divider}></Divider>
+                    <View style={styles.rowRated}>
+                      <Icon name="star" type="FontAwesome" size={16} color="grey"/>
+                      <Icon name="star" type="FontAwesome" size={16} color="grey"/>
+                      <Icon name="star" type="FontAwesome" size={16} color="grey"/>
+                      <Icon name="star" type="FontAwesome" size={16} color="grey"/>
+                      <Icon name="star" type="FontAwesome" size={16} color="grey"/>
+                    </View>
+                    <View style={styles.inputView}>
+                      <TextInput
+                        style={styles.textInput}
+                        placeholder="Digite o motivo da avaliação aqui..."
+                        placeholderTextColor="grey"
+                        onChangeText={(motivoAvaliacao) => setMotivoAval(motivoAvaliacao)}
+                        multiline={true}
+                      />
+                    </View>
+                  </View>
+                  <View style={styles.row}>
+                    <TouchableOpacity onPress={hideDialog} style={styles.dialogBtn}>
+                      <Text style={styles.buttonText} accessible={true} accessibilityLabel="botao-fechar">FECHAR</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={() => ''} style={styles.dialogBtn}>
+                      <Text style={styles.buttonText}>AVALIAR</Text>
+                    </TouchableOpacity>
+                  </View>
+                </View>
+              </View>
+          </Modal>
           <Divider style={styles.divider}></Divider>
         </View>
         ))}
-      </View>
+      </ScrollView>
+      <View style={styles.appFooter}>
+        <Divider style={styles.divider}></Divider>
+        <View style={styles.appFooterRow}>
+          <TouchableOpacity style={styles.appFooterIcon} onPress={() => navigation.navigate('InicioCliente')}>
+            <Icon name="home" type="FontAwesome" size={27} color="grey"/>
+            <Text style={styles.appFooterText}>Início</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.appFooterIcon} onPress={() => ''}>
+            <Icon name="search" type="FontAwesome" size={22} color="grey"/>
+            <Text style={styles.appFooterText}>Busca</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.appFooterIcon} onPress={() => ''}>
+            <Icon name="dollar" type="FontAwesome" size={23} color="black"/>
+            <Text style={styles.appFooterTextActive}>Histórico</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.appFooterIcon} onPress={() => navigation.navigate('PerfilCliente')}>
+            <Icon name="user" type="FontAwesome" size={24} color="grey"/>
+            <Text style={styles.appFooterText}>Perfil</Text>
+          </TouchableOpacity>
+        </View>
+    </View>
     </View>
     );
   };
@@ -231,6 +295,69 @@ const PedidosCliente = ({ navigation })  => {
     btnTextConfirmado: {
       color: 'darkgreen',
       fontWeight: 'bold'
+    },
+    centeredView: {
+      flex: 1,
+      justifyContent: "center",
+      alignItems: "center",
+    },
+    modalView: {
+      backgroundColor: "white",
+      borderRadius: 15,
+      padding: 20,
+      alignItems: "center",
+      elevation: 5,
+      width: '70%'
+    },
+    dialogBtn: {
+      width: 110,
+      borderRadius: 15,
+      height: 40,
+      alignItems: 'center',
+      justifyContent: 'center',
+      backgroundColor: '#004A5A',
+      marginTop: 15
+    },
+    inputView: {
+      backgroundColor: 'white',
+      borderWidth: 1,
+      borderColor: 'grey',
+      borderRadius: 15,
+      height: 90,
+      marginVertical: 10
+    },
+    textInput: {
+        height: 90,
+        marginHorizontal: 10,
+        color: 'black'
+    },
+    buttonText: {
+      color: 'white'
+    },
+    appFooter: {
+      height: 50
+    },
+    appFooterRow: {
+      flex: 0,
+      marginHorizontal: 5,
+      flexDirection: 'row',
+      justifyContent: 'space-around',
+      alignItems: 'center',
+      width: '100%'
+    },
+    appFooterIcon: {
+      width: 40,
+      flex: 1,
+      flexDirection: 'column',
+      alignItems: 'center'
+    },
+    appFooterText: {
+      color: 'grey',
+      fontSize: 12
+    },
+    appFooterTextActive: {
+      color: 'black',
+      fontSize: 12
     }
   });
 
