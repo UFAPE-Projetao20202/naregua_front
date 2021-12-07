@@ -8,16 +8,17 @@ import {
   TouchableOpacity
 } from 'react-native';
 import api from '../services/api';
+import { useAuth } from '../contexts/auth';
 
 const PerfilCliente = ({ navigation }) => {
 
-  const cliente = {name: 'Nome do Cliente'};
+  const { user } = useAuth();
 
   return (
     <View style={styles.container}>
     <View style={styles.content}>
       <View style={styles.row}>
-        <Text style={styles.pageTitle}>{cliente.name}</Text>
+        <Text style={styles.pageTitle}>{user.name}</Text>
       </View>
       <Divider style={styles.dividerHeader}></Divider>
       <TouchableOpacity style={styles.row} onPress={() => navigation.navigate('Chats')}>

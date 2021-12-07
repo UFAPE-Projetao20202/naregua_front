@@ -8,6 +8,7 @@ import ListaNotificacoes from '../paginas/lista_notificacoes';
 import Notificacao from '../paginas/notificacao';
 import Endereco from '../paginas/endereco';
 import CadastroEndereco from '../paginas/cadastro_endereco';
+import DadosCliente from '../paginas/dados_cliente';
 
 const PrestadorStack = createNativeStackNavigator();
 
@@ -21,6 +22,7 @@ function AppPrestadorRoute() {
       <PrestadorStack.Screen name="ListaNotificacoes" component={ListaNotificacoes} options={{title: 'Lista de Notificações'}}/>
       <PrestadorStack.Screen name="Notificacao" component={Notificacao} options={{title: 'Notificação'}}/>
       <PrestadorStack.Screen name="Endereco" component={Endereco} options={{title: "Meus Endereços"}}/>
+      <PrestadorStack.Screen name="DadosCliente" component={DadosCliente} options={{title: 'Meus Dados'}}/>
       <PrestadorStack.Screen name="CadastroEndereco" component={CadastroEndereco} options={{title: "Novo Endereço"}}/>
     </PrestadorStack.Navigator>
   );
