@@ -9,8 +9,8 @@ import {
   ScrollView
 } from 'react-native';
 
-const ListaNotificacoes = ({ navigation })  => {
-  let prestador = true;
+const ListaNotificacoes = ({ route, navigation })  => {
+  let prestador = route.params.prestador;
   const [listaNotificacoes, setlistaNotificacoes] = useState([]);
 
   useEffect(() => {
@@ -48,7 +48,7 @@ const ListaNotificacoes = ({ navigation })  => {
       <Divider style={styles.dividerHeader}></Divider>
       {listaNotificacoes.map((item) => (
           <View key={item.id}>
-            <TouchableOpacity style={styles.item} onPress={() => navigation.navigate('Notificacao', {notificacao: item})}>
+            <TouchableOpacity style={styles.item} onPress={() => navigation.navigate('Notificacao', {notificacao: item, prestador: prestador})}>
                 <Text style={styles.itemText}>{item.titulo}</Text>
                 {item.lida === false &&
                     <Icon name="circle" type="FontAwesome" size={18} color="firebrick"/> 

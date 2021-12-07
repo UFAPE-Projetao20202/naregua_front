@@ -11,7 +11,7 @@ import {
 
 const Notificacao = ({ route, navigation })  => {
     const notificacao = route.params.notificacao;
-    let prestador = true;
+    let prestador = route.params.prestador;
 
   useEffect(() => {
   }, []);

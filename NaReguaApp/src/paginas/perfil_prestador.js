@@ -27,7 +27,7 @@ const PerfilPrestador = ({ navigation }) => {
         </View>
       </TouchableOpacity>
       <Divider style={styles.divider}></Divider>
-      <TouchableOpacity style={styles.row} onPress={() => navigation.navigate('ListaNotificacoes')}>
+      <TouchableOpacity style={styles.row} onPress={() => navigation.navigate('ListaNotificacoes', {prestador: true})}>
         <Icon style={styles.icon} name="bell" type="FontAwesome" size={20} color="black"/>
         <View style={styles.column}>
           <Text style={styles.itemText}>Notificações</Text>
