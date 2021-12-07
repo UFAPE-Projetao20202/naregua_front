@@ -96,9 +96,9 @@ const Chats = ({ navigation })  => {
           <Icon name="dollar" type="FontAwesome" size={23} color="grey"/>
           <Text style={styles.appFooterText}>Histórico</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.appFooterIcon} onPress={() => ''}>
-          <Icon name="user" type="FontAwesome" size={24} color="black"/>
-          <Text style={styles.appFooterTextActive}>Perfil</Text>
+        <TouchableOpacity style={styles.appFooterIcon} onPress={() => navigation.navigate('PerfilPrestador')}>
+          <Icon name="user" type="FontAwesome" size={24} color="grey"/>
+          <Text style={styles.appFooterText}>Perfil</Text>
         </TouchableOpacity>
       </View>
     </View>
