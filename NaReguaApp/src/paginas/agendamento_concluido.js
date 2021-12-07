@@ -9,56 +9,53 @@ import {
   ScrollView
 } from 'react-native';
 
-const Favoritos = ({ navigation })  => {
-  const [listaFavoritos, setlistaFavoritos] = useState([]);
+const AgendamentoConcluido = ({ navigation })  => {
+    let prestador = false;
+    let dados = {
+            nome: 'Nome',
+            id_pedido: '4787584',
+            data_pedido: '12/01/21',
+            telefone: '(81) 99999-9999',
+            whatsapp: true
+        };
 
   useEffect(() => {
-    setlistaFavoritos(
-        [
-          {
-              id: 1,
-              nome: "Nome"
-          },
-          {
-              id: 2,
-              nome: "Nome"
-          },
-          {
-              id: 3,
-              nome: "Nome"
-          }
-      ]
-    );
   }, []);
 
   return (
-
   <View style={styles.container}>
     <ScrollView style={styles.content}>
       <View style={styles.row}>
         <Icon name="chevron-left" type="FontAwesome" size={18} color="black" onPress={() => {}} />
-        <Text style={styles.pageTitle}>Favoritos</Text>
+        <Text style={styles.pageTitle}>AGENDAMENTO CONCLUÍDO</Text>
       </View>
       <Divider style={styles.dividerHeader}></Divider>
-      {listaFavoritos.map((item) => (
-          <View style={styles.itemLista} key={item.id}>
-            <View style={styles.column}>
-              <View>
-                <Text style={styles.itemText}>{item.nome}</Text>
-                <Text style={styles.itemDescription}>1,7 km</Text>
-                <Text style={styles.itemDescription}>Descrição do prestador</Text>
-              </View>
-              <View>
-                <View style={styles.itemLinha}>
-                  <Icon name="star" type="FontAwesome" size={15} color="#DE7800" onPress={() => {}} />
-                  <Text style={styles.itemNota}>4.5</Text>
-                </View>
-                <Icon name="heart" type="FontAwesome" size={24} color="black" onPress={() => {}} />
-              </View>
+        <View>
+            <View style={styles.icon}>
+                <Icon name="check" type="FontAwesome" size={70} color="darkgreen"/>
             </View>
-            <Divider style={styles.divider} />
-          </View>
-        ))}
+            <Divider style={styles.divider}></Divider>
+            <TouchableOpacity key={dados.id_pedido}>
+                <Text style={styles.itemText}>{dados.nome}</Text>
+                <Text style={styles.itemData}>Pedido {dados.id_pedido} • {dados.data_pedido}</Text>
+                {
+                dados.whatsapp === true && 
+                <Text style={styles.itemDescription}>TOQUE PARA SER REDIRECIONADO AO WHATSAPP DESSE {prestador ? 'CLIENTE' : 'ESTABELECIMENTO'}</Text>
+                }
+                {
+                dados.whatsapp === false && 
+                <Text style={styles.itemDescription}>ESSE {prestador ? 'CLIENTE' : 'ESTABELECIMENTO'} NÃO CONECTOU UM NÚMERO DE WHATSAPP, ENTRE EM CONTATO POR LIGAÇÃO: {item.telefone}</Text>
+                }
+            </TouchableOpacity>
+            <Divider style={styles.divider}></Divider>
+            <View style={styles.row}>
+                <View style={styles.containerBotao}>
+                <TouchableOpacity onPress={() => ''} style={styles.continuarBtn}>
+                    <Text style={styles.buttonText} accessible={true} accessibilityLabel="botao-continuar">CONTINUAR</Text>
+                </TouchableOpacity>
+                </View>
+            </View>
+        </View>
     </ScrollView>
     <View style={styles.appFooter}>
         <Divider style={styles.divider}></Divider>
@@ -116,6 +113,24 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width: '100%'
   },
+  rowChat: {
+    flex: 0,
+    marginHorizontal: 5,
+    marginVertical: 10,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'flex-start',
+    width: '100%'
+  },
+  rowAdd: {
+    flex: 0,
+    marginHorizontal: 5,
+    marginVertical: 10,
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    width: '100%'
+  },
   dividerHeader: {
     marginVertical: 10
   },
@@ -123,30 +138,56 @@ const styles = StyleSheet.create({
     marginVertical: 10
   },
   column: {
-    width: '100%',
-    flexDirection: 'row',
+    flex: 1,
+    flexDirection: 'column',
     justifyContent: 'space-between',
-    marginVertical: 10
+    marginHorizontal: 5
   },
   itemText: {
-    color: 'black',
-    textAlign: 'left',
+    marginVertical: 3,
+    marginHorizontal: 10,
     fontSize: 18,
-    fontWeight: '500'
+    color: 'black',
+  },
+  itemData: {
+    marginVertical: 2,
+    marginHorizontal: 10,
+    fontSize: 14,
+    color: 'grey',
   },
   itemDescription: {
     marginVertical: 2,
+    marginHorizontal: 10,
     fontSize: 16,
-    color: 'grey',
+    fontWeight: 'bold',
+    textAlign: 'justify',
+    color: '#004A5A',
   },
-  itemLinha: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginVertical: 10
+  addText: {
+    marginVertical: 3,
+    marginHorizontal: 10,
+    fontSize: 18,
+    color: 'black',
   },
-  itemNota: {
-    color: '#DE7800',
-    fontWeight: '500'
+  icon: {
+    alignItems: 'center'
+  },
+  containerBotao: {
+    width: '80%',
+    flex: 1,
+    marginTop: 20,
+    alignItems: 'center'
+  },
+  continuarBtn: {
+    width: '60%',
+    borderRadius: 15,
+    height: 40,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#004A5A'
+  },
+  buttonText: {
+    color: 'white'
   },
   appFooter: {
     height: 50
@@ -175,4 +216,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Favoritos;
+export default AgendamentoConcluido;
