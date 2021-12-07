@@ -38,18 +38,20 @@ const ListaServicos = ({navigation, route}) => {
       <ScrollView >
       {listaServ.map((item) => (
         <View style={styles.itemLista} key={item.id}>
-          <View style={styles.itemColunas}>
-            <Divider style={styles.divisor} />
-            <View>
-              <TouchableOpacity onPress={() => navigation.navigate('Servico', {servico: item})} style={styles.item}>
-                  <Text style={styles.header}>{item.name}</Text>
-                  <Text style={styles.itemDescription}>Tipo: {item.category.description}</Text>
-                  <Text style={styles.itemDescription}>{item.description}</Text>
-                  <Text style={styles.itemDescription}>{item.duration} min • R$ {item.value}</Text>
-              </TouchableOpacity>
-            </View>
-            <Divider style={styles.divisor} />
-          </View>
+            {prestador.id === item.provider.id?
+              <View style={styles.itemColunas}>
+                <Divider style={styles.divisor} />
+                <View>
+                  <TouchableOpacity onPress={() => navigation.navigate('Servico', {servico: item})} style={styles.item}>
+                      <Text style={styles.header}>{item.name}</Text>
+                      <Text style={styles.itemDescription}>Tipo: {item.category.description}</Text>
+                      <Text style={styles.itemDescription}>{item.description}</Text>
+                      <Text style={styles.itemDescription}>{item.duration} min • R$ {item.value}</Text>
+                  </TouchableOpacity>
+                </View>
+                <Divider style={styles.divisor} />
+              </View> :null
+              }
         </View>
       ))}
       </ScrollView>
