@@ -5,13 +5,15 @@ import {
   View,
   Text,
   StyleSheet,
-  TouchableOpacity
+  TouchableOpacity,
+  ScrollView
 } from 'react-native';
 import api from '../services/api';
 import { useAuth } from '../contexts/auth';
 
 const Endereco = ({ navigation })  => {
-  const { user } = useAuth();
+  //const { user } = useAuth();
+  let user = {name: 'Nome do usuario'};
 
   const [listaEnderecos, setlistaEnderecos] = useState([]);
 
@@ -20,18 +22,41 @@ const Endereco = ({ navigation })  => {
   }, []);
 
   async function listarEnderecos() {
-    try {
-      let res1 = await api.get('/providers/address');
-      setlistaEnderecos(res1.data);
-    } catch (error) {
-      console.log(error.response.data);
-    }
+    // try {
+    //   let res1 = await api.get('/providers/address');
+    //   setlistaEnderecos(res1.data);
+    // } catch (error) {
+    //   console.log(error.response.data);
+    // }
+    setlistaEnderecos(
+      [{
+        id: 1,
+        name: 'Nome do Endereco 1',
+        street: 'Nome da Rua',
+        state: 'Nome do Estado',
+        complement: 'anjmdkmkfdmkkkf',
+      },
+      {
+        id: 2,
+        name: 'Nome do Endereco 2',
+        street: 'Nome da Rua',
+        state: 'Nome do Estado',
+        complement: 'anjmdkmkfdmkkkf',
+      },
+      {
+        id: 3,
+        name: 'Nome do Endereco 3',
+        street: 'Nome da Rua',
+        state: 'Nome do Estado',
+        complement: 'anjmdkmkfdmkkkf',
+      }]
+    )
   }
 
   return (
 
   <View style={styles.container}>
-    <View style={styles.content}>
+    <ScrollView style={styles.content}>
       <View style={styles.row}>
         <Icon style={styles.backButton} name="chevron-left" type="FontAwesome" size={18} color="black" onPress={() => {}} />
         <Text style={styles.pageTitle}>{user.name}</Text>
@@ -53,6 +78,27 @@ const Endereco = ({ navigation })  => {
         <Icon name="plus" type="FontAwesome" size={22} color="black" onPress={() => {}} />
         <Text style={styles.addText}>Adicionar Endereço</Text>
       </TouchableOpacity>
+    </ScrollView>
+    <View style={styles.appFooter}>
+        <Divider style={styles.divider}></Divider>
+        <View style={styles.appFooterRow}>
+          <TouchableOpacity style={styles.appFooterIcon} onPress={() => navigation.navigate('InicioCliente')}>
+            <Icon name="home" type="FontAwesome" size={27} color="grey"/>
+            <Text style={styles.appFooterText}>Início</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.appFooterIcon} onPress={() => ''}>
+            <Icon name="search" type="FontAwesome" size={22} color="grey"/>
+            <Text style={styles.appFooterText}>Busca</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.appFooterIcon} onPress={() => navigation.navigate('PedidosCliente')}>
+            <Icon name="dollar" type="FontAwesome" size={23} color="grey"/>
+            <Text style={styles.appFooterText}>Histórico</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.appFooterIcon} onPress={() => navigation.navigate('PerfilCliente')}>
+            <Icon name="user" type="FontAwesome" size={24} color="grey"/>
+            <Text style={styles.appFooterText}>Perfil</Text>
+          </TouchableOpacity>
+        </View>
     </View>
   </View>
 
@@ -137,6 +183,31 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: 'black',
   },
+  appFooter: {
+    height: 50
+  },
+  appFooterRow: {
+    flex: 0,
+    marginHorizontal: 5,
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    width: '100%'
+  },
+  appFooterIcon: {
+    width: 40,
+    flex: 1,
+    flexDirection: 'column',
+    alignItems: 'center'
+  },
+  appFooterText: {
+    color: 'grey',
+    fontSize: 12
+  },
+  appFooterTextActive: {
+    color: 'black',
+    fontSize: 12
+  }
 });
 
 export default Endereco;
