@@ -34,10 +34,12 @@ const Cadastro = ({ navigation }) => {
 				password: senha
 			});
 
-			let endpoint = tipoUsuario === 'Cliente' ? 'users' : 'providers';
+			let endpoint = tipoUsuario === 'Cliente' ? 'clients' : 'providers';
 			let res = await api.post(`/${endpoint}`, data);
 
 			console.log(res.data);
+			setApiError('');
+            alert('Conta cadastrada!');
 			navigation.navigate('Login');
 		} catch (error) {
 			console.log(error.response.data);
@@ -176,7 +178,7 @@ const Cadastro = ({ navigation }) => {
 				{apiError.length > 0 && <Text style={styles.error}>{apiError}</Text>}
 
 				<View style={styles.containerBtn}>
-					<TouchableOpacity style={styles.signBtn} onPress={() => navigation.navigate('Login')}>
+					<TouchableOpacity style={styles.signBtn} onPress={() => validarDados()}>
 						<Text style={styles.signText} accessible={true} accessibilityLabel="botao-cadastrar">CADASTRAR</Text>
 					</TouchableOpacity>
 				</View>
