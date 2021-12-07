@@ -8,6 +8,7 @@ import {
 	TouchableOpacity
 } from 'react-native';
 import api from '../services/api';
+//import { useAuth } from '../contexts/auth';
 
 const CadastroEndereco = () => {
 	const [nome, setNome] = useState('');
@@ -18,6 +19,8 @@ const CadastroEndereco = () => {
   const [estado, setEstado] = useState('');
   const [pais, setPais] = useState('');
 	const [apiError, setApiError] = useState('');
+
+	//const { user } = useAuth();
 
 	useEffect(() => {
 	}, []);
@@ -34,10 +37,9 @@ const CadastroEndereco = () => {
         country: pais
 			});
 
-			await api.post(`/providers/address`, data);
+			let res = await api.post(`/clients/address`, data);
 
-			//console.log(res.data);
-			//navigation.navigate('Endereco');
+			console.log(res.data);
 
 			setApiError('');
             alert('Endereço cadastrado!');
