@@ -6,7 +6,8 @@ import {
   Text,
   StyleSheet,
   TouchableOpacity,
-  Modal
+  Modal,
+  ScrollView
 } from 'react-native';
 import api from '../services/api';
 
@@ -19,8 +20,8 @@ const PerfilCliente = ({ navigation }) => {
   const cliente = {name: 'Nome do Cliente'};
 
   return (
-    <View style={styles.container}>
-    <View style={styles.content}>
+  <View style={styles.container}>
+    <ScrollView style={styles.content}>
       <View style={styles.row}>
         <Text style={styles.pageTitle}>{cliente.name}</Text>
       </View>
@@ -71,7 +72,7 @@ const PerfilCliente = ({ navigation }) => {
           <Text style={styles.itemText}>Sair</Text>
         </View>
       </TouchableOpacity>
-    </View>
+    </ScrollView>
     <Modal transparent={true} visible={visible} onRequestClose={hideDialog}>
       <View style={styles.centeredView}>
         <View style={styles.modalView}>
@@ -87,6 +88,27 @@ const PerfilCliente = ({ navigation }) => {
         </View>
       </View>
     </Modal>
+    <View style={styles.appFooter}>
+      <Divider style={styles.divider}></Divider>
+      <View style={styles.appFooterRow}>
+        <TouchableOpacity style={styles.appFooterIcon} onPress={() => navigation.navigate('InicioCliente')}>
+          <Icon name="home" type="FontAwesome" size={27} color="grey"/>
+          <Text style={styles.appFooterText}>Início</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.appFooterIcon} onPress={() => ''}>
+          <Icon name="search" type="FontAwesome" size={22} color="grey"/>
+          <Text style={styles.appFooterText}>Busca</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.appFooterIcon} onPress={() => navigation.navigate('PedidosCliente')}>
+          <Icon name="dollar" type="FontAwesome" size={23} color="grey"/>
+          <Text style={styles.appFooterText}>Histórico</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.appFooterIcon} onPress={() => ''}>
+          <Icon name="user" type="FontAwesome" size={24} color="black"/>
+          <Text style={styles.appFooterTextActive}>Perfil</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
   </View>
   );
 };
@@ -172,6 +194,31 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: 'white'
+  },
+  appFooter: {
+    height: 50
+  },
+  appFooterRow: {
+    flex: 0,
+    marginHorizontal: 5,
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    width: '100%'
+  },
+  appFooterIcon: {
+    width: 40,
+    flex: 1,
+    flexDirection: 'column',
+    alignItems: 'center'
+  },
+  appFooterText: {
+    color: 'grey',
+    fontSize: 12
+  },
+  appFooterTextActive: {
+    color: 'black',
+    fontSize: 12
   }
 });
 
