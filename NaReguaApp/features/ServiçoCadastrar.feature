@@ -27,5 +27,4 @@ And eu preencho o campo "valor" com "50,00"
 And eu preencho o campo "Duração Média" com "15,00"
 And eu preencho o campo "Descrição" com "Adicione uma descrição"
 And eu pressiono o botão "Concluir"
-Then eu vejo a tela inicial de prestador
-
+Then eu vejo uma mensagem de confirmação de cadastro do serviço

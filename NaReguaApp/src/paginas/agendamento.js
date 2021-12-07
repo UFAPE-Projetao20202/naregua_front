@@ -159,7 +159,7 @@ const Agendamento = ({ route, navigation }) => {
             <TouchableOpacity onPress={hideDialogSemana} style={styles.dialogBtn}>
               <Text style={styles.buttonText} accessible={true} accessibilityLabel="botao-fechar">FECHAR</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => ''} style={styles.dialogBtn}>
+            <TouchableOpacity onPress={hideDialogSemana} style={styles.dialogBtn}>
               <Text style={styles.buttonText}>OK</Text>
             </TouchableOpacity>
             </View>
@@ -184,7 +184,7 @@ const Agendamento = ({ route, navigation }) => {
             <TouchableOpacity onPress={hideDialogQuinzena} style={styles.dialogBtn}>
               <Text style={styles.buttonText} accessible={true} accessibilityLabel="botao-fechar">FECHAR</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => ''} style={styles.dialogBtn}>
+            <TouchableOpacity onPress={hideDialogSemana} style={styles.dialogBtn}>
               <Text style={styles.buttonText}>OK</Text>
             </TouchableOpacity>
             </View>
@@ -209,7 +209,7 @@ const Agendamento = ({ route, navigation }) => {
             <TouchableOpacity onPress={hideDialogMes} style={styles.dialogBtn}>
               <Text style={styles.buttonText} accessible={true} accessibilityLabel="botao-fechar">FECHAR</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => ''} style={styles.dialogBtn}>
+            <TouchableOpacity onPress={hideDialogSemana} style={styles.dialogBtn}>
               <Text style={styles.buttonText}>OK</Text>
             </TouchableOpacity>
             </View>

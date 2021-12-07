@@ -50,7 +50,7 @@ const AgendamentoConcluido = ({ navigation })  => {
             <Divider style={styles.divider}></Divider>
             <View style={styles.row}>
                 <View style={styles.containerBotao}>
-                <TouchableOpacity onPress={() => ''} style={styles.continuarBtn}>
+                <TouchableOpacity onPress={() => navigation.navigate('PerfilCliente')} style={styles.continuarBtn} style={styles.continuarBtn}>
                     <Text style={styles.buttonText} accessible={true} accessibilityLabel="botao-continuar">CONTINUAR</Text>
                 </TouchableOpacity>
                 </View>

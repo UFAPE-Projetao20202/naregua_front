@@ -21,7 +21,7 @@ And eu preencho o campo "senha" e o campo "confirmar senha" com "123456"
 And eu preencho o campo "Nª de celular" com "8833445566"
 And eu seleciono a opção "Prestador"
 And eu pressiono o botão "Cadastrar"
-Then eu vejo a tela de login
+Then eu vejo uma mensagem de confirmação de cadastro
 
 Scenario: Tentativa de cadastro com E-mail já cadastrado 
 Given Eu estou na tela de login

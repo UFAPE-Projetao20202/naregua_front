@@ -32,7 +32,7 @@ const Servico = ({ route, navigation }) => {
       <View style={styles.inputView}>
         <TextInput
           style={styles.textInput}
-          placeholder="Restições de horário, detalhes do endereço..."
+          placeholder="Restrições de horário, detalhes do endereço..."
           placeholderTextColor="grey"
           onChangeText={(observacoes) => setObservacoes(observacoes)}
           accessible={true} accessibilityLabel="campo-observacoes"
@@ -44,7 +44,7 @@ const Servico = ({ route, navigation }) => {
       <View style={styles.row}>
         <View style={styles.containerBotao}>
           <TouchableOpacity onPress={() => navigation.navigate('Agendamento', {servico: servico})} style={styles.addButton}>
-            <Text style={styles.buttonText} accessible={true} accessibilityLabel="botao-adicionar">ADICIONAR (R$ {servico.value})</Text>
+            <Text style={styles.buttonText} accessible={true} accessibilityLabel="botao-adicionar">AGENDAR (R$ {servico.value})</Text>
           </TouchableOpacity>
         </View>
       </View>

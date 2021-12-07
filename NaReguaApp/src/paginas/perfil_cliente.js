@@ -10,6 +10,7 @@ import {
   ScrollView
 } from 'react-native';
 import api from '../services/api';
+import { useAuth } from '../contexts/auth';
 
 const PerfilCliente = ({ navigation }) => {
   const [visible, setVisible] = React.useState(false);
@@ -17,13 +18,13 @@ const PerfilCliente = ({ navigation }) => {
   const showDialog = () => setVisible(true);
   const hideDialog = () => setVisible(false);
 
-  const cliente = {name: 'Nome do Cliente'};
+  const { user } = useAuth();
 
   return (
   <View style={styles.container}>
     <ScrollView style={styles.content}>
       <View style={styles.row}>
-        <Text style={styles.pageTitle}>{cliente.name}</Text>
+        <Text style={styles.pageTitle}>{user.name}</Text>
       </View>
       <Divider style={styles.dividerHeader}></Divider>
       <TouchableOpacity style={styles.row} onPress={() => navigation.navigate('Chats')}>
@@ -95,7 +96,7 @@ const PerfilCliente = ({ navigation }) => {
           <Icon name="home" type="FontAwesome" size={27} color="grey"/>
           <Text style={styles.appFooterText}>Início</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.appFooterIcon} onPress={() => ''}>
+        <TouchableOpacity style={styles.appFooterIcon} onPress={() => navigation.navigate('BuscarPrestador')}>
           <Icon name="search" type="FontAwesome" size={22} color="grey"/>
           <Text style={styles.appFooterText}>Busca</Text>
         </TouchableOpacity>
